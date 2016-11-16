@@ -10,7 +10,7 @@ package quanlysv;
  * @author Kaiser GX
  */
 public class DiemMonHoc {
-    private String tenSinhVien;
+    private SinhVien sinhVien;
     private float dienGiuaKy;
     private float heSoGK;
     private float diemCuoiKy;
@@ -18,13 +18,23 @@ public class DiemMonHoc {
     private String diemMonHoc;
     private String tenMon;
 
-    public String getTenSinhVien() {
-        return tenSinhVien;
+    public DiemMonHoc(SinhVien sinhVien, float dienGiuaKy, float heSoGK, float hesoCK, String diemMonHoc, String tenMon) {
+        this.sinhVien = sinhVien;
+        this.dienGiuaKy = dienGiuaKy;
+        this.heSoGK = heSoGK;
+        this.hesoCK = hesoCK;
+        this.diemMonHoc = diemMonHoc;
+        this.tenMon = tenMon;
     }
 
-    public void setTenSinhVien(String tenSinhVien) {
-        this.tenSinhVien = tenSinhVien;
+    public SinhVien getSinhVien() {
+        return sinhVien;
     }
+
+    public void setSinhVien(SinhVien sinhVien) {
+        this.sinhVien = sinhVien;
+    }
+
 
     public float getHeSoGK() {
         return heSoGK;
@@ -42,16 +52,7 @@ public class DiemMonHoc {
         this.hesoCK = hesoCK;
     }
 
-    public DiemMonHoc(String tenSinhVien, float dienGiuaKy, float heSoGK, float diemCuoiKy, float hesoCK, String diemMonHoc, String tenMon) {
-        this.tenSinhVien = tenSinhVien;
-        this.dienGiuaKy = dienGiuaKy;
-        this.heSoGK = heSoGK;
-        this.diemCuoiKy = diemCuoiKy;
-        this.hesoCK = hesoCK;
-        this.diemMonHoc = diemMonHoc;
-        this.tenMon = tenMon;
-    }
-
+    
     public float getDienGiuaKy() {
         return dienGiuaKy;
     }

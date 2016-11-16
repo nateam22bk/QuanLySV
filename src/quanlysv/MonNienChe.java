@@ -9,9 +9,14 @@ import java.util.*;
  *
  * @author Kaiser GX
  */
-public class MonNienChe {
+public class MonNienChe extends MonHoc{
     private int kiHocSo;
     ArrayList<MonHoc> dsMonNC; 
+
+    public MonNienChe(ArrayList<MonHoc> dsMonNC, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem, ArrayList<LopHoc> dsLopHoc, ArrayList<SinhVien> dsSinhVien) {
+        super(tenMon, maMon, soTinChi, dsDiem, dsLopHoc, dsSinhVien);
+        this.dsMonNC=dsMonNC;
+    }
 
     public int getKiHocSo() {
         return kiHocSo;
@@ -20,7 +25,7 @@ public class MonNienChe {
     public void setKiHocSo(int kiHocSo) {
         this.kiHocSo = kiHocSo;
     }
-
+    
     public void themMonNC(MonHoc MH){
        this.dsMonNC.add(MH);
     }

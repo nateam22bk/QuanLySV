@@ -14,19 +14,12 @@ import java.util.*;
 public class LopTinChi extends LopHoc{
     ArrayList<SinhVienTinChi> dsSinhVienTC;
 
-    @Override
-    public void themSV(SinhVien SV) {
-        if(SV instanceof SinhVienTinChi)
-            this.dsSinhVienTC.add((SinhVienTinChi)SV);
+    public void themSV(SinhVienTinChi SV) {
+        this.dsSinhVienTC.add((SinhVienTinChi)SV);
     }
 
-    @Override
-    public void xoaSV(SinhVien SV) {
-        if(SV instanceof SinhVienTinChi)
-            this.dsSinhVienTC.remove((SinhVienTinChi) SV);
+    public void xoaSV(SinhVienTinChi SV) {
+       this.dsSinhVienTC.remove((SinhVienTinChi) SV);
     }
-
-    
- 
-    
+  
 }

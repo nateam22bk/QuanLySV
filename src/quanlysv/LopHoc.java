@@ -10,7 +10,7 @@ import java.util.*;
  *
  * @author Kaiser GX
  */
-public abstract class LopHoc {
+public class LopHoc {
     private int maLop;
     ArrayList<SinhVien> dsSinhVien;
     private int soSV;
@@ -49,7 +49,16 @@ public abstract class LopHoc {
         LopHoc.SO_SV_MAX = SO_SV_MAX;
     }
     
-    public abstract void themSV(SinhVien SV);
-    public abstract void xoaSV(SinhVien SV);
+    public void themSV(SinhVien SV) {
+        this.dsSinhVien.add(SV);
+    }
+    public void xoaSV(SinhVien SV) {
+        this.dsSinhVien.remove(SV);
+    }
+    
+    public void inTT(){
+        for(SinhVien sv : this.dsSinhVien )
+            sv.inTT();
+    }
    
 }
