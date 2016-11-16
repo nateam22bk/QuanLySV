@@ -67,6 +67,8 @@ public class SinhVienNienChe extends SinhVien {
            
     }
  
-    
+    public static void main(String[] args) {
+        System.out.println("Hello");
+    }
     
 }
