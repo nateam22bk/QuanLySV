@@ -1,7 +1,7 @@
-package quanlysv;
+package ENTITY;
 import java.util.*;
-import quanlysv.KhoaVien;
-import quanlysv.MonHoc;
+import ENTITY.KhoaVien;
+import ENTITY.MonHoc;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates

@@ -3,18 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quanlysv;
+package ENTITY;                //KHONG DUNG DEN
 import java.util.*;
 /**
  *
  * @author Kaiser GX
  */
-public class MonTinChi extends MonHoc {
+public class MonHocDieuKien {
+    private MonHoc monDangKy;
     ArrayList<MonHoc> dsMonDK;
 
-    public MonTinChi(ArrayList<MonHoc> dsMonDK, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem, ArrayList<LopHoc> dsLopHoc, ArrayList<SinhVien> dsSinhVien) {
-        super(tenMon, maMon, soTinChi, dsDiem, dsLopHoc, dsSinhVien);
+    public MonHocDieuKien(MonHoc monDangKy, ArrayList<MonHoc> dsMonDK) {
+        this.monDangKy = monDangKy;
         this.dsMonDK = dsMonDK;
+    }
+
+    public MonHoc getMonDangKy() {
+        return monDangKy;
+    }
+
+    public void setMonDangKy(MonHoc monDangKy) {
+        this.monDangKy = monDangKy;
     }
 
     public ArrayList<MonHoc> getDsMonDK() {

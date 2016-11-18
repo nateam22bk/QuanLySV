@@ -1,5 +1,5 @@
 
-import quanlysv.SinhVien;
+import ENTITY.SinhVien;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
