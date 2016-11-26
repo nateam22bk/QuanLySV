@@ -5,21 +5,33 @@
  */
 package ENTITY;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author Kaiser GX
  */
-public class LopTinChi extends LopHoc{
+public class LopTinChi extends LopHoc implements Serializable{
     ArrayList<SinhVienTinChi> dsSinhVienTC;
 
-    public void themSV(SinhVienTinChi SV) {
-        this.dsSinhVienTC.add((SinhVienTinChi)SV);
+    public LopTinChi(String maKhoaVien, int maLop, String tenLop, int soSV, ArrayList<SinhVienTinChi> dsSinhVienTC) {
+        super(maKhoaVien, maLop, tenLop, soSV);
+        this.dsSinhVienTC = dsSinhVienTC;
     }
 
-    public void xoaSV(SinhVienTinChi SV) {
-       this.dsSinhVienTC.remove((SinhVienTinChi) SV);
+    @Override
+    public void themSV(SinhVien sv) {
+        if(sv instanceof SinhVienTinChi){
+            this.dsSinhVienTC.add((SinhVienTinChi) sv);
+        }
+    }
+
+    @Override
+    public void xoaSV(SinhVien sv) {
+         if(sv instanceof SinhVienTinChi){
+            this.dsSinhVienTC.remove((SinhVienTinChi) sv);
+        }
     }
   
 }

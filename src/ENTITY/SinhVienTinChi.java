@@ -96,7 +96,7 @@ public class SinhVienTinChi extends SinhVien {
         this.soTinChiTL = soTinChiTL;
     }
     
-    public void dangKyMon(SinhVienTinChi SV, MonTinChi MH, KhoaVien KV){
+    /*public void dangKyMon(SinhVienTinChi SV, MonTinChi MH, KhoaVien KV){
         if(KV.dsMonHoc.contains(MH) && KV.dsSinhVien.contains(SV) && (MH.getSoTinChi() + this.soTinChiDK)<=KV.getSO_TC_MAX() && SV.dsMon.containsAll(MH.dsMonDK)){
             this.soTinChiBB = MH.getSoTinChi() + this.soTinChiBB;
             MH.themSinhVien(SV);
@@ -109,7 +109,7 @@ public class SinhVienTinChi extends SinhVien {
         else
             System.out.println("Dang ky mon that bai");
        
-    }
+    } */
    
     /**
      *

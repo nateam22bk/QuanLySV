@@ -1,4 +1,5 @@
 package ENTITY;
+import java.io.Serializable;
 import java.util.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,11 +11,39 @@ import java.util.*;
  *
  * @author Kaiser GX
  */
-public class LopHoc {
+public abstract class LopHoc implements Serializable{
+    private String maKhoaVien;
     private int maLop;
-    ArrayList<SinhVien> dsSinhVien;
+    private String tenLop;
     private int soSV;
-    public static int SO_SV_MAX;
+    public static int SO_SV_MAX = 50;
+
+    public LopHoc(String maKhoaVien, int maLop, String tenLop, int soSV) {
+        this.maKhoaVien = maKhoaVien;
+        this.maLop = maLop;
+        this.tenLop = tenLop;
+        this.soSV = soSV;
+    }
+    
+    
+
+    public String getTenLop() {
+        return tenLop;
+    }
+
+    public void setTenLop(String tenLop) {
+        this.tenLop = tenLop;
+    }
+
+    
+    
+    public String getMaKhoaVien() {
+        return maKhoaVien;
+    }
+
+    public void setMaKhoaVien(String maKhoaVien) {
+        this.maKhoaVien = maKhoaVien;
+    }
     
 
     public int getMaLop() {
@@ -23,14 +52,6 @@ public class LopHoc {
 
     public void setMaLop(int maLop) {
         this.maLop = maLop;
-    }
-
-    public ArrayList<SinhVien> getDsSinhVien() {
-        return dsSinhVien;
-    }
-
-    public void setDsSinhVien(ArrayList<SinhVien> dsSinhVien) {
-        this.dsSinhVien = dsSinhVien;
     }
 
     public int getSoSV() {
@@ -48,17 +69,6 @@ public class LopHoc {
     public static void setSO_SV_MAX(int SO_SV_MAX) {
         LopHoc.SO_SV_MAX = SO_SV_MAX;
     }
-    
-    public void themSV(SinhVien SV) {
-        this.dsSinhVien.add(SV);
-    }
-    public void xoaSV(SinhVien SV) {
-        this.dsSinhVien.remove(SV);
-    }
-    
-    public void inTT(){
-        for(SinhVien sv : this.dsSinhVien )
-            sv.inTT();
-    }
-   
+   public abstract void themSV(SinhVien sv);
+   public abstract void xoaSV(SinhVien sv);
 }

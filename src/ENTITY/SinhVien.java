@@ -16,6 +16,24 @@ public abstract class SinhVien {
     private String hoTen;
     private Date ngaySinh;
     private String queQuan;
+    private String tenVien;
+
+    public String getTenVien() {
+        return tenVien;
+    }
+
+    public void setTenVien(String tenVien) {
+        this.tenVien = tenVien;
+    }
+
+    public void setQueQuan(String queQuan) {
+        this.queQuan = queQuan;
+    }
+
+    public String getQueQuan() {
+        return queQuan;
+    }
+    
 
     public int getMSSV() {
         return MSSV;

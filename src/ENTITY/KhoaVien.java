@@ -4,34 +4,26 @@
  * and open the template in the editor.
  */
 package ENTITY;
+import java.io.Serializable;
 import java.util.*;
 /**
  *
  * @author Kaiser GX
  */
-public class KhoaVien {
+public class KhoaVien implements Serializable{
+    private String maKhoaVien;
     private String tenVien;
     public ArrayList<SinhVien> dsSinhVien;
     public ArrayList<LopHoc> dsLopHoc;
     public ArrayList<MonHoc> dsMonHoc;
     public static int SO_TC_TN;
-    public static int SO_TC_MAX;
-    public static int SO_TC_MIN;
 
-    public static int getSO_TC_MAX() {
-        return SO_TC_MAX;
+    public void setMaKhoaVien(String maKhoaVien) {
+        this.maKhoaVien = maKhoaVien;
     }
 
-    public static void setSO_TC_MAX(int SO_TC_MAX) {
-        KhoaVien.SO_TC_MAX = SO_TC_MAX;
-    }
-
-    public static int getSO_TC_MIN() {
-        return SO_TC_MIN;
-    }
-
-    public static void setSO_TC_MIN(int SO_TC_MIN) {
-        KhoaVien.SO_TC_MIN = SO_TC_MIN;
+    public String getMaKhoaVien() {
+        return maKhoaVien;
     }
 
     public static int getSO_TC_TN() {
@@ -50,11 +42,12 @@ public class KhoaVien {
         this.tenVien = tenVien;
     }
 
-    public KhoaVien(String tenVien, ArrayList<SinhVien> dsSinhVien, ArrayList<LopHoc> dsLopHoc, ArrayList<MonHoc> dsMonHoc) {
+    public KhoaVien(String maKhoaVien, String tenVien, ArrayList<SinhVien> dsSinhVien, ArrayList<LopHoc> dsLopHoc, ArrayList<MonHoc> dsMonHoc) {
         this.tenVien = tenVien;
         this.dsSinhVien = dsSinhVien;
         this.dsLopHoc = dsLopHoc;
         this.dsMonHoc = dsMonHoc;
+        this.maKhoaVien = maKhoaVien;
     }
 
 

@@ -13,6 +13,11 @@ import java.util.ArrayList;
  */
 public class LopNienChe extends LopHoc{
     ArrayList<SinhVienNienChe> dsLopNC;
+
+    public LopNienChe(String maKhoaVien, int maLop, String tenLop, int soSV, ArrayList<SinhVienNienChe> dsLopNC) {
+        super(maKhoaVien, maLop, tenLop, soSV);
+        this.dsLopNC = dsLopNC;
+    }
     @Override
     public void themSV(SinhVien SV) {
       if(SV instanceof SinhVienNienChe){
