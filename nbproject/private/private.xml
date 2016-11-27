@@ -8,15 +8,21 @@
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanTriGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/CapNhatKhoaVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/DangNhapGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonHocDieuKien.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/SinhVienTinChi.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/CapNhatLopHocGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileMonHoc.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonHoc.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanLySinhVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileSinhVien.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/LopHoc.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanLyKhoaVienGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemLopHocGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/SinhVien.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanLyMonHocGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemKhoaVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileKhoaVien.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileLopHoc.java</file>
         </group>
     </open-files>
 </project-private>

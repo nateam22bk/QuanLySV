@@ -49,24 +49,4 @@ public class FileKhoaVien {
         }
         return list;
     }
-    
-    public static void main(String[] args) {
-       FileKhoaVien fileKhoaVien = new FileKhoaVien();
-      /* ArrayList<KhoaVien> list = new ArrayList<>();
-       KhoaVien khoaVien = new KhoaVien("CNTT","Vien Cong Nghe Thong Tin", new ArrayList<SinhVien>(), new ArrayList<LopHoc>(), new ArrayList<>());
-       list.add(khoaVien);
-       fileKhoaVien.ghiFileKhoaVien(list); */
-      ArrayList<KhoaVien> list = new ArrayList<>();
-      list = fileKhoaVien.docFileKhoaVien();
-        for (int i=0; i< list.size(); i++){
-            if (list.get(i).getMaKhoaVien().equals("CNTT")){
-                ArrayList<LopHoc> listLopHoc = list.get(i).getDsLopHoc();
-                for (int j = 0; j< listLopHoc.size(); j++){
-                    if (listLopHoc.get(i) instanceof LopTinChi){
-                        System.out.println(listLopHoc.get(i).getMaLop());
-                    }
-                }
-            }
-        }
-    }
 }

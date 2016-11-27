@@ -55,4 +55,12 @@ public class FileLopHoc {
         }
         return list;
     }
+    
+    public static void main(String[] args) {
+        FileLopHoc fileLopHoc = new FileLopHoc();
+        ArrayList<LopHoc> list = fileLopHoc.docFileLopHoc();
+        for (int i = 0; i< list.size(); i++){
+            System.out.println(list.get(i).getMaKhoaVien());
+        }
+    }
 }

@@ -16,7 +16,15 @@ public class KhoaVien implements Serializable{
     public ArrayList<SinhVien> dsSinhVien;
     public ArrayList<LopHoc> dsLopHoc;
     public ArrayList<MonHoc> dsMonHoc;
-    public static int SO_TC_TN;
+    private  int soTCTN;
+
+    public int getSoTCTN() {
+        return soTCTN;
+    }
+
+    public void setSoTCTN(int soTCTN) {
+        this.soTCTN = soTCTN;
+    }
 
     public void setMaKhoaVien(String maKhoaVien) {
         this.maKhoaVien = maKhoaVien;
@@ -26,13 +34,6 @@ public class KhoaVien implements Serializable{
         return maKhoaVien;
     }
 
-    public static int getSO_TC_TN() {
-        return SO_TC_TN;
-    }
-
-    public static void setSO_TC_TN(int SO_TC_TN) {
-        KhoaVien.SO_TC_TN = SO_TC_TN;
-    }
 
     public String getTenVien() {
         return tenVien;

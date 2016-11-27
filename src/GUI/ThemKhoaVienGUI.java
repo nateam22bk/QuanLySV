@@ -236,7 +236,7 @@ public class ThemKhoaVienGUI extends javax.swing.JFrame {
         
         ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
         KhoaVien khoaVien = new KhoaVien(maVien, tenVien, new ArrayList<SinhVien>(), new ArrayList<LopHoc>(), new ArrayList<>());
-        khoaVien.SO_TC_TN = soTCTNInt;
+        khoaVien.setSoTCTN(soTCTNInt);
         listKhoaVien.add(khoaVien);
         fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
         JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");

@@ -39,6 +39,9 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
         initTableLopHoc();
         rdHeTinChi.setSelected(true);
         btnCapNhatKhoaVien.setEnabled(false);
+        btnCapNhatLopHoc.setEnabled(false);
+        btnXoaKhoaVien.setEnabled(false);
+        btnXoaLopHoc.setEnabled(false);
         initComboBox();
     }
     
@@ -222,6 +225,11 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbLopHoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbLopHocMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbLopHoc);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -246,18 +254,38 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
         btnCapNhatLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnCapNhatLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/update50x50.png"))); // NOI18N
         btnCapNhatLopHoc.setText("Cập nhật");
+        btnCapNhatLopHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatLopHocActionPerformed(evt);
+            }
+        });
 
         btnXoaLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnXoaLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/file_delete50x50.png"))); // NOI18N
         btnXoaLopHoc.setText("Xóa");
+        btnXoaLopHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaLopHocActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdHeTinChi);
         rdHeTinChi.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         rdHeTinChi.setText("Hệ tín chỉ");
+        rdHeTinChi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdHeTinChiMouseClicked(evt);
+            }
+        });
 
         buttonGroup1.add(rdHeNienChe);
         rdHeNienChe.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         rdHeNienChe.setText("Hệ niên chế");
+        rdHeNienChe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdHeNienCheMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -266,7 +294,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -277,13 +305,13 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(btnCapNhatLopHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnThemLopHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(rdHeNienChe)
                                         .addComponent(rdHeTinChi))
                                     .addComponent(btnXoaLopHoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 20, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -354,7 +382,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(263, 263, 263)
                         .addComponent(jLabel1)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -414,6 +442,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
     private void tbKhoaVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhoaVienMouseClicked
         // TODO add your handling code here:
         btnCapNhatKhoaVien.setEnabled(true);
+        btnXoaKhoaVien.setEnabled(true);
     }//GEN-LAST:event_tbKhoaVienMouseClicked
 
     private void btnXoaKhoaVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKhoaVienActionPerformed
@@ -430,6 +459,32 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         showDataTableLopHoc();
     }//GEN-LAST:event_cbKhoaVienActionPerformed
+
+    private void btnCapNhatLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatLopHocActionPerformed
+        // TODO add your handling code here:
+        capNhatLopHoc();
+    }//GEN-LAST:event_btnCapNhatLopHocActionPerformed
+
+    private void tbLopHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLopHocMouseClicked
+        // TODO add your handling code here:
+        btnCapNhatLopHoc.setEnabled(true);
+        btnXoaLopHoc.setEnabled(true);
+    }//GEN-LAST:event_tbLopHocMouseClicked
+
+    private void btnXoaLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaLopHocActionPerformed
+        // TODO add your handling code here:
+        xoaLopHoc();
+    }//GEN-LAST:event_btnXoaLopHocActionPerformed
+
+    private void rdHeTinChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdHeTinChiMouseClicked
+        // TODO add your handling code here:
+        showDataTableLopHoc();
+    }//GEN-LAST:event_rdHeTinChiMouseClicked
+
+    private void rdHeNienCheMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdHeNienCheMouseClicked
+        // TODO add your handling code here:
+        showDataTableLopHoc();
+    }//GEN-LAST:event_rdHeNienCheMouseClicked
 
     /**
      * @param args the command line arguments
@@ -475,7 +530,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
             Vector<String> dataRow = new Vector<>();
             dataRow.add(khoaVien.getMaKhoaVien());
             dataRow.add(khoaVien.getTenVien());
-            dataRow.add(String.valueOf(khoaVien.SO_TC_TN));
+            dataRow.add(String.valueOf(khoaVien.getSoTCTN()));
             defaultTableModelKhoaVien.addRow(dataRow);
         }
     }
@@ -564,6 +619,58 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
                 }                
             }            
         }
+        
+    }
+    
+    
+    // Xử lý sự kiện btnCapNhatLopHoc
+    // Cập nhật thông tin lớp học được chọn từ bảng lớp học
+    void capNhatLopHoc(){
+        String tenVien = cbKhoaVien.getSelectedItem().toString();
+        FileKhoaVien fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        for (int i = 0; i< listKhoaVien.size(); i++){
+            KhoaVien khoaVien = listKhoaVien.get(i);
+            if (khoaVien.getTenVien().equals(tenVien)){
+                CapNhatLopHocGUI.maVien = khoaVien.getMaKhoaVien();
+            }
+        }
+        
+        CapNhatLopHocGUI.data = (Vector<String>) defaultTableModelLopHoc.getDataVector().elementAt(tbLopHoc.getSelectedRow());
+        new CapNhatLopHocGUI();
+    }
+    
+    // xử lý sự kiện xóa lớp học
+    void xoaLopHoc(){        
+        FileKhoaVien fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        ArrayList<LopHoc> listLopHoc = null;
+        
+        String tenVien = cbKhoaVien.getSelectedItem().toString();
+        int k = 0; // Lưu vị trí của khoa Viện có lớp bị xóa
+        
+        for (int i = 0; i< listKhoaVien.size(); i++){
+            if (listKhoaVien.get(i).getTenVien().equals(tenVien)){
+                k = i;
+                listLopHoc = listKhoaVien.get(i).getDsLopHoc();
+            }
+        }
+        
+        // Lấy dòng dữ liệu được chọn từ bảng lơp học
+        Vector<String> dataRow = (Vector<String>) defaultTableModelLopHoc.getDataVector().elementAt(tbLopHoc.getSelectedRow());
+        
+        for (int i = 0; i< listLopHoc.size(); i++){
+            if (listLopHoc.get(i).getMaLop() == Integer.parseInt(dataRow.get(0))){
+                listLopHoc.remove(i);
+            }
+        }
+        
+        listKhoaVien.get(k).setDsLopHoc(listLopHoc);
+        fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
+        JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+        
+        // Hiển thị dữ liệu mới ra bảng
+        showDataTableLopHoc();
         
     }
 

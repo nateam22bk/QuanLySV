@@ -122,7 +122,7 @@ public class SinhVienTinChi extends SinhVien {
 
     @Override
     public void xetTotNghiep(KhoaVien KV) {
-        if(this.soTinChiTL >= KV.SO_TC_TN ){
+        if(this.soTinChiTL >= KV.getSoTCTN() ){
             System.out.println("Da tot nghiep");
             this.setTotNghiep(true);
         }
