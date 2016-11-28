@@ -9,11 +9,11 @@ import java.util.*;
  *
  * @author Kaiser GX
  */
-public class MonTinChi extends MonHoc {
+public class MonTinChi extends MonHoc{
     ArrayList<MonHoc> dsMonDK;
 
-    public MonTinChi(ArrayList<MonHoc> dsMonDK, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem, ArrayList<LopHoc> dsLopHoc, ArrayList<SinhVien> dsSinhVien) {
-        super(tenMon, maMon, soTinChi, dsDiem, dsLopHoc, dsSinhVien);
+    public MonTinChi(ArrayList<MonHoc> dsMonDK, String maVien, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem, ArrayList<LopHoc> dsLopHoc, ArrayList<SinhVien> dsSinhVien) {
+        super(maVien, tenMon, maMon, soTinChi, dsDiem, dsLopHoc, dsSinhVien);
         this.dsMonDK = dsMonDK;
     }
 

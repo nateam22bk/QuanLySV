@@ -92,4 +92,12 @@ public class KhoaVien implements Serializable{
         this.dsLopHoc.remove(LH);
     }
     
+    public void themMonHoc(MonHoc monHoc){
+        this.dsMonHoc.add(monHoc);
+    }
+    
+    public void xoaMonHoc(MonHoc monHoc){
+        this.dsMonHoc.remove(monHoc);
+    }
+    
 }

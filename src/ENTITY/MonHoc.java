@@ -1,4 +1,5 @@
 package ENTITY;
+import java.io.Serializable;
 import java.util.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,13 +11,24 @@ import java.util.*;
  *
  * @author Kaiser GX
  */
-public class MonHoc {
+public class MonHoc implements Serializable{
+    private String maVien;
     private String tenMon;
     private String maMon;
     private int soTinChi;
     ArrayList<DiemMonHoc> dsDiem;
     ArrayList<LopHoc> dsLopHoc;
     ArrayList<SinhVien> dsSinhVien;
+
+    public String getMaVien() {
+        return maVien;
+    }
+
+    public void setMaVien(String maVien) {
+        this.maVien = maVien;
+    }
+    
+    
 
     public ArrayList<LopHoc> getDsLopHoc() {
         return dsLopHoc;
@@ -34,7 +46,8 @@ public class MonHoc {
         this.dsSinhVien = dsSinhVien;
     }
 
-    public MonHoc(String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem, ArrayList<LopHoc> dsLopHoc, ArrayList<SinhVien> dsSinhVien) {
+    public MonHoc(String maVien, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem, ArrayList<LopHoc> dsLopHoc, ArrayList<SinhVien> dsSinhVien) {
+        this.maVien = maVien;
         this.tenMon = tenMon;
         this.maMon = maMon;
         this.soTinChi = soTinChi;
@@ -42,9 +55,7 @@ public class MonHoc {
         this.dsLopHoc = dsLopHoc;
         this.dsSinhVien = dsSinhVien;
     }
-    
-    
-    
+
     public String getTenMon() {
         return tenMon;
     }
@@ -106,4 +117,5 @@ public class MonHoc {
     public void xoaDiem(DiemMonHoc Diem){
         this.dsDiem.remove(Diem);
     }
+    
 }

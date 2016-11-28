@@ -49,4 +49,9 @@ public class FileKhoaVien {
         }
         return list;
     }
+    
+    public static void main(String[] args) {
+        ArrayList<KhoaVien> listKhoaVien = new FileKhoaVien().docFileKhoaVien();
+        System.out.println(listKhoaVien.size());
+    }
 }
