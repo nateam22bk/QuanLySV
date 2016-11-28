@@ -322,7 +322,7 @@ public class ThemMonTinChiGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Dữ liệu nhập vào chưa hợp lệ !");
         }
         
-        MonHoc monTinChi = new MonTinChi(listMonHocDK, maVien, tenMH, maMH, soTC, new ArrayList<DiemMonHoc>(), new ArrayList<LopHoc>(), new ArrayList<>());
+        MonHoc monTinChi = new MonTinChi(listMonHocDK, maVien, tenMH, maMH, soTC, new ArrayList<DiemMonHoc>(), new ArrayList<>());
         
         ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
         ArrayList<MonHoc> listMonHoc = null;

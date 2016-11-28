@@ -17,7 +17,6 @@ public class MonHoc implements Serializable{
     private String maMon;
     private int soTinChi;
     ArrayList<DiemMonHoc> dsDiem;
-    ArrayList<LopHoc> dsLopHoc;
     ArrayList<SinhVien> dsSinhVien;
 
     public String getMaVien() {
@@ -26,16 +25,6 @@ public class MonHoc implements Serializable{
 
     public void setMaVien(String maVien) {
         this.maVien = maVien;
-    }
-    
-    
-
-    public ArrayList<LopHoc> getDsLopHoc() {
-        return dsLopHoc;
-    }
-
-    public void setDsLopHoc(ArrayList<LopHoc> dsLopHoc) {
-        this.dsLopHoc = dsLopHoc;
     }
 
     public ArrayList<SinhVien> getDsSinhVien() {
@@ -46,13 +35,12 @@ public class MonHoc implements Serializable{
         this.dsSinhVien = dsSinhVien;
     }
 
-    public MonHoc(String maVien, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem, ArrayList<LopHoc> dsLopHoc, ArrayList<SinhVien> dsSinhVien) {
+    public MonHoc(String maVien, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem,ArrayList<SinhVien> dsSinhVien) {
         this.maVien = maVien;
         this.tenMon = tenMon;
         this.maMon = maMon;
         this.soTinChi = soTinChi;
         this.dsDiem = dsDiem;
-        this.dsLopHoc = dsLopHoc;
         this.dsSinhVien = dsSinhVien;
     }
 
@@ -100,14 +88,6 @@ public class MonHoc implements Serializable{
     
     public void xoaSinhVien(SinhVien SV){
         this.dsSinhVien.remove(SV);
-    }
-    
-    public void themLopHoc(LopHoc LH){
-        this.dsLopHoc.add(LH);
-    }
-     
-    public void xoaLopHoc(LopHoc LH){
-        this.dsLopHoc.remove(LH);
     }
     
     public void themDiem(DiemMonHoc Diem){

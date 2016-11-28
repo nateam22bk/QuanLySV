@@ -80,7 +80,7 @@ public class CapNhatLopHocGUI extends javax.swing.JFrame {
         jLabel4.setText("Tên Lớp : ");
 
         btnCapNhat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/update50x50.png"))); // NOI18N
+        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
         btnCapNhat.setText("Cập nhật");
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +89,7 @@ public class CapNhatLopHocGUI extends javax.swing.JFrame {
         });
 
         btnThoat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/exit.png"))); // NOI18N
+        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/logout-512.png"))); // NOI18N
         btnThoat.setText("Thoát");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +146,7 @@ public class CapNhatLopHocGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCapNhat)
                     .addComponent(btnThoat))

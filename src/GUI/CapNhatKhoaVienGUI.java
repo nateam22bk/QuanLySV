@@ -74,7 +74,7 @@ public class CapNhatKhoaVienGUI extends javax.swing.JFrame {
         jLabel4.setText("Số TC Xét TN : ");
 
         btnCapNhat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/update50x50.png"))); // NOI18N
+        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
         btnCapNhat.setText("Cập nhật ");
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +83,7 @@ public class CapNhatKhoaVienGUI extends javax.swing.JFrame {
         });
 
         btnThoat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/exit.png"))); // NOI18N
+        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/logout-512.png"))); // NOI18N
         btnThoat.setText("Thoát");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +144,7 @@ public class CapNhatKhoaVienGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThoat)
                     .addComponent(btnCapNhat))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
