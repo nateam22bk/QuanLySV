@@ -49,10 +49,10 @@ public class SinhVienNienChe extends SinhVien {
     public void setTotNghiep(boolean totNghiep){
     this.totNghiep=totNghiep;
     }
-    public void dangkiMon(SinhVienNienChe SV, MonNienChe MC, KhoaVien KV){
+    /*public void dangkiMon(SinhVienNienChe SV, MonNienChe MC, KhoaVien KV){
       if(KV.dsMonHoc.contains(MC)&& KV.dsSinhVien.contains(SV)&& MC.getKiHocSo()==this.kiHocSo&& SV.dsMon.containsAll(MC.dsMonNC)) MC.themSinhVien(SV);
       else System.out.println("Dang ki mon that bai!");
-    }
+    } */
     @Override
     public void inTT() {
         super.inTT();

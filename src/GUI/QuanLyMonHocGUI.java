@@ -8,11 +8,13 @@ package GUI;
 import DBA.FileKhoaVien;
 import ENTITY.KhoaVien;
 import ENTITY.MonHoc;
+import ENTITY.MonNienChe;
 import ENTITY.MonTinChi;
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,23 +28,35 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
      */
     DefaultComboBoxModel<String> boxModelKhoaVien;
     DefaultTableModel defaultTableModelMonHoc;
+    DefaultTableModel defaultTableModelMHDieuKien;
     public QuanLyMonHocGUI() {
         this.setVisible(true);
         this.setTitle("Quản lý môn học");
         initComponents();
         initComboBoxKhoaVien();
+        initTableMonHocDieuKien();
         rdTinChi.setSelected(true);
         showDataMonHoc();
     }
     
+    public void initTableMonHocDieuKien(){
+        defaultTableModelMHDieuKien = new DefaultTableModel();
+        defaultTableModelMHDieuKien.addColumn("Mã Môn Học");
+        defaultTableModelMHDieuKien.addColumn("Tên Môn Học");
+        defaultTableModelMHDieuKien.addColumn(" Số Tín Chỉ");
+        
+        tbMonHocDK.setModel(defaultTableModelMHDieuKien);
+    }
+    
     public void showDataMonHoc(){
+        defaultTableModelMonHoc = new DefaultTableModel();
         if(rdTinChi.isSelected()){
             defaultTableModelMonHoc = new DefaultTableModel();
             defaultTableModelMonHoc.addColumn("Mã Môn Học");
             defaultTableModelMonHoc.addColumn("Tên Môn Học");
             defaultTableModelMonHoc.addColumn("Số Tín Chỉ");
             
-            tbMonHoc.setModel(defaultTableModelMonHoc);
+            tbDanhSachMonHoc.setModel(defaultTableModelMonHoc);
             
             FileKhoaVien fileKhoaVien = new FileKhoaVien();
             ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
@@ -55,10 +69,11 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
             
             for (MonHoc monHoc : listMonHoc) {
                 if (monHoc instanceof MonTinChi){
+                    MonTinChi monTC = (MonTinChi)monHoc;
                     Vector<String> data = new Vector<>();
-                    data.add(monHoc.getMaMon());
-                    data.add(monHoc.getTenMon());
-                    data.add(String.valueOf(monHoc.getSoTinChi()));
+                    data.add(monTC.getMaMon());
+                    data.add(monTC.getTenMon());
+                    data.add(String.valueOf(monTC.getSoTinChi()));
                     defaultTableModelMonHoc.addRow(data);
                 }
             }
@@ -67,9 +82,10 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
             defaultTableModelMonHoc = new DefaultTableModel();
             defaultTableModelMonHoc.addColumn("Mã Môn Học");
             defaultTableModelMonHoc.addColumn("Tên Môn Học");
+            defaultTableModelMonHoc.addColumn("Đơn vị học trình");
             defaultTableModelMonHoc.addColumn("Học Kì");
             
-            tbMonHoc.setModel(defaultTableModelMonHoc);
+            tbDanhSachMonHoc.setModel(defaultTableModelMonHoc);
             
             FileKhoaVien fileKhoaVien = new FileKhoaVien();
             ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
@@ -79,6 +95,18 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
                     listMonHoc = khoaVien.getDsMonHoc();
                 }
             }  
+            
+            for (MonHoc monHoc : listMonHoc) {
+                if (monHoc instanceof MonNienChe){
+                    MonNienChe monNienChe = (MonNienChe)monHoc;
+                    Vector<String> data = new Vector<>();
+                    data.add(monNienChe.getMaMon());
+                    data.add(monNienChe.getTenMon());
+                    data.add(String.valueOf(monNienChe.getDonViHocTrinh()));
+                    data.add(String.valueOf(monNienChe.getKiHocSo()));
+                    defaultTableModelMonHoc.addRow(data);
+                }
+            }
             
         }
     }
@@ -109,11 +137,8 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbMonHoc = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnThoat = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -122,46 +147,23 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         rdTinChi = new javax.swing.JRadioButton();
         rdNienChe = new javax.swing.JRadioButton();
         btnThemMonHoc = new javax.swing.JButton();
-        btnCapNhatMonHoc = new javax.swing.JButton();
+        btnCapNhat = new javax.swing.JButton();
         btnXoaLopHoc = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbDanhSachMonHoc = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbMonHocDK = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 
-        tbMonHoc.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tbMonHoc);
-
         jPanel3.setBackground(new java.awt.Color(244, 255, 102));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/bk.jpg"))); // NOI18N
-
-        btnThoat.setBackground(new java.awt.Color(254, 254, 254));
-        btnThoat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/logout-512.png"))); // NOI18N
-        btnThoat.setText("Thoát");
-        btnThoat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThoatActionPerformed(evt);
-            }
-        });
 
         btnClose.setBackground(new java.awt.Color(254, 254, 254));
         btnClose.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -183,25 +185,21 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(133, 133, 133)
+                .addGap(265, 265, 265)
                 .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(192, 192, 192)
-                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnThoat)
-                            .addComponent(btnClose))
-                        .addComponent(jLabel1)))
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnClose)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -211,23 +209,24 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(254, 254, 254));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Khoa Viện", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(255, 0, 0))); // NOI18N
 
+        cbKhoaVien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         cbKhoaVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(cbKhoaVien, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(cbKhoaVien, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         buttonGroup1.add(rdTinChi);
@@ -257,9 +256,14 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
             }
         });
 
-        btnCapNhatMonHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnCapNhatMonHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
-        btnCapNhatMonHoc.setText("Cập Nhật Môn Học");
+        btnCapNhat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
+        btnCapNhat.setText("Cập Nhật Môn Học");
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
 
         btnXoaLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnXoaLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/file_delete50x50.png"))); // NOI18N
@@ -277,11 +281,11 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdNienChe)
                     .addComponent(btnThemMonHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCapNhatMonHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCapNhatMonHoc, btnThemMonHoc, btnXoaLopHoc});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCapNhat, btnThemMonHoc, btnXoaLopHoc});
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,7 +299,7 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnThemMonHoc)
                 .addGap(44, 44, 44)
-                .addComponent(btnCapNhatMonHoc)
+                .addComponent(btnCapNhat)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnXoaLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
@@ -304,8 +308,8 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(254, 254, 254));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách môn học", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 18))); // NOI18N
 
-        jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbDanhSachMonHoc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tbDanhSachMonHoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -316,7 +320,12 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        tbDanhSachMonHoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDanhSachMonHocMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbDanhSachMonHoc);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -338,7 +347,7 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(254, 254, 254));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách môn học điều kiện", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 18))); // NOI18N
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbMonHocDK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -349,7 +358,7 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(tbMonHocDK);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -379,29 +388,21 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addContainerGap(61, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(2284, 2284, 2284))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -410,11 +411,11 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -435,15 +436,21 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         showDataMonHoc();
     }//GEN-LAST:event_rdNienCheMouseClicked
 
-    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_btnThoatActionPerformed
-
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void tbDanhSachMonHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDanhSachMonHocMouseClicked
+        // TODO add your handling code here:
+        showMonHocDieuKien();
+    }//GEN-LAST:event_tbDanhSachMonHocMouseClicked
+
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        // TODO add your handling code here:
+        updateMH();
+        
+    }//GEN-LAST:event_btnCapNhatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -480,27 +487,98 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         });
     }
     
-    public void themMonHoc(){
+    void updateMH(){
+        
+        FileKhoaVien fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        String maVien = null;
+        for (KhoaVien khoaVien : listKhoaVien) {
+            if (khoaVien.getTenVien().equals(cbKhoaVien.getSelectedItem().toString())){
+                maVien = khoaVien.getMaKhoaVien();
+            }
+        }
+        
         if (rdTinChi.isSelected()){
-            String tenVien = cbKhoaVien.getSelectedItem().toString();
-            FileKhoaVien fileKhoaVien = new FileKhoaVien();
-            ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
-            for (int i = 0; i< listKhoaVien.size(); i++){
-                if (listKhoaVien.get(i).getTenVien().equals(tenVien)){
-                    ThemMonTinChiGUI.maVien = listKhoaVien.get(i).getMaKhoaVien();
+            CapNhatMonHocTinChiGUI.dataRow = (Vector<String>) defaultTableModelMonHoc.getDataVector().elementAt(tbDanhSachMonHoc.getSelectedRow());
+            CapNhatMonHocTinChiGUI.maVien = maVien;
+            new CapNhatMonHocTinChiGUI();
+        }else {
+            
+    }
+        
+  }
+    
+    public void themMonHoc(){
+        String tenVien = cbKhoaVien.getSelectedItem().toString();
+        FileKhoaVien fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        
+        if (rdTinChi.isSelected()){
+            for (KhoaVien khoaVien : listKhoaVien) {
+                if (khoaVien.getTenVien().equals(tenVien)){
+                    ThemMonTinChiGUI.maVien = khoaVien.getMaKhoaVien();
                 }
             }
             new ThemMonTinChiGUI();
         }else {
-            new ThemMonNienChe();
+            for (KhoaVien khoaVien : listKhoaVien) {
+                if (khoaVien.getTenVien().equals(tenVien)){
+                    ThemMonNienCheGUI.maVien = khoaVien.getMaKhoaVien();
+                }
+            }
+            new ThemMonNienCheGUI();
         }
     }
+    
+    
+    // Đổ dữ liệu cho bảng môn học điều kiện khi một môn học được chọn từ bảng môn học
+    public void showMonHocDieuKien(){
+        if (rdNienChe.isSelected()){
+            return;
+        }
+        defaultTableModelMHDieuKien.setRowCount(0);
+        Vector<String> dataRow = (Vector<String>) defaultTableModelMonHoc.getDataVector().elementAt(tbDanhSachMonHoc.getSelectedRow());
+        
+        FileKhoaVien fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        ArrayList<MonHoc> listMonHoc = new ArrayList<>();
+        ArrayList<MonHoc> listMonDieuKien = new ArrayList<>();
+        
+        for (KhoaVien khoaVien : listKhoaVien){
+            if (khoaVien.getTenVien().equals(cbKhoaVien.getSelectedItem().toString())){
+                listMonHoc = khoaVien.getDsMonHoc();
+            }
+        }
+        
+        for (MonHoc monHoc : listMonHoc) {
+            if (monHoc.getMaMon().equals(dataRow.get(0))){
+                if (monHoc instanceof MonTinChi){
+                    MonTinChi monTinChi = (MonTinChi)monHoc;
+                    listMonDieuKien = monTinChi.getDsMonDK();
+                }
+            }
+        }
+        if (listMonDieuKien.size() < 1){
+            return;
+        }
+        
+        for (MonHoc monHoc : listMonDieuKien) {
+            MonTinChi monTC = (MonTinChi)monHoc;
+            Vector<String> data = new Vector<>();
+            data.add(monTC.getMaMon());
+            data.add(monTC.getTenMon());
+            data.add(String.valueOf(monTC.getSoTinChi()));
+            defaultTableModelMHDieuKien.addRow(data);
+        }
+        
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCapNhatMonHoc;
+    private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnThemMonHoc;
-    private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnXoaLopHoc;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbKhoaVien;
@@ -512,13 +590,11 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JRadioButton rdNienChe;
     private javax.swing.JRadioButton rdTinChi;
-    private javax.swing.JTable tbMonHoc;
+    private javax.swing.JTable tbDanhSachMonHoc;
+    private javax.swing.JTable tbMonHocDK;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,10 +11,20 @@ import java.util.*;
  */
 public class MonTinChi extends MonHoc{
     ArrayList<MonHoc> dsMonDK;
+    private int soTinChi;
 
     public MonTinChi(ArrayList<MonHoc> dsMonDK, String maVien, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem, ArrayList<SinhVien> dsSinhVien) {
-        super(maVien, tenMon, maMon, soTinChi, dsDiem, dsSinhVien);
+        super(maVien, tenMon, maMon, dsDiem, dsSinhVien);
         this.dsMonDK = dsMonDK;
+        this.soTinChi = soTinChi;
+    }
+
+    public int getSoTinChi() {
+        return soTinChi;
+    }
+
+    public void setSoTinChi(int soTinChi) {
+        this.soTinChi = soTinChi;
     }
 
     public ArrayList<MonHoc> getDsMonDK() {

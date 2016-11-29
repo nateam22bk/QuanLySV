@@ -3,30 +3,37 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemMonTinChiGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/KhoaVien.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/SinhVienNienChe.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/SinhVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanTriGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/CapNhatKhoaVienGUI.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/DangNhapGUI.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonHocDieuKien.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/SinhVienTinChi.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/CapNhatLopHocGUI.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonTinChi.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileMonHoc.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonHoc.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThongTinCaNhanGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanLySinhVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileSinhVien.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/LopHoc.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanLyKhoaVienGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanLyMonHocGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileLopHoc.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemMonTinChiGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/DangKiHocGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/SinhVienNienChe.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/DangNhapGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonHocDieuKien.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/DiemMonHoc.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/CapNhatMonHocTinChiGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonTinChi.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/KetQuaHocTapGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileMonHoc.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/LopHoc.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/QuanLySV.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemLopHocGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonNienChe.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/SinhVien.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanLyMonHocGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemKhoaVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileKhoaVien.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileLopHoc.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemMonNienChe.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemMonNienCheGUI.java</file>
         </group>
     </open-files>
 </project-private>

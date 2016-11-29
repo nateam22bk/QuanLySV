@@ -15,7 +15,6 @@ public class MonHoc implements Serializable{
     private String maVien;
     private String tenMon;
     private String maMon;
-    private int soTinChi;
     ArrayList<DiemMonHoc> dsDiem;
     ArrayList<SinhVien> dsSinhVien;
 
@@ -35,11 +34,10 @@ public class MonHoc implements Serializable{
         this.dsSinhVien = dsSinhVien;
     }
 
-    public MonHoc(String maVien, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem,ArrayList<SinhVien> dsSinhVien) {
+    public MonHoc(String maVien, String tenMon, String maMon, ArrayList<DiemMonHoc> dsDiem,ArrayList<SinhVien> dsSinhVien) {
         this.maVien = maVien;
         this.tenMon = tenMon;
         this.maMon = maMon;
-        this.soTinChi = soTinChi;
         this.dsDiem = dsDiem;
         this.dsSinhVien = dsSinhVien;
     }
@@ -60,15 +58,6 @@ public class MonHoc implements Serializable{
         this.maMon = maMon;
     }
 
-    public int getSoTinChi() {
-        return soTinChi;
-    }
-
-    public void setSoTinChi(int soTinChi) {
-        this.soTinChi = soTinChi;
-    }
-
-   
     public ArrayList<DiemMonHoc> getDsDiem() {
         return dsDiem;
     }
@@ -79,7 +68,7 @@ public class MonHoc implements Serializable{
 
     
     public void inTT (MonHoc MH){
-        System.out.println("Ten mon: "+this.tenMon+"\nMa mon: "+this.maMon+"\nSo tin chi: "+this.soTinChi);
+        System.out.println("Ten mon: "+this.tenMon+"\nMa mon: "+this.maMon);
     }
     
     public void themSinhVien(SinhVien SV){

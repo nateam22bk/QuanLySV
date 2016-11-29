@@ -11,15 +11,21 @@ import java.util.*;
  */
 public class MonNienChe extends MonHoc{
     private int kiHocSo;
-    ArrayList<MonHoc> dsMonNC; 
+    private int donViHocTrinh;
 
-    public MonNienChe(int kiHocSo, ArrayList<MonHoc> dsMonNC, String maVien, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem, ArrayList<SinhVien> dsSinhVien) {
-        super(maVien, tenMon, maMon, soTinChi, dsDiem, dsSinhVien);
+    public MonNienChe(int kiHocSo, String maVien, String tenMon, String maMon, int donViHocTrinh, ArrayList<DiemMonHoc> dsDiem, ArrayList<SinhVien> dsSinhVien) {
+        super(maVien, tenMon, maMon, dsDiem, dsSinhVien);
         this.kiHocSo = kiHocSo;
-        this.dsMonNC = dsMonNC;
+        this.donViHocTrinh = donViHocTrinh;
     }
 
-    
+    public int getDonViHocTrinh() {
+        return donViHocTrinh;
+    }
+
+    public void setDonViHocTrinh(int donViHocTrinh) {
+        this.donViHocTrinh = donViHocTrinh;
+    }
 
     public int getKiHocSo() {
         return kiHocSo;
@@ -27,12 +33,5 @@ public class MonNienChe extends MonHoc{
 
     public void setKiHocSo(int kiHocSo) {
         this.kiHocSo = kiHocSo;
-    }
-    
-    public void themMonNC(MonHoc MH){
-       this.dsMonNC.add(MH);
-    }
-    public void xoaMonNC(MonHoc MH){
-        this.dsMonNC.remove(MH);
     }
 }

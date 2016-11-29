@@ -120,6 +120,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(251, 246, 246));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Khoa Viện", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 18), new java.awt.Color(255, 0, 0))); // NOI18N
 
+        tbKhoaVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tbKhoaVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -212,6 +213,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(254, 247, 247));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lớp Học", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 18), new java.awt.Color(255, 0, 0))); // NOI18N
 
+        tbLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tbLopHoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -335,7 +337,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel4.setBackground(new java.awt.Color(164, 253, 141));
+        jPanel4.setBackground(new java.awt.Color(254, 255, 143));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/bk.jpg"))); // NOI18N
 
@@ -357,7 +359,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
@@ -430,6 +432,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
     private void btnCapNhatKhoaVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatKhoaVienActionPerformed
         // TODO add your handling code here:
         capNhat();
+        showDataTableVien();
     }//GEN-LAST:event_btnCapNhatKhoaVienActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -452,11 +455,13 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
     private void btnXoaKhoaVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKhoaVienActionPerformed
         // TODO add your handling code here:
         xoaVien();
+        showDataTableVien();
     }//GEN-LAST:event_btnXoaKhoaVienActionPerformed
 
     private void btnThemLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLopHocActionPerformed
         // TODO add your handling code here:
         themLopHoc();
+        showDataTableLopHoc();
     }//GEN-LAST:event_btnThemLopHocActionPerformed
 
     private void cbKhoaVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKhoaVienActionPerformed
@@ -467,6 +472,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
     private void btnCapNhatLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatLopHocActionPerformed
         // TODO add your handling code here:
         capNhatLopHoc();
+        showDataTableLopHoc();
     }//GEN-LAST:event_btnCapNhatLopHocActionPerformed
 
     private void tbLopHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLopHocMouseClicked
@@ -478,6 +484,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
     private void btnXoaLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaLopHocActionPerformed
         // TODO add your handling code here:
         xoaLopHoc();
+        showDataTableLopHoc();
     }//GEN-LAST:event_btnXoaLopHocActionPerformed
 
     private void rdHeTinChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdHeTinChiMouseClicked
