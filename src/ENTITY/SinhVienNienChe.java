@@ -5,37 +5,35 @@
  */
 package ENTITY;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
  * @author Dell
  */
-public class SinhVienNienChe extends SinhVien {
-    private int kiHocSo;
+public class SinhVienNienChe extends SinhVien implements Serializable{
     private float diem;
     private boolean totNghiep;
     ArrayList<MonHoc> dsMon;
-    ArrayList<LopHoc> dsLopNC;
-    
-    public int getKiHoc(){
-    return kiHocSo;
+
+    public SinhVienNienChe(String MSSV, String hoTen, Date ngaySinh, String queQuan) {
+        super(MSSV, hoTen, ngaySinh, queQuan);
     }
+    
+    
     public float getDiem(){
     return diem;
     }
     public ArrayList<MonHoc> getMon(){
     return dsMon;
     }
-    public ArrayList<LopHoc> getLopNC(){
-    return dsLopNC;
-    }
+    
     public boolean isTotNghiep(){
     return totNghiep;
     }
-    public void setKiHoc(int kiHocSo){
-    this.kiHocSo=kiHocSo;
-    }
+    
     public void setDiem(float diem){
     this.diem = diem;
     }
@@ -43,9 +41,7 @@ public class SinhVienNienChe extends SinhVien {
     public void setMon(ArrayList<MonHoc> dsMon){
      this.dsMon=dsMon;
     }
-    public void setLop(ArrayList<LopHoc> dsLopNC){
-    this.dsLopNC=dsLopNC;
-    }
+    
     public void setTotNghiep(boolean totNghiep){
     this.totNghiep=totNghiep;
     }
@@ -56,7 +52,7 @@ public class SinhVienNienChe extends SinhVien {
     @Override
     public void inTT() {
         super.inTT();
-        System.out.println("Ban dang hoc o ki:"+this.kiHocSo+"Voi diem trung binh la:"+this.diem);
+        //System.out.println("Ban dang hoc o ki:"+this.kiHocSo+"Voi diem trung binh la:"+this.diem);
     }
     @Override
     public void xetTotNghiep(KhoaVien KV) {

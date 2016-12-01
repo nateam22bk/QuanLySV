@@ -5,18 +5,37 @@
  */
 package ENTITY;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author Kaiser GX
  */
-public abstract class SinhVien {
-    private int MSSV;
+public abstract class SinhVien implements Serializable{
+    private String maSV;
     private String hoTen;
     private Date ngaySinh;
     private String queQuan;
     private String tenVien;
+    private String tenLop;
+
+    public SinhVien(String MSSV, String hoTen, Date ngaySinh, String queQuan) {
+        this.maSV = MSSV;
+        this.hoTen = hoTen;
+        this.ngaySinh = ngaySinh;
+        this.queQuan = queQuan;
+    }
+
+    public String getTenLop() {
+        return tenLop;
+    }
+
+    public void setTenLop(String tenLop) {
+        this.tenLop = tenLop;
+    }
+    
+    
 
     public String getTenVien() {
         return tenVien;
@@ -33,16 +52,17 @@ public abstract class SinhVien {
     public String getQueQuan() {
         return queQuan;
     }
+
+    public String getMaSV() {
+        return maSV;
+    }
+
+    public void setMaSV(String maSV) {
+        this.maSV = maSV;
+    }
     
-
-    public int getMSSV() {
-        return MSSV;
-    }
-
-    public void setMSSV(int MSSV) {
-        this.MSSV = MSSV;
-    }
-
+    
+   
     public String getHoTen() {
         return hoTen;
     }

@@ -12,20 +12,28 @@ package ENTITY;
 public class DiemMonHoc {
     private SinhVien sinhVien;
     private float dienGiuaKy;
-    private float heSoGK;
     private float diemCuoiKy;
     private float hesoCK;
-    private String diemMonHoc;
     private String tenMon;
+    public int hocKi;
 
-    public DiemMonHoc(SinhVien sinhVien, float dienGiuaKy, float heSoGK, float hesoCK, String diemMonHoc, String tenMon) {
+    public DiemMonHoc(SinhVien sinhVien, float hesoCK, String tenMon, int hocKi) {
         this.sinhVien = sinhVien;
-        this.dienGiuaKy = dienGiuaKy;
-        this.heSoGK = heSoGK;
         this.hesoCK = hesoCK;
-        this.diemMonHoc = diemMonHoc;
         this.tenMon = tenMon;
+        this.hocKi = hocKi;
     }
+    
+
+    public int getHocKi() {
+        return hocKi;
+    }
+
+    public void setHocKi(int hocKi) {
+        this.hocKi = hocKi;
+    }
+
+    
 
     public SinhVien getSinhVien() {
         return sinhVien;
@@ -33,15 +41,6 @@ public class DiemMonHoc {
 
     public void setSinhVien(SinhVien sinhVien) {
         this.sinhVien = sinhVien;
-    }
-
-
-    public float getHeSoGK() {
-        return heSoGK;
-    }
-
-    public void setHeSoGK(float heSoGK) {
-        this.heSoGK = heSoGK;
     }
 
     public float getHesoCK() {
@@ -67,14 +66,6 @@ public class DiemMonHoc {
 
     public void setDiemCuoiKy(float diemCuoiKy) {
         this.diemCuoiKy = diemCuoiKy;
-    }
-
-    public String getDiemMonHoc() {
-        return diemMonHoc;
-    }
-
-    public void setDiemMonHoc(String diemMonHoc) {
-        this.diemMonHoc = diemMonHoc;
     }
 
     public String getTenMon() {

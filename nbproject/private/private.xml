@@ -12,8 +12,10 @@
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonHoc.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThongTinCaNhanGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanLySinhVienGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/LopNienChe.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileSinhVien.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanLyKhoaVienGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/LopTinChi.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanLyMonHocGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileLopHoc.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemMonTinChiGUI.java</file>
@@ -27,12 +29,13 @@
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/KetQuaHocTapGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileMonHoc.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/LopHoc.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/QuanLySV.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemLopHocGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonNienChe.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/CapNhatSinhVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/SinhVien.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemKhoaVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileKhoaVien.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemSinhVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemMonNienCheGUI.java</file>
         </group>
     </open-files>

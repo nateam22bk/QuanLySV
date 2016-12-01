@@ -262,6 +262,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m Sinh Vi&#xea;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemSVActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnCapNhatSV">
               <Properties>
@@ -273,6 +276,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="C&#x1ead;p Nh&#x1ead;t "/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCapNhatSVActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnXoaSV">
               <Properties>
@@ -362,6 +368,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="H&#x1ec7; Ni&#xea;n Ch&#x1ebf;"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdNienCheMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="rdTinChi">
                   <Properties>
@@ -373,6 +382,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="H&#x1ec7; T&#xed;n Ch&#x1ec9;"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdTinChiMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

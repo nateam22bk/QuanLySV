@@ -259,8 +259,6 @@ public class ThemLopHocGUI extends javax.swing.JFrame {
     
     // Xử lý sự kiện thêm lớp học
     void themLopHoc(){
-        FileLopHoc fileLopHoc = new FileLopHoc();
-        ArrayList<LopHoc> listLopHoc = fileLopHoc.docFileLopHoc();
         
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
         ArrayList<KhoaVien> listKhoaVien  = fileKhoaVien.docFileKhoaVien();
@@ -283,8 +281,6 @@ public class ThemLopHocGUI extends javax.swing.JFrame {
         
         if (rdTinChi == 1){
             LopHoc lopTinChi = new LopTinChi(maVien, maLopInt, tenLop, 0, new ArrayList<SinhVienTinChi>());
-            listLopHoc.add(lopTinChi);
-            fileLopHoc.ghiFileLopHoc(listLopHoc);
             
             for (int i = 0; i< listKhoaVien.size(); i++){
                 KhoaVien khoaVien = listKhoaVien.get(i);
@@ -296,8 +292,6 @@ public class ThemLopHocGUI extends javax.swing.JFrame {
          
         }else {
             LopHoc lopNienChe = new LopNienChe(maVien, maLopInt, tenLop, 0, new ArrayList<SinhVienNienChe>());
-            listLopHoc.add(lopNienChe);
-            fileLopHoc.ghiFileLopHoc(listLopHoc);
             
             for (int i = 0; i< listKhoaVien.size(); i++){
                 KhoaVien khoaVien = listKhoaVien.get(i);

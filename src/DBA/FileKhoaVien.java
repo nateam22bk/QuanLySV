@@ -52,6 +52,7 @@ public class FileKhoaVien {
     
     public static void main(String[] args) {
         ArrayList<KhoaVien> listKhoaVien = new FileKhoaVien().docFileKhoaVien();
-        System.out.println(listKhoaVien.size());
+        LopTinChi lopTinChi = (LopTinChi)listKhoaVien.get(0).getDsLopHoc().get(0);
+        System.out.println(lopTinChi.getDsSinhVienTC().get(1).getHoTen());
     }
 }

@@ -10,8 +10,15 @@ import ENTITY.KhoaVien;
 import ENTITY.LopHoc;
 import ENTITY.LopNienChe;
 import ENTITY.LopTinChi;
+import ENTITY.SinhVien;
+import ENTITY.SinhVienNienChe;
+import ENTITY.SinhVienTinChi;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Stack;
+import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,12 +29,13 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
     /**
      * Creates new form QuanLySinhVienGUI
      */
-    
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     FileKhoaVien fileKhoaVien;
     ArrayList<KhoaVien> listKhoaVien;
     ArrayList<LopHoc> listLopHoc;
     DefaultComboBoxModel<String> boxModelKhoaVien;
     DefaultComboBoxModel<String> boxModelLopHoc;
+    DefaultTableModel tableModelSinhVien;
     public QuanLySinhVienGUI() {
         this.setVisible(true);
         this.setTitle("Quản lý thông tin sinh viên");
@@ -38,7 +46,20 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
         cbLopHoc.setModel(boxModelLopHoc);
         rdTinChi.setSelected(true);
         initComboBoxKhoaVien();
+        initTableSinhVien();
         showDataBoxLopHoc();
+        showDataSinhVien();
+    }
+    
+    public void initTableSinhVien(){
+        tableModelSinhVien = new DefaultTableModel();
+        tableModelSinhVien.addColumn("Mã số");
+        tableModelSinhVien.addColumn("Họ tên");
+        tableModelSinhVien.addColumn("Ngày sinh");
+        tableModelSinhVien.addColumn("Quê quán");
+        
+        tbSinhVien.setModel(tableModelSinhVien);
+        
     }
     
     public void initComboBoxKhoaVien(){
@@ -53,7 +74,9 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
     }
     
     public void showDataBoxLopHoc(){
+        cbLopHoc.setMaximumRowCount(0);
         String tenVien = cbKhoaVien.getSelectedItem().toString();
+        listLopHoc = new ArrayList<>();
         for(KhoaVien khoaVien : listKhoaVien){
             if (khoaVien.getTenVien().equals(tenVien)){
                 listLopHoc = khoaVien.getDsLopHoc();
@@ -73,6 +96,54 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
                 }
             }
     }
+    }
+    
+    public void showDataSinhVien(){
+        tableModelSinhVien.setNumRows(0);
+        fileKhoaVien = new FileKhoaVien();
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        listLopHoc  = new ArrayList<>();
+        LopHoc lopHoc = null;
+        
+        String tenVien = cbKhoaVien.getSelectedItem().toString();
+        String tenLop = cbLopHoc.getSelectedItem().toString();
+        
+        int kvIndex = 0;
+        int lhIndex = 0;
+        for (int i = 0; i < listKhoaVien.size(); i++){
+            if (listKhoaVien.get(i).getTenVien().equals(tenVien)){
+                listLopHoc = listKhoaVien.get(i).getDsLopHoc();
+            }
+        }
+        for (int i = 0;i< listLopHoc.size(); i++){
+            if (listLopHoc.get(i).getTenLop().equals(tenLop)){
+                lopHoc = listLopHoc.get(i);
+            }
+        }
+        
+        if (lopHoc instanceof LopTinChi){
+            LopTinChi lopTinChi = (LopTinChi)lopHoc;
+            ArrayList<SinhVienTinChi> listSV = lopTinChi.getDsSinhVienTC();
+            for (SinhVienTinChi sinhVienTinChi : listSV) {
+                Vector<String> data = new Vector<>();
+                data.add(sinhVienTinChi.getMaSV());
+                data.add(sinhVienTinChi.getHoTen());
+                data.add(dateFormat.format(sinhVienTinChi.getNgaySinh()));
+                data.add(sinhVienTinChi.getQueQuan());
+                tableModelSinhVien.addRow(data);
+            }
+        }else{
+            LopNienChe lopNienChe  = (LopNienChe)lopHoc;
+            ArrayList<SinhVienNienChe> listSV = lopNienChe.getDsLopNC();
+            for (SinhVienNienChe sinhVienNienChe : listSV) {
+                Vector<String> data = new Vector<>();
+                data.add(sinhVienNienChe.getMaSV());
+                data.add(sinhVienNienChe.getHoTen());
+                data.add(dateFormat.format(sinhVienNienChe.getNgaySinh()));
+                data.add(sinhVienNienChe.getQueQuan());
+                tableModelSinhVien.addRow(data);
+            }
+        }
     }
 
     /**
@@ -181,10 +252,20 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
         btnThemSV.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnThemSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/addNew.png"))); // NOI18N
         btnThemSV.setText("Thêm Sinh Viên");
+        btnThemSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemSVActionPerformed(evt);
+            }
+        });
 
         btnCapNhatSV.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnCapNhatSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
         btnCapNhatSV.setText("Cập Nhật ");
+        btnCapNhatSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatSVActionPerformed(evt);
+            }
+        });
 
         btnXoaSV.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnXoaSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/file_delete50x50.png"))); // NOI18N
@@ -199,10 +280,20 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
         buttonGroup1.add(rdNienChe);
         rdNienChe.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         rdNienChe.setText("Hệ Niên Chế");
+        rdNienChe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdNienCheMouseClicked(evt);
+            }
+        });
 
         buttonGroup1.add(rdTinChi);
         rdTinChi.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         rdTinChi.setText("Hệ Tín Chỉ");
+        rdTinChi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdTinChiMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -378,6 +469,29 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnThemSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSVActionPerformed
+        // TODO add your handling code here:
+        themSinhVien();
+        new ThemSinhVienGUI();
+    }//GEN-LAST:event_btnThemSVActionPerformed
+
+    private void rdTinChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTinChiMouseClicked
+        // TODO add your handling code here:
+        showDataSinhVien();
+        showDataBoxLopHoc();
+    }//GEN-LAST:event_rdTinChiMouseClicked
+
+    private void btnCapNhatSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatSVActionPerformed
+        // TODO add your handling code here:
+        capNhatSinhVien();
+        new CapNhatSinhVienGUI();
+    }//GEN-LAST:event_btnCapNhatSVActionPerformed
+
+    private void rdNienCheMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdNienCheMouseClicked
+        // TODO add your handling code here:
+        showDataBoxLopHoc();
+    }//GEN-LAST:event_rdNienCheMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -411,6 +525,66 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
                 new QuanLySinhVienGUI().setVisible(true);
             }
         });
+    }
+    
+    public void themSinhVien(){
+        fileKhoaVien = new FileKhoaVien();
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        String tenVien = cbKhoaVien.getSelectedItem().toString();
+        String tenLop = cbLopHoc.getSelectedItem().toString();
+        
+        ThemSinhVienGUI.tenVien = tenVien;
+        ThemSinhVienGUI.tenLop = tenLop;
+        
+        for (int i = 0; i< listKhoaVien.size(); i++){
+            if (listKhoaVien.get(i).equals(tenVien)){
+                ThemSinhVienGUI.kvIndex = i;
+                listLopHoc = listKhoaVien.get(i).getDsLopHoc();
+            }
+        }
+        
+        for (int i = 0; i< listLopHoc.size(); i++){
+            if (listLopHoc.get(i).equals(tenLop)){
+                ThemSinhVienGUI.lhIndex = i;
+            }
+        }
+        
+        if (rdTinChi.isSelected()){
+            ThemSinhVienGUI.rdTinChi = 1;
+        }else {
+            ThemSinhVienGUI.rdTinChi = 0;
+        }
+    }
+    
+    public void capNhatSinhVien(){
+        fileKhoaVien = new FileKhoaVien();
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        String tenVien = cbKhoaVien.getSelectedItem().toString();
+        String tenLop = cbLopHoc.getSelectedItem().toString();
+        
+        CapNhatSinhVienGUI.tenVien = tenVien;
+        CapNhatSinhVienGUI.tenLop = tenLop;
+        
+        for (int i = 0; i< listKhoaVien.size(); i++){
+            if (listKhoaVien.get(i).equals(tenVien)){
+                CapNhatSinhVienGUI.kvIndex = i;
+                listLopHoc = listKhoaVien.get(i).getDsLopHoc();
+            }
+        }
+        
+        for (int i = 0; i< listLopHoc.size(); i++){
+            if (listLopHoc.get(i).equals(tenLop)){
+                CapNhatSinhVienGUI.lhIndex = i;
+            }
+        }
+        
+        if (rdTinChi.isSelected()){
+            CapNhatSinhVienGUI.rdTinChi = 1;
+        }else {
+            CapNhatSinhVienGUI.rdTinChi = 0;
+        }
+        
+        CapNhatSinhVienGUI.data = (Vector<String>) tableModelSinhVien.getDataVector().elementAt(tbSinhVien.getSelectedRow());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

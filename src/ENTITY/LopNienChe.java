@@ -14,6 +14,16 @@ import java.util.ArrayList;
 public class LopNienChe extends LopHoc{
     ArrayList<SinhVienNienChe> dsLopNC;
 
+    public ArrayList<SinhVienNienChe> getDsLopNC() {
+        return dsLopNC;
+    }
+
+    public void setDsLopNC(ArrayList<SinhVienNienChe> dsLopNC) {
+        this.dsLopNC = dsLopNC;
+    }
+    
+    
+
     public LopNienChe(String maKhoaVien, int maLop, String tenLop, int soSV, ArrayList<SinhVienNienChe> dsLopNC) {
         super(maKhoaVien, maLop, tenLop, soSV);
         this.dsLopNC = dsLopNC;

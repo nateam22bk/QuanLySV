@@ -15,6 +15,16 @@ import java.util.*;
 public class LopTinChi extends LopHoc implements Serializable{
     ArrayList<SinhVienTinChi> dsSinhVienTC;
 
+    public ArrayList<SinhVienTinChi> getDsSinhVienTC() {
+        return dsSinhVienTC;
+    }
+
+    public void setDsSinhVienTC(ArrayList<SinhVienTinChi> dsSinhVienTC) {
+        this.dsSinhVienTC = dsSinhVienTC;
+    }
+    
+    
+
     public LopTinChi(String maKhoaVien, int maLop, String tenLop, int soSV, ArrayList<SinhVienTinChi> dsSinhVienTC) {
         super(maKhoaVien, maLop, tenLop, soSV);
         this.dsSinhVienTC = dsSinhVienTC;
@@ -24,6 +34,7 @@ public class LopTinChi extends LopHoc implements Serializable{
     public void themSV(SinhVien sv) {
         if(sv instanceof SinhVienTinChi){
             this.dsSinhVienTC.add((SinhVienTinChi) sv);
+            setSoSV(getSoSV()+1);
         }
     }
 
@@ -31,6 +42,7 @@ public class LopTinChi extends LopHoc implements Serializable{
     public void xoaSV(SinhVien sv) {
          if(sv instanceof SinhVienTinChi){
             this.dsSinhVienTC.remove((SinhVienTinChi) sv);
+            setSoSV(getSoSV()-1);
         }
     }
   
