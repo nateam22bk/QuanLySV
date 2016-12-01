@@ -302,6 +302,11 @@ public class ThemSinhVienGUI extends javax.swing.JFrame {
     }
     
     public void themSinhVien(){
+        
+        FileSinhVien fileSinhVien = new FileSinhVien();
+        ArrayList<SinhVien> listSinhVien = new ArrayList<>();
+        listSinhVien = fileSinhVien.docFileSinhVien();
+        
         String hoTen = txtHoTen.getText().trim();
         String maStr = txtMSSV.getText().trim();
         String ngaySinhStr = txtNgaySinh.getText().trim();
@@ -325,6 +330,7 @@ public class ThemSinhVienGUI extends javax.swing.JFrame {
        
        if (rdTinChi == 1){
            SinhVien sinhVien = new SinhVienTinChi(maStr, hoTen, ngaySinh, queQuan);
+           listSinhVien.add(sinhVien);
            if (listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex) instanceof LopTinChi){
                
                listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).themSV(sinhVien);
@@ -332,6 +338,7 @@ public class ThemSinhVienGUI extends javax.swing.JFrame {
           
        }else {
            SinhVien sinhVien= new SinhVienNienChe(maStr, hoTen, ngaySinh, queQuan);
+           listSinhVien.add(sinhVien);
            if (listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex) instanceof LopNienChe){
               
                listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).themSV(sinhVien);
@@ -341,6 +348,7 @@ public class ThemSinhVienGUI extends javax.swing.JFrame {
        
        
        fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
+       fileSinhVien.ghiFileSinhVien(listSinhVien);
        JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
     
     }

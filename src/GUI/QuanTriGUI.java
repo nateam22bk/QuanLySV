@@ -15,7 +15,10 @@ public class QuanTriGUI extends javax.swing.JFrame {
      * Creates new form QuanTriGUI
      */
     public QuanTriGUI() {
+        this.setVisible(true);
+        this.setTitle("Quản trị hệ thống");
         initComponents();
+        this.setLocation(300, 100);
     }
 
     /**
@@ -71,6 +74,11 @@ public class QuanTriGUI extends javax.swing.JFrame {
         btnQuanLySinhVien.setBackground(new java.awt.Color(254, 254, 254));
         btnQuanLySinhVien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnQuanLySinhVien.setText("Quản lý thông tin Sinh Viên");
+        btnQuanLySinhVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuanLySinhVienActionPerformed(evt);
+            }
+        });
 
         btnMoDangKiHocTap.setBackground(new java.awt.Color(254, 254, 254));
         btnMoDangKiHocTap.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -201,13 +209,19 @@ public class QuanTriGUI extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
+        new DangNhapGUI();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btnQuanLyMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyMonHocActionPerformed
         // TODO add your handling code here:
         new QuanLyMonHocGUI();
     }//GEN-LAST:event_btnQuanLyMonHocActionPerformed
+
+    private void btnQuanLySinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLySinhVienActionPerformed
+        // TODO add your handling code here:
+        new QuanLySinhVienGUI();
+    }//GEN-LAST:event_btnQuanLySinhVienActionPerformed
 
     /**
      * @param args the command line arguments

@@ -101,18 +101,44 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
     }
     }
     
+    // Đổ dữ liệu vào bảng sinh viên
     public void showDataSinhVien(){
         tableModelSinhVien.setNumRows(0);
         fileKhoaVien = new FileKhoaVien();
         listKhoaVien = fileKhoaVien.docFileKhoaVien();
         listLopHoc  = new ArrayList<>();
         LopHoc lopHoc = null;
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
         
         String tenVien = cbKhoaVien.getSelectedItem().toString();
+        
+        int soLopTC = 0;
+        int soLopNC = 0;
+        for (KhoaVien khoaVien : listKhoaVien) {
+            if (khoaVien.getTenVien().equals(tenVien)){
+                listLopHoc = khoaVien.getDsLopHoc();
+            }
+        }
+        
+        for (LopHoc lopHoc1 : listLopHoc) {
+            if (lopHoc1 instanceof LopTinChi){
+                soLopTC++;
+            }else {
+                soLopNC++;
+            }
+        }
+        
+        // Kiểm tra danh sách lớp tin chỉ hoặc niên chế có rống hay không
+        if (rdTinChi.isSelected()){
+            if (soLopTC == 0)
+                return;
+        }else {
+            if(soLopNC == 0)
+                return;
+        }
+        
         String tenLop = cbLopHoc.getSelectedItem().toString();
         
-        int kvIndex = 0;
-        int lhIndex = 0;
         for (int i = 0; i < listKhoaVien.size(); i++){
             if (listKhoaVien.get(i).getTenVien().equals(tenVien)){
                 listLopHoc = listKhoaVien.get(i).getDsLopHoc();

@@ -5,6 +5,13 @@
  */
 package GUI;
 
+import DBA.FileKhoaVien;
+import ENTITY.KhoaVien;
+import ENTITY.MonHoc;
+import ENTITY.MonTinChi;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,14 +26,18 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     
     DefaultTableModel defaultTableModelTraCuu;
     DefaultTableModel defaultTableModelMonHocDK;
-    
+    DefaultComboBoxModel<String> boxModelVien;
+    FileKhoaVien fileKhoaVien;
     public DangKiHocGUI() {
         this.setVisible(true);
         this.setTitle("Đăng kí môn học");
         initComponents();
         initTable();
+        initComboBox();
+        showDataTraCuu();
     }
     
+    // KHởi tạo bảng
     public void initTable(){
         defaultTableModelMonHocDK = new DefaultTableModel();
         defaultTableModelTraCuu = new DefaultTableModel();
@@ -41,6 +52,62 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         
         tbMonHocDK.setModel(defaultTableModelMonHocDK);
         tbTraCuu.setModel(defaultTableModelTraCuu);
+    }
+    
+    //Khởi tạo ComboBox Khoa Viện
+    public void initComboBox(){
+        boxModelVien = new DefaultComboBoxModel<>();
+        fileKhoaVien  = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        
+        for (KhoaVien khoaVien : listKhoaVien) {
+            boxModelVien.addElement(khoaVien.getTenVien());
+        }
+        cbKhoaVien.setModel(boxModelVien);
+    }
+    
+    // Đổ dữ liệu cho bảng tra cứu
+    public void showDataTraCuu(){
+        defaultTableModelTraCuu.setNumRows(0);
+        fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        ArrayList<MonHoc> listMonHoc  = new ArrayList<>();
+        
+        for (KhoaVien khoaVien : listKhoaVien) {
+            if (khoaVien.getTenVien().equals(cbKhoaVien.getSelectedItem().toString())){
+                listMonHoc = khoaVien.getDsMonHoc();
+            }
+        }
+        
+        for (MonHoc monHoc : listMonHoc) {
+            if (monHoc instanceof MonTinChi){
+                MonTinChi monHocTC = (MonTinChi)monHoc;
+                Vector<String> data = new Vector<>();
+                
+                data.add(monHocTC.getMaMon());
+                data.add(monHocTC.getTenMon());
+                data.add(String.valueOf(monHocTC.getSoTinChi()));
+                defaultTableModelTraCuu.addRow(data);
+            }
+        }
+    }
+    
+    // Thêm môn học vào danh sách môn đăng kí
+    public void themMonDK(){
+        Vector<String> dataRow = new Vector<>();
+        dataRow = (Vector<String>) defaultTableModelTraCuu.getDataVector().elementAt(tbTraCuu.getSelectedRow());
+        defaultTableModelMonHocDK.addRow(dataRow);
+    }
+    
+    // Xóa môn học trong bảng danh sách đăng kí
+    public void xoaMonHocDK(){
+        defaultTableModelMonHocDK.removeRow(tbMonHocDK.getSelectedRow());
+    }
+    
+    public void dangKiMonHoc(){
+        
     }
 
     /**
@@ -59,19 +126,19 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbKhoaVien = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnTimKiem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbTraCuu = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        btnThemMonDK = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbMonHocDK = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnXoaMonDK = new javax.swing.JButton();
+        btnDangKi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,8 +191,18 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(254, 254, 254));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Khoa viện", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 18))); // NOI18N
 
-        jComboBox1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbKhoaVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        cbKhoaVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbKhoaVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbKhoaVienMouseClicked(evt);
+            }
+        });
+        cbKhoaVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbKhoaVienActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -133,24 +210,25 @@ public class DangKiHocGUI extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbKhoaVien, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(cbKhoaVien, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Mã môn học : ");
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/search50x50.png"))); // NOI18N
-        jButton2.setText("Tìm kiếm");
+        btnTimKiem.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/search50x50.png"))); // NOI18N
+        btnTimKiem.setText("Tìm kiếm");
 
+        tbTraCuu.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tbTraCuu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -164,7 +242,12 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbTraCuu);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/add50x50.png"))); // NOI18N
+        btnThemMonDK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/add50x50.png"))); // NOI18N
+        btnThemMonDK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemMonDKActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -175,9 +258,9 @@ public class DangKiHocGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btnTimKiem)
                         .addGap(77, 77, 77)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnThemMonDK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -196,8 +279,8 @@ public class DangKiHocGUI extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnTimKiem)
+                    .addComponent(btnThemMonDK))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -206,6 +289,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(254, 254, 254));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đăng kí môn học", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 18), new java.awt.Color(255, 0, 0))); // NOI18N
 
+        tbMonHocDK.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tbMonHocDK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -223,43 +307,50 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 33, 255));
         jLabel4.setText("Danh sách môn đăng kí : ");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/remove-icon-png-26.png"))); // NOI18N
+        btnXoaMonDK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/remove-icon-png-26.png"))); // NOI18N
+        btnXoaMonDK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaMonDKActionPerformed(evt);
+            }
+        });
 
-        jButton5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/addNew.png"))); // NOI18N
-        jButton5.setText("Đăng kí");
+        btnDangKi.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnDangKi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/addNew.png"))); // NOI18N
+        btnDangKi.setText("Đăng kí");
+        btnDangKi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangKiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addComponent(btnXoaMonDK, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addContainerGap(104, Short.MAX_VALUE))
+                    .addComponent(btnXoaMonDK)
+                    .addComponent(btnDangKi))
+                .addGap(47, 47, 47))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -278,14 +369,13 @@ public class DangKiHocGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 9, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -307,6 +397,31 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbKhoaVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKhoaVienActionPerformed
+        // TODO add your handling code here:
+         showDataTraCuu();
+    }//GEN-LAST:event_cbKhoaVienActionPerformed
+
+    private void cbKhoaVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbKhoaVienMouseClicked
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_cbKhoaVienMouseClicked
+
+    private void btnThemMonDKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMonDKActionPerformed
+        // TODO add your handling code here:
+        themMonDK();
+    }//GEN-LAST:event_btnThemMonDKActionPerformed
+
+    private void btnXoaMonDKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaMonDKActionPerformed
+        // TODO add your handling code here:
+        xoaMonHocDK();
+    }//GEN-LAST:event_btnXoaMonDKActionPerformed
+
+    private void btnDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKiActionPerformed
+        // TODO add your handling code here:
+        dangKiMonHoc();
+    }//GEN-LAST:event_btnDangKiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -344,12 +459,12 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDangKi;
+    private javax.swing.JButton btnThemMonDK;
+    private javax.swing.JButton btnTimKiem;
+    private javax.swing.JButton btnXoaMonDK;
+    private javax.swing.JComboBox<String> cbKhoaVien;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

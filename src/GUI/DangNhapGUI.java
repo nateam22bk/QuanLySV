@@ -5,6 +5,11 @@
  */
 package GUI;
 
+import DBA.FileSinhVien;
+import ENTITY.SinhVien;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author tu
@@ -15,7 +20,61 @@ public class DangNhapGUI extends javax.swing.JFrame {
      * Creates new form DangNhapGUI
      */
     public DangNhapGUI() {
+        this.setVisible(true);
+        this.setTitle("Đăng nhập");
         initComponents();
+        this.setLocation(300, 100);
+        rdSinhVien.setSelected(true);
+    }
+    
+    public void dangNhap(){
+        FileSinhVien fileSinhVien = new FileSinhVien();
+        ArrayList<SinhVien> listSinhVien = new ArrayList<>();
+        listSinhVien = fileSinhVien.docFileSinhVien();
+        
+        String userName = txtUserName.getText().trim();
+        String passWord = new String(txtPassword.getPassword());
+        
+        try {
+            if (userName.length() < 1 || passWord.length() < 1){
+                throw new Exception();
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, "Dữ liệu nhập vào chưa đúng");
+            return;
+        }
+        
+        int k = 0;
+        
+        if (rdAdmin.isSelected()){
+            if (passWord.equals("admin") && userName.equals("admin")){
+                JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công !");
+                new QuanTriGUI();
+                this.dispose();
+                return;
+            }else {
+                JOptionPane.showMessageDialog(rootPane, "Tài khoản hoặc mật khẩu chưa đúng !");
+            }
+        }else {
+            for (SinhVien sinhVien : listSinhVien) {
+               if (sinhVien.getMaSV().equals(userName)){
+                   k++;
+                   if (sinhVien.getMaSV().equals(userName) && sinhVien.getMaSV().equals(passWord)){
+                       JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công !");
+                       SinhVienGUI.user= sinhVien.getHoTen();
+                       new SinhVienGUI();
+                       this.dispose();
+                       return;
+                   }else {
+                       JOptionPane.showMessageDialog(rootPane, "Mật khẩu chưa đúng !");
+                   }
+               }
+            }
+        }
+        if (k == 0){
+            JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập không đúng !");
+            return;
+        }
     }
 
     /**
@@ -51,6 +110,11 @@ public class DangNhapGUI extends javax.swing.JFrame {
         btnDangNhap.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/user_login.png"))); // NOI18N
         btnDangNhap.setText("Đăng Nhập");
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangNhapActionPerformed(evt);
+            }
+        });
 
         btnThoat.setBackground(new java.awt.Color(254, 254, 254));
         btnThoat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -83,8 +147,6 @@ public class DangNhapGUI extends javax.swing.JFrame {
 
         txtUserName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
-        txtPassword.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -95,14 +157,11 @@ public class DangNhapGUI extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                    .addComponent(txtPassword))
                 .addGap(29, 29, 29))
         );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtPassword, txtUserName});
-
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -214,6 +273,11 @@ public class DangNhapGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+        // TODO add your handling code here:
+        dangNhap();
+    }//GEN-LAST:event_btnDangNhapActionPerformed
 
     /**
      * @param args the command line arguments

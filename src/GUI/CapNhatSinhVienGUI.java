@@ -6,6 +6,7 @@
 package GUI;
 
 import DBA.FileKhoaVien;
+import DBA.FileSinhVien;
 import ENTITY.KhoaVien;
 import ENTITY.LopTinChi;
 import ENTITY.SinhVien;
@@ -320,6 +321,10 @@ public class CapNhatSinhVienGUI extends javax.swing.JFrame {
     
     public void capNhat(){
         
+        FileSinhVien fileSinhVien = new FileSinhVien();
+        ArrayList<SinhVien> listSinhVien = new ArrayList<>();
+        listSinhVien = fileSinhVien.docFileSinhVien();
+        
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
         ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
         
@@ -349,6 +354,15 @@ public class CapNhatSinhVienGUI extends javax.swing.JFrame {
             listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).capNhatSV(sv, data.get(0));
         }
         
+        for (int i = 0; i< listSinhVien.size(); i++){
+            if (listSinhVien.get(i).getMaSV().equals(data.get(0))){
+                listSinhVien.get(i).setMaSV(maSV);
+                listSinhVien.get(i).setHoTen(hoTen);
+                listSinhVien.get(i).setNgaySinh(ngaySinh);
+                listSinhVien.get(i).setQueQuan(queQuan);
+            }
+        }
+        fileSinhVien.ghiFileSinhVien(listSinhVien);
         fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
         JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công !");
     }

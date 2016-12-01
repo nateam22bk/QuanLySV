@@ -49,4 +49,10 @@ public class FileSinhVien {
         }
         return list;
     }
+    
+    public static void main(String[] args) {
+        FileSinhVien fileSinhVien = new FileSinhVien();
+        ArrayList<SinhVien> listSinhVien = fileSinhVien.docFileSinhVien();
+        System.out.println(listSinhVien.get(0).getHoTen());
+    }
 }
