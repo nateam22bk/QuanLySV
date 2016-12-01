@@ -39,10 +39,24 @@ public class LopTinChi extends LopHoc implements Serializable{
     }
 
     @Override
-    public void xoaSV(SinhVien sv) {
-         if(sv instanceof SinhVienTinChi){
-            this.dsSinhVienTC.remove((SinhVienTinChi) sv);
-            setSoSV(getSoSV()-1);
+    public void xoaSV(String MSSV) {
+         for (int i = 0; i< dsSinhVienTC.size(); i++){
+             if (dsSinhVienTC.get(i).getMaSV().equals(MSSV)){
+                 dsSinhVienTC.remove(i);
+             }
+         }
+    }
+
+    @Override
+    public void capNhatSV(SinhVien sv, String MSSV) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i< dsSinhVienTC.size(); i++){
+            if (dsSinhVienTC.get(i).getMaSV().equals(MSSV)){
+                dsSinhVienTC.get(i).setMaSV(sv.getMaSV());
+                dsSinhVienTC.get(i).setHoTen(sv.getHoTen());
+                dsSinhVienTC.get(i).setNgaySinh(sv.getNgaySinh());
+                dsSinhVienTC.get(i).setQueQuan(sv.getQueQuan());
+            }
         }
     }
   

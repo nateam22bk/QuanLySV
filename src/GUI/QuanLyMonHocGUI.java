@@ -309,6 +309,7 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách môn học", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 18))); // NOI18N
 
         tbDanhSachMonHoc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tbDanhSachMonHoc.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tbDanhSachMonHoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -347,6 +348,7 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(254, 254, 254));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách môn học điều kiện", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 18))); // NOI18N
 
+        tbMonHocDK.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tbMonHocDK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

@@ -127,11 +127,16 @@ public class ThemLopHocGUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel4.setText("Tên Lớp : ");
 
+        txtMaVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtMaLop.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txtMaLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaLopActionPerformed(evt);
             }
         });
+
+        txtTenLop.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

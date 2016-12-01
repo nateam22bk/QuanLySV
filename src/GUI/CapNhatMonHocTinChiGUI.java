@@ -159,6 +159,12 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel5.setText("Số Tín Chỉ : ");
 
+        txtMaMH.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtTenMH.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtSoTC.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(

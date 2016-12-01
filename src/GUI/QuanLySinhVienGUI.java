@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -49,6 +50,8 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
         initTableSinhVien();
         showDataBoxLopHoc();
         showDataSinhVien();
+        btnCapNhatSV.setEnabled(false);
+        btnXoaSV.setEnabled(false);
     }
     
     public void initTableSinhVien(){
@@ -74,7 +77,7 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
     }
     
     public void showDataBoxLopHoc(){
-        cbLopHoc.setMaximumRowCount(0);
+        cbLopHoc.removeAllItems();
         String tenVien = cbKhoaVien.getSelectedItem().toString();
         listLopHoc = new ArrayList<>();
         for(KhoaVien khoaVien : listKhoaVien){
@@ -270,6 +273,11 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
         btnXoaSV.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnXoaSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/file_delete50x50.png"))); // NOI18N
         btnXoaSV.setText("Xóa");
+        btnXoaSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSVActionPerformed(evt);
+            }
+        });
 
         jPanel6.setBackground(new java.awt.Color(254, 254, 254));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lớp Học", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 18), new java.awt.Color(255, 0, 0))); // NOI18N
@@ -355,6 +363,7 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(254, 254, 254));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sinh viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 18))); // NOI18N
 
+        tbSinhVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tbSinhVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -366,6 +375,11 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbSinhVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbSinhVienMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbSinhVien);
 
         jPanel7.setBackground(new java.awt.Color(254, 254, 254));
@@ -477,8 +491,8 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
 
     private void rdTinChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTinChiMouseClicked
         // TODO add your handling code here:
-        showDataSinhVien();
         showDataBoxLopHoc();
+        showDataSinhVien();
     }//GEN-LAST:event_rdTinChiMouseClicked
 
     private void btnCapNhatSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatSVActionPerformed
@@ -490,7 +504,19 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
     private void rdNienCheMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdNienCheMouseClicked
         // TODO add your handling code here:
         showDataBoxLopHoc();
+        showDataSinhVien();
     }//GEN-LAST:event_rdNienCheMouseClicked
+
+    private void tbSinhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSinhVienMouseClicked
+        // TODO add your handling code here:
+        btnCapNhatSV.setEnabled(true);
+        btnXoaSV.setEnabled(true);
+    }//GEN-LAST:event_tbSinhVienMouseClicked
+
+    private void btnXoaSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSVActionPerformed
+        // TODO add your handling code here:
+        xoaSinhVien();
+    }//GEN-LAST:event_btnXoaSVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -585,6 +611,26 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
         }
         
         CapNhatSinhVienGUI.data = (Vector<String>) tableModelSinhVien.getDataVector().elementAt(tbSinhVien.getSelectedRow());
+    }
+    
+    public void xoaSinhVien(){
+        Vector<String> dataRow = new Vector<>();
+        dataRow = (Vector<String>) tableModelSinhVien.getDataVector().elementAt(tbSinhVien.getSelectedRow());
+        fileKhoaVien = new FileKhoaVien();
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        
+        for (int i = 0; i<listKhoaVien.size(); i++){
+            if (listKhoaVien.get(i).getTenVien().equals(cbKhoaVien.getSelectedItem().toString())){
+                 int k = listKhoaVien.get(i).getDsLopHoc().size();
+                 for (int j = 0; j<k; j++){
+                     if (listKhoaVien.get(i).getDsLopHoc().get(j).getTenLop().equals(cbLopHoc.getSelectedItem().toString())){
+                         listKhoaVien.get(i).getDsLopHoc().get(j).xoaSV(dataRow.get(0));
+                     }
+                 }
+            }
+        }
+        fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
+        JOptionPane.showMessageDialog(rootPane, "Xóa thành công ");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

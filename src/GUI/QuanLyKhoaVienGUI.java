@@ -235,6 +235,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel3.setText("Khoa Viện : ");
 
+        cbKhoaVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cbKhoaVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbKhoaVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -81,6 +81,10 @@ public class DangNhapGUI extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/lock_512pxGREY.png"))); // NOI18N
         jLabel5.setText("Mật Khẩu : ");
 
+        txtUserName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtPassword.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(

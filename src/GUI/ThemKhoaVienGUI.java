@@ -114,6 +114,11 @@ public class ThemKhoaVienGUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel4.setText("Số TC Xét TN : ");
 
+        txtMaVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtTenVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtSoTCTN.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txtSoTCTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSoTCTNActionPerformed(evt);

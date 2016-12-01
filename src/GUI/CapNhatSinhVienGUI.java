@@ -8,6 +8,8 @@ package GUI;
 import DBA.FileKhoaVien;
 import ENTITY.KhoaVien;
 import ENTITY.LopTinChi;
+import ENTITY.SinhVien;
+import ENTITY.SinhVienNienChe;
 import ENTITY.SinhVienTinChi;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -145,6 +147,18 @@ public class CapNhatSinhVienGUI extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel8.setText("Quê Quán : ");
+
+        txtVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtLop.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtHoTen.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtMSSV.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtNgaySinh.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtQueQuan.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -328,10 +342,15 @@ public class CapNhatSinhVienGUI extends javax.swing.JFrame {
         }
         
         if (rdTinChi == 1){
-            LopTinChi lopTinChi = (LopTinChi)listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex);
+            SinhVien sv = new SinhVienTinChi(maSV, hoTen, ngaySinh, queQuan);
+            listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).capNhatSV(sv, data.get(0));
         }else {
-            
+            SinhVien sv = new SinhVienNienChe(maSV, hoTen, ngaySinh, queQuan);
+            listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).capNhatSV(sv, data.get(0));
         }
+        
+        fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
+        JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công !");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

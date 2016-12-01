@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author tu
@@ -14,6 +17,9 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
     /**
      * Creates new form KetQuaHocTapGUi
      */
+    
+    DefaultTableModel defaultTableModel = new DefaultTableModel();
+    
     public KetQuaHocTapGUI() {
         initComponents();
     }
@@ -33,11 +39,11 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 527, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 460, Short.MAX_VALUE)
         );
 
         pack();

@@ -35,10 +35,25 @@ public class LopNienChe extends LopHoc{
     }
 
     @Override
-    public void xoaSV(SinhVien SV) {
-      if(SV instanceof SinhVienNienChe){
-      this.dsLopNC.remove((SinhVienNienChe)SV);
-      }
+    public void xoaSV(String MSSV) {
+      for (int i = 0; i< dsLopNC.size(); i++){
+             if (dsLopNC.get(i).getMaSV().equals(MSSV)){
+                 dsLopNC.remove(i);
+             }
+         }
+    }
+
+    @Override
+    public void capNhatSV(SinhVien sv, String MSSV) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i< dsLopNC.size(); i++){
+            if (dsLopNC.get(i).getMaSV().equals(MSSV)){
+                dsLopNC.get(i).setMaSV(sv.getMaSV());
+                dsLopNC.get(i).setHoTen(sv.getHoTen());
+                dsLopNC.get(i).setNgaySinh(sv.getNgaySinh());
+                dsLopNC.get(i).setQueQuan(sv.getQueQuan());
+            }
+        }
     }
     
 }

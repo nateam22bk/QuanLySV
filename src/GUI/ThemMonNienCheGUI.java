@@ -135,6 +135,16 @@ public class ThemMonNienCheGUI extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel7.setText("Học kì : ");
 
+        txtMaVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtMaMH.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtTenMH.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtDonViHT.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        txtHocKi.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -221,7 +231,7 @@ public class ThemMonNienCheGUI extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnThemMH)
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

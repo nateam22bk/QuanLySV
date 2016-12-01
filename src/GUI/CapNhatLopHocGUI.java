@@ -123,11 +123,17 @@ public class CapNhatLopHocGUI extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Mã Viện : ");
 
+        txtMaVien.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel3.setText("Mã Lớp : ");
 
+        txtMaLop.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel4.setText("Tên Lớp : ");
+
+        txtTenLop.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
