@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import ENTITY.SinhVien;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author tu
@@ -14,6 +17,9 @@ public class ThongTinCaNhanGUI extends javax.swing.JFrame {
     /**
      * Creates new form ThongTinCaNhanGUI
      */
+    
+    public static SinhVien sv;
+    
     public ThongTinCaNhanGUI() {
         this.setVisible(true);
         this.setTitle("Thông tin cá nhân");
@@ -24,6 +30,16 @@ public class ThongTinCaNhanGUI extends javax.swing.JFrame {
         txtMSSV.setEnabled(false);
         txtNgaySinh.setEnabled(false);
         txtTenVien.setEnabled(false);
+        initContents();
+        
+    }
+    
+    public void initContents(){
+        txtHoTen.setText(sv.getHoTen());
+        txtMSSV.setText(sv.getMaSV());
+        txtLopHoc.setText(sv.getTenLop());
+        txtNgaySinh.setText(new SimpleDateFormat("dd/MM/yyyy").format(sv.getNgaySinh()));
+        txtTenVien.setText(sv.getTenVien());
     }
 
     /**

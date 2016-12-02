@@ -62,6 +62,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
                    if (sinhVien.getMaSV().equals(userName) && sinhVien.getMaSV().equals(passWord)){
                        JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công !");
                        SinhVienGUI.user= sinhVien.getHoTen();
+                       SinhVienGUI.ms = sinhVien.getMaSV();
                        new SinhVienGUI();
                        this.dispose();
                        return;

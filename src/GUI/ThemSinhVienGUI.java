@@ -330,6 +330,8 @@ public class ThemSinhVienGUI extends javax.swing.JFrame {
        
        if (rdTinChi == 1){
            SinhVien sinhVien = new SinhVienTinChi(maStr, hoTen, ngaySinh, queQuan);
+           sinhVien.setTenVien(tenVien);
+           sinhVien.setTenLop(tenLop);
            listSinhVien.add(sinhVien);
            if (listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex) instanceof LopTinChi){
                
@@ -338,6 +340,8 @@ public class ThemSinhVienGUI extends javax.swing.JFrame {
           
        }else {
            SinhVien sinhVien= new SinhVienNienChe(maStr, hoTen, ngaySinh, queQuan);
+           sinhVien.setTenVien(tenVien);
+           sinhVien.setTenLop(tenLop);
            listSinhVien.add(sinhVien);
            if (listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex) instanceof LopNienChe){
               

@@ -5,6 +5,14 @@
  */
 package GUI;
 
+import DBA.FileKhoaVien;
+import DBA.FileSinhVien;
+import ENTITY.KhoaVien;
+import ENTITY.LopHoc;
+import ENTITY.SinhVien;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author tu
@@ -14,8 +22,10 @@ public class SinhVienGUI extends javax.swing.JFrame {
     /**
      * Creates new form SinhVienGUI
      */
-    
+    public FileKhoaVien fileKhoaVien;
+    public FileSinhVien fileSinhVien;
     public static String user;
+    public static String ms;
     
     public SinhVienGUI() {
         this.setVisible(true);
@@ -24,6 +34,49 @@ public class SinhVienGUI extends javax.swing.JFrame {
         this.setLocation(300, 100);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         lbUser.setText(user);
+        lbMSSV.setText(ms);
+    }
+    
+    public void dangKiHocTap(){
+        ArrayList<SinhVien> listSinhVien = new ArrayList<>();
+        fileSinhVien = new FileSinhVien();
+        
+        listSinhVien = fileSinhVien.docFileSinhVien();
+        
+        for (SinhVien sinhVien : listSinhVien) {
+            if (sinhVien.getMaSV().equals(ms)){
+                DangKiHocGUI.sv = sinhVien;
+            }
+        }
+        
+        new DangKiHocGUI();
+    }
+    
+    public void xemThongTin(){
+        ArrayList<SinhVien> listSinhVien = new ArrayList<>();
+        fileSinhVien = new FileSinhVien();
+        
+        listSinhVien = fileSinhVien.docFileSinhVien();
+        
+        for (SinhVien sinhVien : listSinhVien) {
+            if (sinhVien.getMaSV().equals(ms)){
+                ThongTinCaNhanGUI.sv = sinhVien;
+            }
+        }
+        
+        new ThongTinCaNhanGUI();
+    }
+    
+    public void xemBangDiem(){
+        fileSinhVien = new FileSinhVien();
+        ArrayList<SinhVien> listSinhVien = fileSinhVien.docFileSinhVien();
+        
+        for (SinhVien sinhVien : listSinhVien) {
+            if (sinhVien.getMaSV().equals(ms)){
+                KetQuaHocTapGUI.sv = sinhVien;
+            }
+        }
+        new KetQuaHocTapGUI();
     }
 
     /**
@@ -47,6 +100,8 @@ public class SinhVienGUI extends javax.swing.JFrame {
         btnMucKhac = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbUser = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lbMSSV = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,14 +151,29 @@ public class SinhVienGUI extends javax.swing.JFrame {
         btnThongTinCaNhan.setBackground(new java.awt.Color(254, 254, 254));
         btnThongTinCaNhan.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnThongTinCaNhan.setText("Thông Tin Cá Nhân");
+        btnThongTinCaNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongTinCaNhanActionPerformed(evt);
+            }
+        });
 
         btnKetQuaHocTap.setBackground(new java.awt.Color(254, 254, 254));
         btnKetQuaHocTap.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnKetQuaHocTap.setText("Kết Quả Học Tập");
+        btnKetQuaHocTap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKetQuaHocTapActionPerformed(evt);
+            }
+        });
 
         btnDangKiHocTap.setBackground(new java.awt.Color(254, 254, 254));
         btnDangKiHocTap.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnDangKiHocTap.setText("Đăng Kí Học Tâp ");
+        btnDangKiHocTap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangKiHocTapActionPerformed(evt);
+            }
+        });
 
         btnMucKhac.setBackground(new java.awt.Color(254, 254, 254));
         btnMucKhac.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -142,31 +212,45 @@ public class SinhVienGUI extends javax.swing.JFrame {
         lbUser.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         lbUser.setText("user");
 
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        jLabel4.setText("MSSV : ");
+
+        lbMSSV.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        lbMSSV.setText("ms");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbUser))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(59, 59, 59)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbMSSV)
+                    .addComponent(lbUser)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lbUser))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lbMSSV))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -190,6 +274,21 @@ public class SinhVienGUI extends javax.swing.JFrame {
         this.dispose();
         new DangNhapGUI();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnDangKiHocTapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKiHocTapActionPerformed
+        // TODO add your handling code here:
+        dangKiHocTap();
+    }//GEN-LAST:event_btnDangKiHocTapActionPerformed
+
+    private void btnThongTinCaNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongTinCaNhanActionPerformed
+        // TODO add your handling code here:
+        xemThongTin();
+    }//GEN-LAST:event_btnThongTinCaNhanActionPerformed
+
+    private void btnKetQuaHocTapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetQuaHocTapActionPerformed
+        // TODO add your handling code here:
+        xemBangDiem();
+    }//GEN-LAST:event_btnKetQuaHocTapActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,9 +334,11 @@ public class SinhVienGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lbMSSV;
     private javax.swing.JLabel lbUser;
     // End of variables declaration//GEN-END:variables
 }

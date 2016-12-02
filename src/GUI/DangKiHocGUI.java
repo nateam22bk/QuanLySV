@@ -7,8 +7,12 @@ package GUI;
 
 import DBA.FileKhoaVien;
 import ENTITY.KhoaVien;
+import ENTITY.LopHoc;
+import ENTITY.LopTinChi;
 import ENTITY.MonHoc;
 import ENTITY.MonTinChi;
+import ENTITY.SinhVien;
+import ENTITY.SinhVienTinChi;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -23,7 +27,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     /**
      * Creates new form DangKiHocGUI
      */
-    
+    public static SinhVien sv; // Lấy thông tin sinh viên từ SinhVienGUI
     DefaultTableModel defaultTableModelTraCuu;
     DefaultTableModel defaultTableModelMonHocDK;
     DefaultComboBoxModel<String> boxModelVien;
@@ -107,6 +111,29 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     }
     
     public void dangKiMonHoc(){
+        String tenVien = sv.getTenVien();
+        String tenLop = sv.getTenLop();
+        
+        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
+        ArrayList<LopHoc> listLopHoc = new ArrayList<>();
+        ArrayList<SinhVienTinChi> listSVTC = new ArrayList<>();
+        int kvIndex = 0;
+        int lhIndex = 0;
+        
+        for(int i = 0; i< listKhoaVien.size(); i++){
+            if (listKhoaVien.get(i).getTenVien().equals(tenVien)){
+                listLopHoc = listKhoaVien.get(i).getDsLopHoc();
+                kvIndex = i;
+            }
+        }
+        
+        for (int i = 0; i< listLopHoc.size(); i++){
+            if (listLopHoc.get(i).getTenLop().equals(tenLop)){
+                if (listLopHoc.get(i) instanceof LopTinChi){
+                    lhIndex = i;
+                }
+            }
+        }
         
     }
 
@@ -168,9 +195,9 @@ public class DangKiHocGUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(327, 327, 327)
-                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(167, 167, 167)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
