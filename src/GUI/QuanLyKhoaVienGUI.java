@@ -34,6 +34,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
         this.setVisible(true);
         this.setTitle("Quản Lý Khoa Viện");
         initComponents();
+        this.setLocation(130, 60);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initTableKhoaVien();
         initTableLopHoc();
@@ -139,6 +140,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbKhoaVien);
 
+        btnThemKhoaVien.setBackground(new java.awt.Color(254, 254, 254));
         btnThemKhoaVien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnThemKhoaVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/addNew.png"))); // NOI18N
         btnThemKhoaVien.setText("Thêm Khoa Viện");
@@ -148,6 +150,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
             }
         });
 
+        btnCapNhatKhoaVien.setBackground(new java.awt.Color(254, 254, 254));
         btnCapNhatKhoaVien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnCapNhatKhoaVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
         btnCapNhatKhoaVien.setText("Cập nhật");
@@ -157,6 +160,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
             }
         });
 
+        btnXoaKhoaVien.setBackground(new java.awt.Color(254, 254, 254));
         btnXoaKhoaVien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnXoaKhoaVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/file_delete50x50.png"))); // NOI18N
         btnXoaKhoaVien.setText("Xóa");
@@ -166,6 +170,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
             }
         });
 
+        btnLoadDuLieu.setBackground(new java.awt.Color(254, 254, 254));
         btnLoadDuLieu.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnLoadDuLieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/connect-icon.png"))); // NOI18N
         btnLoadDuLieu.setText("Load dữ liệu");
@@ -243,6 +248,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
             }
         });
 
+        btnThemLopHoc.setBackground(new java.awt.Color(254, 254, 254));
         btnThemLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnThemLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/addNew.png"))); // NOI18N
         btnThemLopHoc.setText("Thêm Lớp Học");
@@ -252,6 +258,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
             }
         });
 
+        btnCapNhatLopHoc.setBackground(new java.awt.Color(254, 254, 254));
         btnCapNhatLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnCapNhatLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
         btnCapNhatLopHoc.setText("Cập nhật");
@@ -261,6 +268,7 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
             }
         });
 
+        btnXoaLopHoc.setBackground(new java.awt.Color(254, 254, 254));
         btnXoaLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnXoaLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/file_delete50x50.png"))); // NOI18N
         btnXoaLopHoc.setText("Xóa");

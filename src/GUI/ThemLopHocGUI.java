@@ -69,6 +69,7 @@ public class ThemLopHocGUI extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 
+        btnThemLopHoc.setBackground(new java.awt.Color(254, 254, 254));
         btnThemLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnThemLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/addNew.png"))); // NOI18N
         btnThemLopHoc.setText("Thêm");
@@ -83,6 +84,7 @@ public class ThemLopHocGUI extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/bk.jpg"))); // NOI18N
 
+        btnThoat.setBackground(new java.awt.Color(254, 254, 254));
         btnThoat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/logout-512.png"))); // NOI18N
         btnThoat.setText("Thoát");

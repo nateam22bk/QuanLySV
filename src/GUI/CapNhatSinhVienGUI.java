@@ -9,6 +9,7 @@ import DBA.FileKhoaVien;
 import DBA.FileSinhVien;
 import ENTITY.KhoaVien;
 import ENTITY.LopTinChi;
+import ENTITY.MonHoc;
 import ENTITY.SinhVien;
 import ENTITY.SinhVienNienChe;
 import ENTITY.SinhVienTinChi;
@@ -226,6 +227,7 @@ public class CapNhatSinhVienGUI extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
+        btnCapNhat.setBackground(new java.awt.Color(254, 254, 254));
         btnCapNhat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
         btnCapNhat.setText("Cập Nhật");
@@ -347,7 +349,7 @@ public class CapNhatSinhVienGUI extends javax.swing.JFrame {
         }
         
         if (rdTinChi == 1){
-            SinhVien sv = new SinhVienTinChi(maSV, hoTen, ngaySinh, queQuan);
+            SinhVien sv = new SinhVienTinChi(new ArrayList<MonHoc>(),maSV, hoTen, ngaySinh, queQuan);
             listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).capNhatSV(sv, data.get(0));
         }else {
             SinhVien sv = new SinhVienNienChe(maSV, hoTen, ngaySinh, queQuan);

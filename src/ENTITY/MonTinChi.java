@@ -13,8 +13,8 @@ public class MonTinChi extends MonHoc{
     ArrayList<MonHoc> dsMonDK;
     private int soTinChi;
 
-    public MonTinChi(ArrayList<MonHoc> dsMonDK, String maVien, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem, ArrayList<SinhVien> dsSinhVien) {
-        super(maVien, tenMon, maMon, dsDiem, dsSinhVien);
+    public MonTinChi(ArrayList<MonHoc> dsMonDK, String maVien, String tenMon, String maMon, int soTinChi, ArrayList<DiemMonHoc> dsDiem, ArrayList<SinhVien> dsSinhVien, int heSoCK) {
+        super(maVien, tenMon, maMon, dsDiem, dsSinhVien, heSoCK);
         this.dsMonDK = dsMonDK;
         this.soTinChi = soTinChi;
     }

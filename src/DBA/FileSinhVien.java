@@ -22,37 +22,40 @@ import java.util.logging.Logger;
  * @author tu
  */
 public class FileSinhVien {
+
     File f = new File("SINHVIEN.DAT");
-    
-    public  void ghiFileSinhVien(ArrayList<SinhVien> list){
+
+    public void ghiFileSinhVien(ArrayList<SinhVien> list) {
         try {
-            if(!(f.exists()))
+            if (!(f.exists())) {
                 f.createNewFile();
+            }
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
             oos.writeObject(list);
             oos.close();
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
     }
-    
-    public ArrayList<SinhVien> docFileSinhVien(){
+
+    public ArrayList<SinhVien> docFileSinhVien() {
         ArrayList<SinhVien> list = new ArrayList<>();
         try {
-            if (!(f.exists()))
+            if (!(f.exists())) {
                 return list;
+            }
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-            list = (ArrayList<SinhVien>)ois.readObject();
+            list = (ArrayList<SinhVien>) ois.readObject();
             ois.close();
-        }catch (Exception e){
-            
+        } catch (Exception e) {
+
         }
         return list;
     }
-    
+
     public static void main(String[] args) {
         FileSinhVien fileSinhVien = new FileSinhVien();
         ArrayList<SinhVien> listSinhVien = fileSinhVien.docFileSinhVien();
-        System.out.println(listSinhVien.get(0).getHoTen());
+        System.out.println(listSinhVien.size());
     }
 }

@@ -33,6 +33,7 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         this.setVisible(true);
         this.setTitle("Quản lý môn học");
         initComponents();
+        this.setLocation(120, 60);
         initComboBoxKhoaVien();
         initTableMonHocDieuKien();
         rdTinChi.setSelected(true);
@@ -247,6 +248,7 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
             }
         });
 
+        btnThemMonHoc.setBackground(new java.awt.Color(254, 254, 254));
         btnThemMonHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnThemMonHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/addNew.png"))); // NOI18N
         btnThemMonHoc.setText("Thêm Môn Học");
@@ -256,6 +258,7 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
             }
         });
 
+        btnCapNhat.setBackground(new java.awt.Color(254, 254, 254));
         btnCapNhat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
         btnCapNhat.setText("Cập Nhật Môn Học");
@@ -265,6 +268,7 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
             }
         });
 
+        btnXoaLopHoc.setBackground(new java.awt.Color(254, 254, 254));
         btnXoaLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnXoaLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/file_delete50x50.png"))); // NOI18N
         btnXoaLopHoc.setText("Xóa Lớp Học");

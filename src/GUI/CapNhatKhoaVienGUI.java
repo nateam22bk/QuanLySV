@@ -64,6 +64,7 @@ public class CapNhatKhoaVienGUI extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 
+        btnCapNhat.setBackground(new java.awt.Color(254, 254, 254));
         btnCapNhat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
         btnCapNhat.setText("Cập nhật ");

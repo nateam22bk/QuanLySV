@@ -62,6 +62,8 @@ public class ThemMonNienCheGUI extends javax.swing.JFrame {
         txtTenMH = new javax.swing.JTextField();
         txtDonViHT = new javax.swing.JTextField();
         txtHocKi = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtHeSo = new javax.swing.JTextField();
         btnThemMH = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -145,6 +147,11 @@ public class ThemMonNienCheGUI extends javax.swing.JFrame {
 
         txtHocKi.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel8.setText("Hệ số CK : ");
+
+        txtHeSo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -166,11 +173,13 @@ public class ThemMonNienCheGUI extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
                         .addGap(34, 34, 34)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtDonViHT)
-                            .addComponent(txtHocKi))))
+                            .addComponent(txtHocKi)
+                            .addComponent(txtHeSo))))
                 .addGap(58, 58, 58))
         );
 
@@ -199,9 +208,14 @@ public class ThemMonNienCheGUI extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtHocKi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtHeSo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        btnThemMH.setBackground(new java.awt.Color(254, 254, 254));
         btnThemMH.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnThemMH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/addNew.png"))); // NOI18N
         btnThemMH.setText("Thêm Môn Học");
@@ -229,9 +243,9 @@ public class ThemMonNienCheGUI extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThemMH)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -299,12 +313,15 @@ public class ThemMonNienCheGUI extends javax.swing.JFrame {
         String tenMH = txtTenMH.getText().trim();
         String donviHTStr = txtDonViHT.getText().trim();
         String hocKiStr = txtDonViHT.getText().trim();
+        String heSoStr = txtHeSo.getText().trim();
         Integer donviHT = 0;
         Integer hocKi = 0;
+        Integer heSoCK = 0;
         
         try {
             donviHT = Integer.parseInt(donviHTStr);
             hocKi = Integer.parseInt(hocKiStr);
+            heSoCK = Integer.parseInt(heSoStr);
             
             if (maMH.length() < 1 || tenMH.length() < 1 ){
                 throw new Exception();
@@ -325,7 +342,7 @@ public class ThemMonNienCheGUI extends javax.swing.JFrame {
             }
         }
         
-        MonHoc monHoc = new MonNienChe(hocKi, maVien, tenMH, maMH, donviHT, new ArrayList<DiemMonHoc>(), new ArrayList<SinhVien>());
+        MonHoc monHoc = new MonNienChe(hocKi, maVien, tenMH, maMH, donviHT, new ArrayList<DiemMonHoc>(), new ArrayList<SinhVien>(), heSoCK);
         listMonHoc.add(monHoc);
         listKhoaVien.get(k).setDsMonHoc(listMonHoc);
         fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
@@ -343,11 +360,13 @@ public class ThemMonNienCheGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField txtDonViHT;
+    private javax.swing.JTextField txtHeSo;
     private javax.swing.JTextField txtHocKi;
     private javax.swing.JTextField txtMaMH;
     private javax.swing.JTextField txtMaVien;

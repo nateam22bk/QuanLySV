@@ -5,6 +5,7 @@
  */
 package DBA;
 
+import ENTITY.DiemMonHoc;
 import ENTITY.KhoaVien;
 import ENTITY.LopHoc;
 import ENTITY.LopTinChi;
@@ -52,7 +53,7 @@ public class FileKhoaVien {
     
     public static void main(String[] args) {
         ArrayList<KhoaVien> listKhoaVien = new FileKhoaVien().docFileKhoaVien();
-        LopTinChi lopTinChi = (LopTinChi)listKhoaVien.get(0).getDsLopHoc().get(0);
-        System.out.println(lopTinChi.getDsSinhVienTC().get(1).getHoTen());
+        ArrayList<DiemMonHoc> diem = listKhoaVien.get(0).getDsMonHoc().get(0).getDsDiem();
+        System.out.println(diem.get(0).getSinhVien().getHoTen() + "  " + diem.get(0).getTenMon());
     }
 }

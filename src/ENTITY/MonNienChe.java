@@ -13,8 +13,8 @@ public class MonNienChe extends MonHoc{
     private int kiHocSo;
     private int donViHocTrinh;
 
-    public MonNienChe(int kiHocSo, String maVien, String tenMon, String maMon, int donViHocTrinh, ArrayList<DiemMonHoc> dsDiem, ArrayList<SinhVien> dsSinhVien) {
-        super(maVien, tenMon, maMon, dsDiem, dsSinhVien);
+    public MonNienChe(int kiHocSo, String maVien, String tenMon, String maMon, int donViHocTrinh, ArrayList<DiemMonHoc> dsDiem, ArrayList<SinhVien> dsSinhVien, int heSoCK) {
+        super(maVien, tenMon, maMon, dsDiem, dsSinhVien, heSoCK);
         this.kiHocSo = kiHocSo;
         this.donViHocTrinh = donViHocTrinh;
     }

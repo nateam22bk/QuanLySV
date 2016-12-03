@@ -5,6 +5,7 @@
  */
 package ENTITY;
 
+import DBA.FileBangDiem;
 import java.io.Serializable;
 import java.util.*;
 
@@ -43,6 +44,7 @@ public class LopTinChi extends LopHoc implements Serializable{
          for (int i = 0; i< dsSinhVienTC.size(); i++){
              if (dsSinhVienTC.get(i).getMaSV().equals(MSSV)){
                  dsSinhVienTC.remove(i);
+                 setSoSV(getSoSV() - 1);
              }
          }
     }
@@ -58,6 +60,25 @@ public class LopTinChi extends LopHoc implements Serializable{
                 dsSinhVienTC.get(i).setQueQuan(sv.getQueQuan());
             }
         }
+    }
+
+    @Override
+    public void dangKiHocTap(String MSSV, MonHoc monHoc, KhoaVien khoaVien, int hocKi) {
+        FileBangDiem filebangDiem = new FileBangDiem();
+        ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+        bangDiem = filebangDiem.docFileBangDiem();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(int i = 0; i< dsSinhVienTC.size(); i++){
+           if (dsSinhVienTC.get(i).getMaSV().equals(MSSV)){
+               if(dsSinhVienTC.get(i).dangKyMon(monHoc, khoaVien)){
+                   DiemMonHoc diem = new DiemMonHoc(dsSinhVienTC.get(i), monHoc.getHeSoCK(), monHoc.getTenMon(), hocKi);
+                   monHoc.getDsDiem().add(diem);
+                   bangDiem.add(diem);
+               }
+           }
+        }
+        filebangDiem.ghiFileBangDiem(bangDiem);
+        
     }
   
 }

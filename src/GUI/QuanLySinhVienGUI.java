@@ -40,6 +40,7 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
     public QuanLySinhVienGUI() {
         this.setVisible(true);
         this.setTitle("Quản lý thông tin sinh viên");
+        this.setLocation(120, 60);
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComboBoxKhoaVien();
@@ -260,6 +261,11 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
 
         cbKhoaVien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         cbKhoaVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbKhoaVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbKhoaVienActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -278,6 +284,7 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+        btnThemSV.setBackground(new java.awt.Color(254, 254, 254));
         btnThemSV.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnThemSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/addNew.png"))); // NOI18N
         btnThemSV.setText("Thêm Sinh Viên");
@@ -287,6 +294,7 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
             }
         });
 
+        btnCapNhatSV.setBackground(new java.awt.Color(254, 254, 254));
         btnCapNhatSV.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnCapNhatSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
         btnCapNhatSV.setText("Cập Nhật ");
@@ -296,6 +304,7 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
             }
         });
 
+        btnXoaSV.setBackground(new java.awt.Color(254, 254, 254));
         btnXoaSV.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnXoaSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/file_delete50x50.png"))); // NOI18N
         btnXoaSV.setText("Xóa");
@@ -310,6 +319,11 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
 
         cbLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         cbLopHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbLopHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbLopHocActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdNienChe);
         rdNienChe.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -413,6 +427,7 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
 
         txtTimKiem.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
+        btnTimKiem.setBackground(new java.awt.Color(254, 254, 254));
         btnTimKiem.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/search50x50.png"))); // NOI18N
         btnTimKiem.setText("Tìm Kiếm");
@@ -430,8 +445,8 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnTimKiem)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addComponent(btnTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -543,6 +558,15 @@ public class QuanLySinhVienGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         xoaSinhVien();
     }//GEN-LAST:event_btnXoaSVActionPerformed
+
+    private void cbKhoaVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKhoaVienActionPerformed
+        // TODO add your handling code here:
+        showDataBoxLopHoc();
+    }//GEN-LAST:event_cbKhoaVienActionPerformed
+
+    private void cbLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLopHocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbLopHocActionPerformed
 
     /**
      * @param args the command line arguments

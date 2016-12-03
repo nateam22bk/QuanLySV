@@ -5,11 +5,13 @@
  */
 package ENTITY;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Kaiser GX
  */
-public class DiemMonHoc {
+public class DiemMonHoc implements Serializable{
     private SinhVien sinhVien;
     private float dienGiuaKy;
     private float diemCuoiKy;
@@ -75,5 +77,12 @@ public class DiemMonHoc {
     public void setTenMon(String tenMon) {
         this.tenMon = tenMon;
     }
+
+    @Override
+    public String toString() {
+        return sinhVien.getHoTen() + "   " + tenMon + " GK : " + dienGiuaKy + "  CK : "+ diemCuoiKy;
+    }
+    
+    
     
 }

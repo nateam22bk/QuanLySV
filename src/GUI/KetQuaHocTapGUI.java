@@ -5,7 +5,17 @@
  */
 package GUI;
 
+import DBA.FileBangDiem;
+import DBA.FileKhoaVien;
+import ENTITY.DiemMonHoc;
+import ENTITY.KhoaVien;
+import ENTITY.LopHoc;
+import ENTITY.LopTinChi;
+import ENTITY.MonHoc;
+import ENTITY.MonTinChi;
 import ENTITY.SinhVien;
+import ENTITY.SinhVienTinChi;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,17 +38,18 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initTable();
+        initContents();
     }
     
     public void initTable(){
         defaultTableModelKetQua = new DefaultTableModel();
         defaultTableModelMonHoc = new DefaultTableModel();
         
-        defaultTableModelMonHoc.addColumn("Mã môn học");
-        defaultTableModelMonHoc.addColumn("Têm môn học");
-        defaultTableModelMonHoc.addColumn("Số tín chỉ");
-        defaultTableModelMonHoc.addColumn("Điểm giữa kì");
-        defaultTableModelMonHoc.addColumn("Điểm cuối kì");
+        defaultTableModelMonHoc.addColumn("Mã MH");
+        defaultTableModelMonHoc.addColumn("Têm MH");
+        defaultTableModelMonHoc.addColumn("Số TC");
+        defaultTableModelMonHoc.addColumn("Điểm GK");
+        defaultTableModelMonHoc.addColumn("Điểm CK");
         defaultTableModelMonHoc.addColumn("Trung bình");
         
         defaultTableModelKetQua.addColumn("Học kì");
@@ -50,6 +61,53 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
         tbDiemTrungBinh.setModel(defaultTableModelKetQua);
         tbMonHoc.setModel(defaultTableModelMonHoc);
         
+    }
+    
+    public void initContents(){
+        FileKhoaVien fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        ArrayList<LopHoc> listLopHoc = new ArrayList<>();
+        ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
+        ArrayList<MonHoc> listMonHoc = new ArrayList<>();
+        
+        for (KhoaVien khoaVien : listKhoaVien) {
+            if (khoaVien.getTenVien().equals(sv.getTenVien())){
+                listLopHoc = khoaVien.getDsLopHoc();
+            }
+        }
+        
+        for (LopHoc lopHoc : listLopHoc) {
+            if (lopHoc.getTenLop().equals(sv.getTenLop())){
+                if (lopHoc instanceof LopTinChi){
+                    LopTinChi lopTinChi = (LopTinChi)lopHoc;
+                    listSV = lopTinChi.getDsSinhVienTC();
+                }
+            }
+        }
+        for (SinhVienTinChi sinhVienTinChi : listSV) {
+            if (sinhVienTinChi.getMaSV().equals(sv.getMaSV())){
+                listMonHoc = sinhVienTinChi.getDsMon();
+            }
+        }
+        for (MonHoc monHoc : listMonHoc) {
+            MonTinChi monTinChi = null;
+            if (monHoc instanceof MonTinChi){
+                monTinChi = (MonTinChi)monHoc;
+            }
+            Vector<String> data = new Vector<>();
+            data.add(monTinChi.getMaMon());
+            data.add(monTinChi.getTenMon());
+            data.add(String.valueOf(monTinChi.getSoTinChi()));
+            ArrayList<DiemMonHoc> bangDiem = monHoc.getDsDiem();
+            for (DiemMonHoc diemMonHoc : bangDiem) {
+                if(diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())){
+                    data.add(String.valueOf(diemMonHoc.getDienGiuaKy()));
+                    data.add(String.valueOf(diemMonHoc.getDiemCuoiKy()));
+                    data.add(String.valueOf(diemMonHoc.getDienGiuaKy()));
+                }
+            }
+            defaultTableModelMonHoc.addRow(data);
+        }
     }
 
     /**
@@ -81,6 +139,7 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/bk.jpg"))); // NOI18N
 
+        jButton1.setBackground(new java.awt.Color(254, 254, 254));
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/logout-512.png"))); // NOI18N
         jButton1.setText("Thoát");
@@ -99,20 +158,19 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(48, 48, 48)
+                .addGap(68, 68, 68)
                 .addComponent(jLabel2)
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jLabel1)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(14, 14, 14))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel2)
-                .addComponent(jButton1))
+                .addContainerGap()
+                .addComponent(jLabel2))
         );
 
         jPanel3.setBackground(new java.awt.Color(254, 254, 254));
@@ -135,7 +193,7 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,17 +219,17 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,7 +240,9 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

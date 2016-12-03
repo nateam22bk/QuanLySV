@@ -19,10 +19,11 @@ public class SinhVienTinChi extends SinhVien implements Serializable{
    private boolean totNghiep;
    ArrayList<MonHoc> dsMon;
 
-    public SinhVienTinChi(String MSSV, String hoTen, Date ngaySinh, String queQuan) {
+    public SinhVienTinChi(ArrayList<MonHoc> dsMon, String MSSV, String hoTen, Date ngaySinh, String queQuan) {
         super(MSSV, hoTen, ngaySinh, queQuan);
-    }
-
+        this.dsMon = dsMon;
+    }    
+    
     
 
     public boolean isTotNghiep() {
@@ -59,12 +60,35 @@ public class SinhVienTinChi extends SinhVien implements Serializable{
         this.soTinChiTL = soTinChiTL;
     }
     
-    public boolean dangKyMon( MonTinChi monHoc, KhoaVien khoaVien){
-        if ((soTinChiTL + monHoc.getSoTinChi()) <= khoaVien.getSoTCTN()){
-            return true;
-        }else {
+    public boolean dangKyMon( MonHoc monHoc, KhoaVien khoaVien){
+        MonTinChi monTinChi = (MonTinChi)monHoc;
+        if ((soTinChiTL + monTinChi.getSoTinChi()) <= khoaVien.getSoTCTN()){
+            int k = 0; // Đếm số môn học điều kiện đã học
+            ArrayList<MonHoc> listMonDK = new ArrayList<>();
+            listMonDK = monTinChi.getDsMonDK();
+            if (listMonDK.size() == 0){
+                dsMon.add(monHoc);
+                monHoc.getDsSinhVien().add(this);
+                this.soTinChiTL += monTinChi.getSoTinChi();
+                return true;
+            }
+            for (MonHoc monHoc1 : listMonDK) {
+                for (MonHoc monHoc2 : dsMon) {
+                    if (monHoc1.getMaMon().equals(monHoc2.getMaMon())){
+                        k++;
+                    }
+                }
+            }
+            
+            if (k == listMonDK.size()){
+                dsMon.add(monHoc);
+                monHoc.getDsSinhVien().add(this);
+                this.soTinChiTL += monTinChi.getSoTinChi();
+                return true;
+            }
             return false;
         }
+        return false;
     }
    
     /**

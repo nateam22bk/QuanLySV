@@ -7,6 +7,7 @@
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/SinhVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/QuanTriGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/CapNhatKhoaVienGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/ArrayList.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/SinhVienTinChi.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/CapNhatLopHocGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonHoc.java</file>
@@ -22,7 +23,6 @@
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/DangKiHocGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/SinhVienNienChe.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/DangNhapGUI.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonHocDieuKien.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/DiemMonHoc.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/CapNhatMonHocTinChiGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/ENTITY/MonTinChi.java</file>
@@ -37,6 +37,7 @@
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileKhoaVien.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemSinhVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/GUI/ThemMonNienCheGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySVG/src/DBA/FileBangDiem.java</file>
         </group>
     </open-files>
 </project-private>

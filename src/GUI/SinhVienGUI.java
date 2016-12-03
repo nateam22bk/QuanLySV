@@ -52,6 +52,21 @@ public class SinhVienGUI extends javax.swing.JFrame {
         new DangKiHocGUI();
     }
     
+    public void xemKetQua(){
+        ArrayList<SinhVien> listSinhVien = new ArrayList<>();
+        fileSinhVien = new FileSinhVien();
+        
+        listSinhVien = fileSinhVien.docFileSinhVien();
+        
+        for (SinhVien sinhVien : listSinhVien) {
+            if (sinhVien.getMaSV().equals(ms)){
+                KetQuaHocTapGUI.sv = sinhVien;
+            }
+        }
+        
+        new KetQuaHocTapGUI();
+    }
+    
     public void xemThongTin(){
         ArrayList<SinhVien> listSinhVien = new ArrayList<>();
         fileSinhVien = new FileSinhVien();

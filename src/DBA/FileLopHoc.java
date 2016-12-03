@@ -6,6 +6,9 @@
 package DBA;
 
 import ENTITY.LopHoc;
+import ENTITY.LopTinChi;
+import ENTITY.SinhVien;
+import ENTITY.SinhVienTinChi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -57,10 +60,19 @@ public class FileLopHoc {
     }
     
     public static void main(String[] args) {
+        LopHoc lopHoc = new LopTinChi("SOICT", 0, "CNTT2.01", 0, new ArrayList<SinhVienTinChi>());
         FileLopHoc fileLopHoc = new FileLopHoc();
         ArrayList<LopHoc> list = fileLopHoc.docFileLopHoc();
-        for (int i = 0; i< list.size(); i++){
-            System.out.println(list.get(i).getMaKhoaVien());
+        list.add(lopHoc);
+        fileLopHoc.ghiFileLopHoc(list);
+        list = fileLopHoc.docFileLopHoc();
+        LopTinChi lopTinChi = null;
+        if (list.get(0) instanceof LopTinChi){
+           lopTinChi = (LopTinChi)list.get(0);
         }
+        lopTinChi.setMaKhoaVien("Soict");
+        fileLopHoc.ghiFileLopHoc(list);
+        list = fileLopHoc.docFileLopHoc();
+        System.out.println(list.get(0).getMaKhoaVien());
     }
 }

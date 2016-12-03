@@ -55,6 +55,7 @@ public class QuanTriGUI extends javax.swing.JFrame {
         btnQuanLyKhoaVien.setBackground(new java.awt.Color(254, 254, 254));
         btnQuanLyKhoaVien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnQuanLyKhoaVien.setText("Quản lý Khoa - Viện");
+        btnQuanLyKhoaVien.setAlignmentX(1.0F);
         btnQuanLyKhoaVien.setAlignmentY(1.0F);
         btnQuanLyKhoaVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

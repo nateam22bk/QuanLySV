@@ -11,6 +11,7 @@ import ENTITY.KhoaVien;
 import ENTITY.LopHoc;
 import ENTITY.LopNienChe;
 import ENTITY.LopTinChi;
+import ENTITY.MonHoc;
 import ENTITY.SinhVien;
 import ENTITY.SinhVienNienChe;
 import ENTITY.SinhVienTinChi;
@@ -210,6 +211,7 @@ public class ThemSinhVienGUI extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
+        btnThem.setBackground(new java.awt.Color(254, 254, 254));
         btnThem.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/addNew.png"))); // NOI18N
         btnThem.setText("Thêm");
@@ -329,7 +331,7 @@ public class ThemSinhVienGUI extends javax.swing.JFrame {
        ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
        
        if (rdTinChi == 1){
-           SinhVien sinhVien = new SinhVienTinChi(maStr, hoTen, ngaySinh, queQuan);
+           SinhVien sinhVien = new SinhVienTinChi(new ArrayList<MonHoc>(),maStr, hoTen, ngaySinh, queQuan);
            sinhVien.setTenVien(tenVien);
            sinhVien.setTenLop(tenLop);
            listSinhVien.add(sinhVien);

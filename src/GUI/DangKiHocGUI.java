@@ -16,6 +16,7 @@ import ENTITY.SinhVienTinChi;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +28,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     /**
      * Creates new form DangKiHocGUI
      */
+    public static int hocKi = 1;
     public static SinhVien sv; // Lấy thông tin sinh viên từ SinhVienGUI
     DefaultTableModel defaultTableModelTraCuu;
     DefaultTableModel defaultTableModelMonHocDK;
@@ -39,6 +41,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         initTable();
         initComboBox();
         showDataTraCuu();
+        lbHocKi.setText(String.valueOf(hocKi));
     }
     
     // KHởi tạo bảng
@@ -111,19 +114,20 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     }
     
     public void dangKiMonHoc(){
+        fileKhoaVien = new FileKhoaVien();
         String tenVien = sv.getTenVien();
         String tenLop = sv.getTenLop();
-        
         ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
         ArrayList<LopHoc> listLopHoc = new ArrayList<>();
-        ArrayList<SinhVienTinChi> listSVTC = new ArrayList<>();
+        ArrayList<MonHoc> listMonHoc = new ArrayList<>();
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
         int kvIndex = 0;
         int lhIndex = 0;
         
         for(int i = 0; i< listKhoaVien.size(); i++){
             if (listKhoaVien.get(i).getTenVien().equals(tenVien)){
-                listLopHoc = listKhoaVien.get(i).getDsLopHoc();
                 kvIndex = i;
+                listMonHoc = listKhoaVien.get(i).getDsMonHoc();
             }
         }
         
@@ -135,6 +139,33 @@ public class DangKiHocGUI extends javax.swing.JFrame {
             }
         }
         
+        ArrayList<String> listmaMHDK = new ArrayList<>();
+        listmaMHDK = getListMH();
+        
+        for (String maMH : listmaMHDK) {
+            for (int i = 0; i< listKhoaVien.get(kvIndex).getDsMonHoc().size(); i++){
+                if (listKhoaVien.get(kvIndex).getDsMonHoc().get(i).getMaMon().equals(maMH)){
+                    if (listKhoaVien.get(kvIndex).getDsMonHoc().get(i) instanceof MonTinChi){
+                        listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).dangKiHocTap(sv.getMaSV(), listKhoaVien.get(kvIndex).getDsMonHoc().get(i), listKhoaVien.get(kvIndex), hocKi);
+                    }
+                }
+            }
+        }
+        fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
+        
+        JOptionPane.showMessageDialog(rootPane, "Đăng kí thành công !");
+        
+    }
+    
+    public ArrayList<String> getListMH(){
+        ArrayList<String> maMH = new ArrayList<>();
+        
+        for (int i = 0; i< defaultTableModelMonHocDK.getRowCount(); i++){
+            Vector<String> dataRow = (Vector<String>) defaultTableModelMonHocDK.getDataVector().elementAt(i);
+            maMH.add(dataRow.get(0));
+            //System.out.println(dataRow.get(1));
+        }
+        return maMH;
     }
 
     /**
@@ -166,6 +197,8 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnXoaMonDK = new javax.swing.JButton();
         btnDangKi = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        lbHocKi = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -251,6 +284,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Mã môn học : ");
 
+        btnTimKiem.setBackground(new java.awt.Color(254, 254, 254));
         btnTimKiem.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/search50x50.png"))); // NOI18N
         btnTimKiem.setText("Tìm kiếm");
@@ -269,6 +303,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbTraCuu);
 
+        btnThemMonDK.setBackground(new java.awt.Color(254, 254, 254));
         btnThemMonDK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/add50x50.png"))); // NOI18N
         btnThemMonDK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,29 +323,28 @@ public class DangKiHocGUI extends javax.swing.JFrame {
                         .addComponent(btnTimKiem)
                         .addGap(77, 77, 77)
                         .addComponent(btnThemMonDK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                        .addComponent(jTextField1)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnTimKiem)
                     .addComponent(btnThemMonDK))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(254, 254, 254));
@@ -334,6 +368,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 33, 255));
         jLabel4.setText("Danh sách môn đăng kí : ");
 
+        btnXoaMonDK.setBackground(new java.awt.Color(254, 254, 254));
         btnXoaMonDK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/remove-icon-png-26.png"))); // NOI18N
         btnXoaMonDK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -341,6 +376,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
             }
         });
 
+        btnDangKi.setBackground(new java.awt.Color(254, 254, 254));
         btnDangKi.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnDangKi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/addNew.png"))); // NOI18N
         btnDangKi.setText("Đăng kí");
@@ -371,14 +407,21 @@ public class DangKiHocGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnXoaMonDK)
                     .addComponent(btnDangKi))
-                .addGap(47, 47, 47))
+                .addGap(60, 60, 60))
         );
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 44, 255));
+        jLabel5.setText("Học Kì : ");
+
+        lbHocKi.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        lbHocKi.setText("hk");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -387,20 +430,31 @@ public class DangKiHocGUI extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbHocKi)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lbHocKi))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 9, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -496,6 +550,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -504,6 +559,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbHocKi;
     private javax.swing.JTable tbMonHocDK;
     private javax.swing.JTable tbTraCuu;
     // End of variables declaration//GEN-END:variables

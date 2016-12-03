@@ -203,6 +203,7 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnCapNhat.setBackground(new java.awt.Color(254, 254, 254));
         btnCapNhat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
         btnCapNhat.setText("Cập Nhật");
@@ -215,6 +216,7 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel6.setText("Tên Môn Học :");
 
+        btnXoaMHDieuKien.setBackground(new java.awt.Color(254, 254, 254));
         btnXoaMHDieuKien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnXoaMHDieuKien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/file_delete50x50.png"))); // NOI18N
         btnXoaMHDieuKien.setText("Xóa");
