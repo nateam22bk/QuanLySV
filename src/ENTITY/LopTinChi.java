@@ -62,8 +62,7 @@ public class LopTinChi extends LopHoc implements Serializable{
         }
     }
 
-    @Override
-    public void dangKiHocTap(String MSSV, MonHoc monHoc, KhoaVien khoaVien, int hocKi) {
+    public void dangKiHocTap(String MSSV, MonTinChi monHoc, KhoaVien khoaVien, int hocKi) {
         FileBangDiem filebangDiem = new FileBangDiem();
         ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
         bangDiem = filebangDiem.docFileBangDiem();

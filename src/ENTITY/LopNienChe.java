@@ -56,9 +56,9 @@ public class LopNienChe extends LopHoc{
         }
     }
 
-    @Override
-    public void dangKiHocTap(String MSSV, MonHoc monHoc, KhoaVien khoaVien, int hocKi) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public void dangKiHocTap(String MSSV, MonHoc monHoc, KhoaVien khoaVien, int hocKi) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     
 }

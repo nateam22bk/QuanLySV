@@ -72,5 +72,5 @@ public abstract class LopHoc implements Serializable{
    public abstract void themSV(SinhVien sv);
    public abstract void xoaSV(String MSSV);
    public abstract void capNhatSV(SinhVien sv, String MSSV);
-   public abstract void dangKiHocTap(String MSSV, MonHoc monHoc, KhoaVien khoaVien, int hocKi);
+//   public abstract void dangKiHocTap(String MSSV, MonHoc monHoc, KhoaVien khoaVien, int hocKi);
 }

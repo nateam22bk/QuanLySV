@@ -17,11 +17,40 @@ public class SinhVienTinChi extends SinhVien implements Serializable{
    private float diemCPA;
    private int soTinChiTL;
    private boolean totNghiep;
-   ArrayList<MonHoc> dsMon;
+   private int soTinChiDK = this.soTinChiBB+this.soTinChiTD;
+   private int soTinChiBB;
+   private int soTinChiTD;
+   ArrayList<MonHoc> dsMonDK; //Mon hoc dang ky ki nay.
+   ArrayList<MonHoc> dsMonTL; //Mon hoc da qua.
 
+    public SinhVienTinChi(float diemCPA, int soTinChiTL, boolean totNghiep, int soTinChiBB, int soTinChiTD, ArrayList<MonHoc> dsMon, String MSSV, String hoTen, Date ngaySinh, String queQuan) {
+        super(MSSV, hoTen, ngaySinh, queQuan);
+        this.diemCPA = diemCPA;
+        this.soTinChiTL = soTinChiTL;
+        this.totNghiep = totNghiep;
+        this.soTinChiBB = soTinChiBB;
+        this.soTinChiTD = soTinChiTD;
+        this.dsMonDK = dsMon;
+    }
+
+    public int getSoTinChiBB() {
+        return soTinChiBB;
+    }
+
+    public void setSoTinChiBB(int soTinChiBB) {
+        this.soTinChiBB = soTinChiBB;
+    }
+
+    public int getSoTinChiTD() {
+        return soTinChiTD;
+    }
+
+    public void setSoTinChiTD(int soTinChiTD) {
+        this.soTinChiTD = soTinChiTD;
+    }
     public SinhVienTinChi(ArrayList<MonHoc> dsMon, String MSSV, String hoTen, Date ngaySinh, String queQuan) {
         super(MSSV, hoTen, ngaySinh, queQuan);
-        this.dsMon = dsMon;
+        this.dsMonDK = dsMon;
     }    
     
     
@@ -34,12 +63,12 @@ public class SinhVienTinChi extends SinhVien implements Serializable{
         this.totNghiep = totNghiep;
     }
 
-    public ArrayList<MonHoc> getDsMon() {
-        return dsMon;
+    public ArrayList<MonHoc> getDsMonDK() {
+        return dsMonDK;
     }
 
-    public void setDsMon(ArrayList<MonHoc> dsMon) {
-        this.dsMon = dsMon;
+    public void setDsMonDK(ArrayList<MonHoc> dsMon) {
+        this.dsMonDK = dsMon;
     }
 
     
@@ -59,41 +88,55 @@ public class SinhVienTinChi extends SinhVien implements Serializable{
     public void setSoTinChiTL(int soTinChiTL) {
         this.soTinChiTL = soTinChiTL;
     }
-    
-    public boolean dangKyMon( MonHoc monHoc, KhoaVien khoaVien){
-        MonTinChi monTinChi = (MonTinChi)monHoc;
-        if ((soTinChiTL + monTinChi.getSoTinChi()) <= khoaVien.getSoTCTN()){
-            int k = 0; // Đếm số môn học điều kiện đã học
-            ArrayList<MonHoc> listMonDK = new ArrayList<>();
-            listMonDK = monTinChi.getDsMonDK();
-            if (listMonDK.size() == 0){
-                dsMon.add(monHoc);
-                monHoc.getDsSinhVien().add(this);
-                this.soTinChiTL += monTinChi.getSoTinChi();
-                return true;
-            }
-            for (MonHoc monHoc1 : listMonDK) {
-                for (MonHoc monHoc2 : dsMon) {
-                    if (monHoc1.getMaMon().equals(monHoc2.getMaMon())){
-                        k++;
-                    }
-                }
-            }
-            
-            if (k == listMonDK.size()){
-                dsMon.add(monHoc);
-                monHoc.getDsSinhVien().add(this);
-                this.soTinChiTL += monTinChi.getSoTinChi();
-                return true;
-            }
-            return false;
+    public boolean dangKyMon(MonTinChi MH, KhoaVien KV){
+        if(KV.dsMonHoc.contains(MH) && KV.dsSinhVien.contains(this) && (MH.getSoTinChi() + this.soTinChiDK)<=KV.getTC_DK_MAX() && this.dsMonTL.containsAll(MH.dsMonDK)){
+            this.soTinChiBB = MH.getSoTinChi() + this.soTinChiBB;
+            MH.themSinhVien(this);
+            return true;
         }
-        return false;
+        else
+        if(!KV.dsMonHoc.contains(MH) && KV.dsSinhVien.contains(this) && (MH.getSoTinChi() + this.soTinChiDK)<=KV.getTC_DK_MAX() && this.dsMonTL.containsAll(MH.dsMonDK)){
+            this.soTinChiTD = MH.getSoTinChi() + this.soTinChiTD;
+            MH.themSinhVien(this);
+            return true;
+            }
+        else
+            return false;
     }
-   
-    /**
-     *
-     */
+//    public boolean dangKyMon( MonHoc monHoc, KhoaVien khoaVien){
+//        MonTinChi monTinChi = (MonTinChi)monHoc;
+//        if ((soTinChiTL + monTinChi.getSoTinChi()) <= khoaVien.getSoTCTN()){
+//            int k = 0; // Đếm số môn học điều kiện đã học
+//            ArrayList<MonHoc> listMonDK = new ArrayList<>();
+//            listMonDK = monTinChi.getDsMonDK();
+//            if (listMonDK.size() == 0){
+//                dsMon.add(monHoc);
+//                monHoc.getDsSinhVien().add(this);
+//                this.soTinChiTL += monTinChi.getSoTinChi();
+//                return true;
+//            }
+//            for (MonHoc monHoc1 : listMonDK) {
+//                for (MonHoc monHoc2 : dsMon) {
+//                    if (monHoc1.getMaMon().equals(monHoc2.getMaMon())){
+//                        k++;
+//                    }
+//                }
+//            }
+//            
+//            if (k == listMonDK.size()){
+//                dsMon.add(monHoc);
+//                monHoc.getDsSinhVien().add(this);
+//                this.soTinChiTL += monTinChi.getSoTinChi();
+//                return true;
+//            }
+//            return false;
+//        }
+//        return false;
+//    }
+//   
+//    /**
+//     *
+//     */
     @Override
     public void inTT() {
         super.inTT();

@@ -17,9 +17,27 @@ public class KhoaVien implements Serializable{
     public ArrayList<LopHoc> dsLopHoc;
     public ArrayList<MonHoc> dsMonHoc;
     private  int soTCTN;
+    public static int TC_DK_MAX;
+    public static int TC_DK_MIN;
 
     public int getSoTCTN() {
         return soTCTN;
+    }
+
+    public static int getTC_DK_MAX() {
+        return TC_DK_MAX;
+    }
+
+    public static void setTC_DK_MAX(int TC_DK_MAX) {
+        KhoaVien.TC_DK_MAX = TC_DK_MAX;
+    }
+
+    public static int getTC_DK_MIN() {
+        return TC_DK_MIN;
+    }
+
+    public static void setTC_DK_MIN(int TC_DK_MIN) {
+        KhoaVien.TC_DK_MIN = TC_DK_MIN;
     }
 
     public void setSoTCTN(int soTCTN) {
