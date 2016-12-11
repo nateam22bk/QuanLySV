@@ -312,7 +312,7 @@ public class ThemMonNienCheGUI extends javax.swing.JFrame {
         String maMH = txtMaMH.getText().trim();
         String tenMH = txtTenMH.getText().trim();
         String donviHTStr = txtDonViHT.getText().trim();
-        String hocKiStr = txtDonViHT.getText().trim();
+        String hocKiStr = txtHocKi.getText().trim();
         String heSoStr = txtHeSo.getText().trim();
         Integer donviHT = 0;
         Integer hocKi = 0;

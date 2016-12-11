@@ -10,6 +10,7 @@ import dataaccesslayer.FileKhoaVien;
 import entity.DiemMonHoc;
 import entity.KhoaVien;
 import entity.LopHoc;
+import entity.LopNienChe;
 import entity.LopTinChi;
 import entity.MonHoc;
 import entity.MonTinChi;
@@ -33,232 +34,286 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
     DefaultTableModel defaultTableModelKetQua;
     DefaultTableModel defaultTableModelMHTichLuy;
     DefaultTableModel defaultTableModelMHNoDK;
-    
+
     public KetQuaHocTapGUI() {
         this.setVisible(true);
         this.setTitle("Bảng điểm cá nhân");
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initTable();
-        initContents();
+        initContentsOfTable();
+        
     }
     
-    public void initTable(){
+    public void initContentsOfTable(){
+        showMHDangKi();
+        showMHNoDK();
+        showMHTichLuy();
+    }
+
+    public void initTable() {
         defaultTableModelKetQua = new DefaultTableModel();
         defaultTableModelMonHoc = new DefaultTableModel();
         defaultTableModelMHNoDK = new DefaultTableModel();
         defaultTableModelMHTichLuy = new DefaultTableModel();
-        
+
         defaultTableModelMonHoc.addColumn("Mã MH");
         defaultTableModelMonHoc.addColumn("Têm MH");
         defaultTableModelMonHoc.addColumn("Số TC");
         defaultTableModelMonHoc.addColumn("Điểm GK");
         defaultTableModelMonHoc.addColumn("Điểm CK");
         defaultTableModelMonHoc.addColumn("Trung bình");
-        
+
         defaultTableModelMHNoDK.addColumn("Mã MH");
         defaultTableModelMHNoDK.addColumn("Têm MH");
         defaultTableModelMHNoDK.addColumn("Số TC");
         defaultTableModelMHNoDK.addColumn("Điểm GK");
         defaultTableModelMHNoDK.addColumn("Điểm CK");
         defaultTableModelMHNoDK.addColumn("Trung bình");
-        
+
         defaultTableModelMHTichLuy.addColumn("Mã MH");
         defaultTableModelMHTichLuy.addColumn("Têm MH");
         defaultTableModelMHTichLuy.addColumn("Số TC");
         defaultTableModelMHTichLuy.addColumn("Điểm GK");
         defaultTableModelMHTichLuy.addColumn("Điểm CK");
         defaultTableModelMHTichLuy.addColumn("Trung bình");
-        
+
         defaultTableModelKetQua.addColumn("Học kì");
         defaultTableModelKetQua.addColumn("Số Tín Chỉ ĐK");
         defaultTableModelKetQua.addColumn("Số Tín Chỉ Nợ ĐK");
         defaultTableModelKetQua.addColumn("Điểm GPA");
         defaultTableModelKetQua.addColumn("Điểm CPA");
-        
+
         tbDiemTrungBinh.setModel(defaultTableModelKetQua);
         tbMonHocDK.setModel(defaultTableModelMonHoc);
         tbMHTichLuy.setModel(defaultTableModelMHTichLuy);
         tbMHNoDK.setModel(defaultTableModelMHNoDK);
-        
+
     }
-    
-    public void showMHTichLuy(){
+
+    public void showMHTichLuy() {
         defaultTableModelMHTichLuy.setNumRows(0);
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
-        ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
         ArrayList<LopHoc> listLopHoc = new ArrayList<>();
-        ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
         ArrayList<MonHoc> listMonHoc = new ArrayList<>();
-        defaultTableModelMonHoc.setNumRows(0);
+        ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
+
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+
         for (KhoaVien khoaVien : listKhoaVien) {
-            if (khoaVien.getTenVien().equals(sv.getTenVien())){
+            if (khoaVien.getTenVien().equals(sv.getTenVien())) {
                 listLopHoc = khoaVien.getDsLopHoc();
+                break;
             }
         }
-        
+
         for (LopHoc lopHoc : listLopHoc) {
-            if (lopHoc.getTenLop().equals(sv.getTenLop())){
-                if (lopHoc instanceof LopTinChi){
-                    LopTinChi lopTinChi = (LopTinChi)lopHoc;
+            if (lopHoc instanceof LopTinChi) {
+                if (lopHoc.getTenLop().equals(sv.getTenLop())) {
+                    LopTinChi lopTinChi = (LopTinChi) lopHoc;
                     listSV = lopTinChi.getDsSinhVienTC();
+                    break;
                 }
             }
         }
+
         for (SinhVienTinChi sinhVienTinChi : listSV) {
-            if (sinhVienTinChi.getMaSV().equals(sv.getMaSV())){
+            if (sinhVienTinChi.getMaSV().equals(sv.getMaSV())) {
                 listMonHoc = sinhVienTinChi.getDsMonTichLuy();
+                break;
             }
         }
+
+        ArrayList<Vector<String>> listdataRow = new ArrayList<>();
         for (MonHoc monHoc : listMonHoc) {
             MonTinChi monTinChi = null;
-            if (monHoc instanceof MonTinChi){
-                monTinChi = (MonTinChi)monHoc;
+            if (monHoc instanceof MonTinChi) {
+                monTinChi = (MonTinChi) monHoc;
             }
-            Vector<String> data = new Vector<>();
-            data.add(monTinChi.getMaMon());
-            data.add(monTinChi.getTenMon());
-            data.add(String.valueOf(monTinChi.getSoTinChi()));
-            ArrayList<DiemMonHoc> bangDiem = monHoc.getDsDiem();
+
+            Vector<String> dataRow = new Vector<>();
+            dataRow.add(monHoc.getMaMon());
+            dataRow.add(monHoc.getTenMon());
+            dataRow.add(String.valueOf(monTinChi.getSoTinChi()));
+
+            ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+            bangDiem = monHoc.getDsDiem();
             for (DiemMonHoc diemMonHoc : bangDiem) {
-                if(diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())){
-                    data.add(String.valueOf(diemMonHoc.getDienGiuaKy()));
-                    data.add(String.valueOf(diemMonHoc.getDiemCuoiKy()));
-                    data.add(String.valueOf(diemMonHoc.getDiemTB()));
+                if (diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())) {
+                    dataRow.add(String.valueOf(diemMonHoc.getDienGiuaKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemCuoiKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemTB()));
+                    break;
                 }
             }
-            defaultTableModelMHTichLuy.addRow(data);
+            listdataRow.add(dataRow);
         }
-        
+
+        for (Vector<String> vector : listdataRow) {
+            defaultTableModelMHTichLuy.addRow(vector);
+        }
+
     }
-    
-    public void showMHNoDK(){
+
+    public void showMHNoDK() {
         defaultTableModelMHNoDK.setNumRows(0);
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
-        ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
         ArrayList<LopHoc> listLopHoc = new ArrayList<>();
-        ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
         ArrayList<MonHoc> listMonHoc = new ArrayList<>();
-        defaultTableModelMonHoc.setNumRows(0);
+        ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
+
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+
         for (KhoaVien khoaVien : listKhoaVien) {
-            if (khoaVien.getTenVien().equals(sv.getTenVien())){
+            if (khoaVien.getTenVien().equals(sv.getTenVien())) {
                 listLopHoc = khoaVien.getDsLopHoc();
+                break;
             }
         }
-        
+
         for (LopHoc lopHoc : listLopHoc) {
-            if (lopHoc.getTenLop().equals(sv.getTenLop())){
-                if (lopHoc instanceof LopTinChi){
-                    LopTinChi lopTinChi = (LopTinChi)lopHoc;
+            if (lopHoc instanceof LopTinChi) {
+                if (lopHoc.getTenLop().equals(sv.getTenLop())) {
+                    LopTinChi lopTinChi = (LopTinChi) lopHoc;
                     listSV = lopTinChi.getDsSinhVienTC();
+                    break;
                 }
             }
         }
+
         for (SinhVienTinChi sinhVienTinChi : listSV) {
-            if (sinhVienTinChi.getMaSV().equals(sv.getMaSV())){
+            if (sinhVienTinChi.getMaSV().equals(sv.getMaSV())) {
                 listMonHoc = sinhVienTinChi.getDsMonNoDangKi();
+                break;
             }
         }
+
+        ArrayList<Vector<String>> listdataRow = new ArrayList<>();
         for (MonHoc monHoc : listMonHoc) {
             MonTinChi monTinChi = null;
-            if (monHoc instanceof MonTinChi){
-                monTinChi = (MonTinChi)monHoc;
+            if (monHoc instanceof MonTinChi) {
+                monTinChi = (MonTinChi) monHoc;
             }
-            Vector<String> data = new Vector<>();
-            data.add(monTinChi.getMaMon());
-            data.add(monTinChi.getTenMon());
-            data.add(String.valueOf(monTinChi.getSoTinChi()));
-            ArrayList<DiemMonHoc> bangDiem = monHoc.getDsDiem();
+
+            Vector<String> dataRow = new Vector<>();
+            dataRow.add(monHoc.getMaMon());
+            dataRow.add(monHoc.getTenMon());
+            dataRow.add(String.valueOf(monTinChi.getSoTinChi()));
+
+            ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+            bangDiem = monHoc.getDsDiem();
             for (DiemMonHoc diemMonHoc : bangDiem) {
-                if(diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())){
-                    data.add(String.valueOf(diemMonHoc.getDienGiuaKy()));
-                    data.add(String.valueOf(diemMonHoc.getDiemCuoiKy()));
-                    data.add(String.valueOf(diemMonHoc.getDiemTB()));
+                if (diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())) {
+                    dataRow.add(String.valueOf(diemMonHoc.getDienGiuaKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemCuoiKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemTB()));
+                    break;
                 }
             }
-            defaultTableModelMHNoDK.addRow(data);
+            listdataRow.add(dataRow);
         }
+
+        for (Vector<String> vector : listdataRow) {
+            defaultTableModelMHNoDK.addRow(vector);
+        }
+
     }
-    public void showBangDiemTB(){
-        
+
+    public void showBangDiemTB() {
+
     }
-    
-    public void initContents(){
+
+    public void showMHDangKi() {
         defaultTableModelMonHoc.setNumRows(0);
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
-        ArrayList<KhoaVien> listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
         ArrayList<LopHoc> listLopHoc = new ArrayList<>();
-        ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
         ArrayList<MonHoc> listMonHoc = new ArrayList<>();
-        defaultTableModelMonHoc.setNumRows(0);
+        ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
+
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+
         for (KhoaVien khoaVien : listKhoaVien) {
-            if (khoaVien.getTenVien().equals(sv.getTenVien())){
+            if (khoaVien.getTenVien().equals(sv.getTenVien())) {
                 listLopHoc = khoaVien.getDsLopHoc();
+                break;
             }
         }
-        
+
         for (LopHoc lopHoc : listLopHoc) {
-            if (lopHoc.getTenLop().equals(sv.getTenLop())){
-                if (lopHoc instanceof LopTinChi){
-                    LopTinChi lopTinChi = (LopTinChi)lopHoc;
+            if (lopHoc instanceof LopTinChi) {
+                if (lopHoc.getTenLop().equals(sv.getTenLop())) {
+                    LopTinChi lopTinChi = (LopTinChi) lopHoc;
                     listSV = lopTinChi.getDsSinhVienTC();
+                    break;
                 }
             }
         }
+
         for (SinhVienTinChi sinhVienTinChi : listSV) {
-            if (sinhVienTinChi.getMaSV().equals(sv.getMaSV())){
+            if (sinhVienTinChi.getMaSV().equals(sv.getMaSV())) {
                 listMonHoc = sinhVienTinChi.getDsMonDangKi();
+                break;
             }
         }
+
+        ArrayList<Vector<String>> listdataRow = new ArrayList<>();
         for (MonHoc monHoc : listMonHoc) {
             MonTinChi monTinChi = null;
-            if (monHoc instanceof MonTinChi){
-                monTinChi = (MonTinChi)monHoc;
+            if (monHoc instanceof MonTinChi) {
+                monTinChi = (MonTinChi) monHoc;
             }
-            Vector<String> data = new Vector<>();
-            data.add(monTinChi.getMaMon());
-            data.add(monTinChi.getTenMon());
-            data.add(String.valueOf(monTinChi.getSoTinChi()));
-            ArrayList<DiemMonHoc> bangDiem = monHoc.getDsDiem();
+
+            Vector<String> dataRow = new Vector<>();
+            dataRow.add(monHoc.getMaMon());
+            dataRow.add(monHoc.getTenMon());
+            dataRow.add(String.valueOf(monTinChi.getSoTinChi()));
+
+            ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+            bangDiem = monHoc.getDsDiem();
             for (DiemMonHoc diemMonHoc : bangDiem) {
-                if(diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())){
-                    data.add(String.valueOf(diemMonHoc.getDienGiuaKy()));
-                    data.add(String.valueOf(diemMonHoc.getDiemCuoiKy()));
-                    data.add(String.valueOf(diemMonHoc.getDiemTB()));
+                if (diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())) {
+                    dataRow.add(String.valueOf(diemMonHoc.getDienGiuaKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemCuoiKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemTB()));
+                    break;
                 }
             }
-            defaultTableModelMonHoc.addRow(data);
+            listdataRow.add(dataRow);
         }
-        
-        showMHNoDK();
-        showMHTichLuy();
+
+        for (Vector<String> vector : listdataRow) {
+            defaultTableModelMonHoc.addRow(vector);
+        }
+
     }
-    
-    public void capNhatTrangThaiMH(){
+
+    public void capNhatTrangThaiMH() {
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
         ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
         listKhoaVien = fileKhoaVien.docFileKhoaVien();
         ArrayList<LopHoc> listLopHoc = new ArrayList<>();
-        
+
         int kvIndex = 0;
         int lhIndex = 0;
-        
-        for (int i = 0; i< listKhoaVien.size(); i++){
-            if (listKhoaVien.get(i).getTenVien().equals(sv.getTenVien())){
+
+        for (int i = 0; i < listKhoaVien.size(); i++) {
+            if (listKhoaVien.get(i).getTenVien().equals(sv.getTenVien())) {
                 kvIndex = i;
                 listLopHoc = listKhoaVien.get(i).getDsLopHoc();
             }
         }
-        
-        for (int i = 0; i< listLopHoc.size(); i++){
-            if (listLopHoc.get(i).getTenLop().equals(sv.getTenLop())){
+
+        for (int i = 0; i < listLopHoc.size(); i++) {
+            if (listLopHoc.get(i).getTenLop().equals(sv.getTenLop())) {
                 lhIndex = i;
             }
         }
-        
+
         listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).capNhatTrangThaiMHChoSV(sv.getMaSV());
         fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
-        initContents();
     }
 
     /**
@@ -537,6 +592,7 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         capNhatTrangThaiMH();
+        initContentsOfTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

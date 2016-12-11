@@ -95,6 +95,22 @@ public class SinhVienNienChe extends SinhVien implements Serializable{
 
     @Override
     public void capNhatTrangThaiMH() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i< dsMonDangKi.size(); i++){
+            MonHoc monHoc = dsMonDangKi.get(i);
+            ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+            bangDiem = monHoc.getDsDiem();
+            for (DiemMonHoc diemMonHoc : bangDiem) {
+                if (diemMonHoc.getSinhVien().getMaSV().equals(this.getMaSV())){
+                    if (diemMonHoc.getDiemTB()>=4.0f){
+                        dsMonDaQua.add(dsMonDangKi.get(i));
+                        dsMonDangKi.remove(i);
+                    }else {
+                        dsMonTruot.add(dsMonDangKi.get(i));
+                        dsMonDangKi.remove(i);
+                    }
+                }
+            }
+        }
     }
 }

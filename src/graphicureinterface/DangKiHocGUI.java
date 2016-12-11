@@ -160,10 +160,10 @@ public class DangKiHocGUI extends javax.swing.JFrame {
                         if (listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).dangKiHocTapChoSV(sv.getMaSV(), listKhoaVien.get(kvIndex).getDsMonHoc().get(i), listKhoaVien.get(kvIndex), hocKi)){
                             JOptionPane.showMessageDialog(rootPane, "Đăng kí thành công !");
                             fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
-                            return;
+                            break;
                         }else{
                             JOptionPane.showMessageDialog(rootPane, "Đăng kí không thành công, do bạn chưa học đủ môn điều kiện " + "\n Hoặc đã đăng kí môn học này "+ "\n Hoặc quá số TC tụ do");
-                            return;
+                            break;
                         }
                     }
                 }

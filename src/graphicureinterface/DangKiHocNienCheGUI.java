@@ -14,6 +14,7 @@ import entity.MonNienChe;
 import entity.SinhVien;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,17 +28,32 @@ public class DangKiHocNienCheGUI extends javax.swing.JFrame {
      * Creates new form DangKiHocNienCheGUI
      */
     public static SinhVien sv;
-    public static int hocKi;
+    public int hocKi = 0;
     DefaultTableModel defaultTableModelDanhSachMH;
-
+    DefaultComboBoxModel<String> boxModelHocKi;
     public DangKiHocNienCheGUI() {
         this.setVisible(true);
         this.setTitle("Dang ki hoc");
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initTable();
+        initComboBoxHocKi();
         showDataTableMonHoc();
-        this.lbHocKi.setText(String.valueOf(hocKi));
+    }
+    
+    public void initComboBoxHocKi(){
+        boxModelHocKi = new DefaultComboBoxModel<>();
+        boxModelHocKi.addElement("1");
+        boxModelHocKi.addElement("2");
+        boxModelHocKi.addElement("3");
+        boxModelHocKi.addElement("4");
+        boxModelHocKi.addElement("5");
+        boxModelHocKi.addElement("6");
+        boxModelHocKi.addElement("7");
+        boxModelHocKi.addElement("8");
+        boxModelHocKi.addElement("9");
+        boxModelHocKi.addElement("10");
+        cbHocKi.setModel(boxModelHocKi);
     }
     
     public ArrayList<String> getMaMH(){
@@ -79,21 +95,23 @@ public class DangKiHocNienCheGUI extends javax.swing.JFrame {
         ArrayList<String> dsMaMH = new ArrayList<>();
         dsMaMH = getMaMH();
         for (String maMH : dsMaMH) {
-            System.out.println(maMH);
             for (int i = 0; i< listKhoaVien.get(kvIndex).getDsMonHoc().size(); i++){
                 if (listKhoaVien.get(kvIndex).getDsMonHoc().get(i).getMaMon().equals(maMH)){
                     if (listKhoaVien.get(kvIndex).getDsMonHoc().get(i) instanceof MonNienChe){
+                        System.out.println(listKhoaVien.get(kvIndex).getDsMonHoc().get(i).getTenMon());
                         if (listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).dangKiHocTapChoSV(sv.getMaSV(), listKhoaVien.get(kvIndex).getDsMonHoc().get(i), listKhoaVien.get(kvIndex), hocKi)){
                             JOptionPane.showMessageDialog(rootPane, "Dang Ki thanh cong");
                             fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
-                            return;
+                            break;
                         }else{
                             JOptionPane.showMessageDialog(rootPane, "Dang ki khong thanh cong !");
+                            break;
                         }
                     }
                 }
             }
         }
+        
     }
 
     public void initTable() {
@@ -107,6 +125,7 @@ public class DangKiHocNienCheGUI extends javax.swing.JFrame {
     }
     
     public void showDataTableMonHoc(){
+        defaultTableModelDanhSachMH.setNumRows(0);
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
         ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
         ArrayList<MonHoc> listMonHoc = new ArrayList<>();
@@ -152,7 +171,7 @@ public class DangKiHocNienCheGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDanhSachMH = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        lbHocKi = new javax.swing.JLabel();
+        cbHocKi = new javax.swing.JComboBox<>();
         btnDangKi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -219,8 +238,13 @@ public class DangKiHocNienCheGUI extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(10, 0, 255));
         jLabel3.setText("Học kì số : ");
 
-        lbHocKi.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        lbHocKi.setText("hk");
+        cbHocKi.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        cbHocKi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbHocKi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbHocKiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -233,8 +257,8 @@ public class DangKiHocNienCheGUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(lbHocKi)
+                .addGap(3, 3, 3)
+                .addComponent(cbHocKi, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -243,8 +267,8 @@ public class DangKiHocNienCheGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(lbHocKi))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                    .addComponent(cbHocKi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -279,7 +303,7 @@ public class DangKiHocNienCheGUI extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(btnDangKi)
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(0, 4, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -305,6 +329,12 @@ public class DangKiHocNienCheGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         dangKi();
     }//GEN-LAST:event_btnDangKiActionPerformed
+
+    private void cbHocKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHocKiActionPerformed
+        // TODO add your handling code here:
+        this.hocKi = Integer.parseInt(cbHocKi.getSelectedItem().toString());
+        showDataTableMonHoc();
+    }//GEN-LAST:event_cbHocKiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -344,6 +374,7 @@ public class DangKiHocNienCheGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangKi;
     private javax.swing.JButton btnThoat;
+    private javax.swing.JComboBox<String> cbHocKi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -351,7 +382,6 @@ public class DangKiHocNienCheGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbHocKi;
     private javax.swing.JTable tbDanhSachMH;
     // End of variables declaration//GEN-END:variables
 }

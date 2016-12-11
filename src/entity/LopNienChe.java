@@ -70,16 +70,19 @@ public class LopNienChe extends LopHoc{
                    monHoc.getDsSinhVien().add(dsLopNC.get(i));
                    return true;
                }
-               return false;
            }
-           return false;
        }
        return false;
     }
 
     @Override
     public void capNhatTrangThaiMHChoSV(String MSSV) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i< dsLopNC.size(); i++){
+            if (dsLopNC.get(i).getMaSV().equals(MSSV)){
+                dsLopNC.get(i).capNhatTrangThaiMH();
+            }
+        }
     }
     
 }

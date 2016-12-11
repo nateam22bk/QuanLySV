@@ -5,7 +5,18 @@
  */
 package graphicureinterface;
 
+import dataaccesslayer.FileKhoaVien;
+import entity.DiemMonHoc;
+import entity.KhoaVien;
+import entity.LopHoc;
+import entity.LopNienChe;
+import entity.MonHoc;
+import entity.MonNienChe;
 import entity.SinhVien;
+import entity.SinhVienNienChe;
+import static graphicureinterface.KetQuaHocTapGUI.sv;
+import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,52 +29,278 @@ public class KetQuaHocTapNienCheGUI extends javax.swing.JFrame {
      * Creates new form KetQuaHocTapNienCheGUI
      */
     public static SinhVien sv;
-    
+
     DefaultTableModel tableModelDSMHDangKi;
     DefaultTableModel tableModelDSMHTruot;
     DefaultTableModel tableModelDSMHQua;
     DefaultTableModel tableModelDiemTB;
-    
+
     public KetQuaHocTapNienCheGUI() {
         this.setVisible(true);
         this.setTitle("Kết quả học tập");
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initTable();
+        initContentsOfTalble();
+        
     }
     
-    public void initTable(){
+    public void initContentsOfTalble(){
+        showMHDaDat();
+        showMHDangKi();
+        showMHTruot();
+    }
+
+    public void initTable() {
         tableModelDSMHDangKi = new DefaultTableModel();
         tableModelDSMHQua = new DefaultTableModel();
         tableModelDSMHTruot = new DefaultTableModel();
         tableModelDiemTB = new DefaultTableModel();
-        
+
         tableModelDSMHDangKi.addColumn("Mã MH");
         tableModelDSMHDangKi.addColumn("Tên MH");
         tableModelDSMHDangKi.addColumn("Số ĐVHT");
         tableModelDSMHDangKi.addColumn("Điểm GK");
         tableModelDSMHDangKi.addColumn("Điểm CK");
         tableModelDSMHDangKi.addColumn("Trung Bình");
-        
+
         tableModelDSMHQua.addColumn("Mã MH");
         tableModelDSMHQua.addColumn("Tên MH");
         tableModelDSMHQua.addColumn("Số ĐVHT");
         tableModelDSMHQua.addColumn("Điểm GK");
         tableModelDSMHQua.addColumn("Điểm CK");
         tableModelDSMHQua.addColumn("Trung Bình");
-        
+
         tableModelDSMHTruot.addColumn("Mã MH");
         tableModelDSMHTruot.addColumn("Tên MH");
         tableModelDSMHTruot.addColumn("Số ĐVHT");
         tableModelDSMHTruot.addColumn("Điểm GK");
         tableModelDSMHTruot.addColumn("Điểm CK");
         tableModelDSMHTruot.addColumn("Trung Bình");
-        
+
         tbDanhSachMHDangKi.setModel(tableModelDSMHDangKi);
         tbDanhSachMHDat.setModel(tableModelDSMHQua);
         tbDanhSachMHTruot.setModel(tableModelDSMHTruot);
         tbDiemTrungBinh.setModel(tableModelDiemTB);
-        
+
+    }
+    
+    public void showMHTruot(){
+        tableModelDSMHTruot.setNumRows(0);
+
+        FileKhoaVien fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
+        ArrayList<LopHoc> listLopHoc = new ArrayList<>();
+        ArrayList<MonHoc> listMonHoc = new ArrayList<>();
+        ArrayList<SinhVienNienChe> listSV = new ArrayList<>();
+
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+
+        for (KhoaVien khoaVien : listKhoaVien) {
+            if (khoaVien.getTenVien().equals(sv.getTenVien())) {
+                listLopHoc = khoaVien.getDsLopHoc();
+                break;
+            }
+        }
+
+        for (LopHoc lopHoc : listLopHoc) {
+            if (lopHoc.getTenLop().equals(sv.getTenLop())) {
+                if (lopHoc instanceof LopNienChe) {
+                    LopNienChe lopNienChe = (LopNienChe) lopHoc;
+                    listSV = lopNienChe.getDsLopNC();
+                    break;
+                }
+            }
+        }
+
+        for (SinhVienNienChe sinhVienNienChe : listSV) {
+            if (sinhVienNienChe.getMaSV().equals(sv.getMaSV())) {
+                listMonHoc = sinhVienNienChe.getDsMonTruot();
+                break;
+            }
+        }
+
+        ArrayList<Vector<String>> listRowData = new ArrayList<>();
+
+        for (MonHoc monHoc : listMonHoc) {
+            MonNienChe monNienChe = null;
+            if (monHoc instanceof MonNienChe) {
+                monNienChe = (MonNienChe) monHoc;
+            }
+            ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+            bangDiem = monHoc.getDsDiem();
+
+            Vector<String> dataRow = new Vector<>();
+            dataRow.add(monHoc.getMaMon());
+            dataRow.add(monHoc.getTenMon());
+            dataRow.add(String.valueOf(monNienChe.getDonViHocTrinh()));
+            for (DiemMonHoc diemMonHoc : bangDiem) {
+                if (diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())) {
+                    dataRow.add(String.valueOf(diemMonHoc.getDienGiuaKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemCuoiKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemTB()));
+                    break;
+                }
+                
+            }
+            listRowData.add(dataRow);
+        }
+        for (Vector<String> vector : listRowData) {
+            tableModelDSMHTruot.addRow(vector);
+        }
+    }
+    
+    public void showMHDaDat(){
+        tableModelDSMHQua.setNumRows(0);
+
+        FileKhoaVien fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
+        ArrayList<LopHoc> listLopHoc = new ArrayList<>();
+        ArrayList<MonHoc> listMonHoc = new ArrayList<>();
+        ArrayList<SinhVienNienChe> listSV = new ArrayList<>();
+
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+
+        for (KhoaVien khoaVien : listKhoaVien) {
+            if (khoaVien.getTenVien().equals(sv.getTenVien())) {
+                listLopHoc = khoaVien.getDsLopHoc();
+            }
+        }
+
+        for (LopHoc lopHoc : listLopHoc) {
+            if (lopHoc.getTenLop().equals(sv.getTenLop())) {
+                if (lopHoc instanceof LopNienChe) {
+                    LopNienChe lopNienChe = (LopNienChe) lopHoc;
+                    listSV = lopNienChe.getDsLopNC();
+                }
+            }
+        }
+
+        for (SinhVienNienChe sinhVienNienChe : listSV) {
+            if (sinhVienNienChe.getMaSV().equals(sv.getMaSV())) {
+                listMonHoc = sinhVienNienChe.getDsMonDaQua();
+            }
+        }
+
+        ArrayList<Vector<String>> listRowData = new ArrayList<>();
+
+        for (MonHoc monHoc : listMonHoc) {
+            MonNienChe monNienChe = null;
+            if (monHoc instanceof MonNienChe) {
+                monNienChe = (MonNienChe) monHoc;
+            }
+            ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+            bangDiem = monHoc.getDsDiem();
+
+            Vector<String> dataRow = new Vector<>();
+            dataRow.add(monHoc.getMaMon());
+            dataRow.add(monHoc.getTenMon());
+            dataRow.add(String.valueOf(monNienChe.getDonViHocTrinh()));
+            for (DiemMonHoc diemMonHoc : bangDiem) {
+                if (diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())) {
+                    dataRow.add(String.valueOf(diemMonHoc.getDienGiuaKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemCuoiKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemTB()));
+                    break;
+                }
+                
+            }
+            listRowData.add(dataRow);
+        }
+        for (Vector<String> vector : listRowData) {
+            tableModelDSMHQua.addRow(vector);
+        }
+    }
+
+    public void showMHDangKi() {
+        tableModelDSMHDangKi.setNumRows(0);
+
+        FileKhoaVien fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
+        ArrayList<LopHoc> listLopHoc = new ArrayList<>();
+        ArrayList<MonHoc> listMonHoc = new ArrayList<>();
+        ArrayList<SinhVienNienChe> listSV = new ArrayList<>();
+
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+
+        for (KhoaVien khoaVien : listKhoaVien) {
+            if (khoaVien.getTenVien().equals(sv.getTenVien())) {
+                listLopHoc = khoaVien.getDsLopHoc();
+                break;
+            }
+        }
+
+        for (LopHoc lopHoc : listLopHoc) {
+            if (lopHoc.getTenLop().equals(sv.getTenLop())) {
+                if (lopHoc instanceof LopNienChe) {
+                    LopNienChe lopNienChe = (LopNienChe) lopHoc;
+                    listSV = lopNienChe.getDsLopNC();
+                    break;
+                }
+            }
+        }
+
+        for (SinhVienNienChe sinhVienNienChe : listSV) {
+            if (sinhVienNienChe.getMaSV().equals(sv.getMaSV())) {
+                listMonHoc = sinhVienNienChe.getDsMonDangKi();
+                break;
+            }
+        }
+
+        ArrayList<Vector<String>> listRowData = new ArrayList<>();
+
+        for (MonHoc monHoc : listMonHoc) {
+            MonNienChe monNienChe = null;
+            if (monHoc instanceof MonNienChe) {
+                monNienChe = (MonNienChe) monHoc;
+            }
+            ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+            bangDiem = monHoc.getDsDiem();
+
+            Vector<String> dataRow = new Vector<>();
+            dataRow.add(monHoc.getMaMon());
+            dataRow.add(monHoc.getTenMon());
+            dataRow.add(String.valueOf(monNienChe.getDonViHocTrinh()));
+            for (DiemMonHoc diemMonHoc : bangDiem) {
+                if (diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())) {
+                    dataRow.add(String.valueOf(diemMonHoc.getDienGiuaKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemCuoiKy()));
+                    dataRow.add(String.valueOf(diemMonHoc.getDiemTB()));
+                    break;
+                }
+                
+            }
+            listRowData.add(dataRow);
+        }
+        for (Vector<String> vector : listRowData) {
+            tableModelDSMHDangKi.addRow(vector);
+        }
+    }
+
+    public void capNhatTrangThaiMH() {
+        FileKhoaVien fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        ArrayList<LopHoc> listLopHoc = new ArrayList<>();
+
+        int kvIndex = 0;
+        int lhIndex = 0;
+
+        for (int i = 0; i < listKhoaVien.size(); i++) {
+            if (listKhoaVien.get(i).getTenVien().equals(sv.getTenVien())) {
+                kvIndex = i;
+                listLopHoc = listKhoaVien.get(i).getDsLopHoc();
+            }
+        }
+
+        for (int i = 0; i < listLopHoc.size(); i++) {
+            if (listLopHoc.get(i).getTenLop().equals(sv.getTenLop())) {
+                lhIndex = i;
+            }
+        }
+
+        listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).capNhatTrangThaiMHChoSV(sv.getMaSV());
+        fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
     }
 
     /**
@@ -239,6 +476,11 @@ public class KetQuaHocTapNienCheGUI extends javax.swing.JFrame {
         btnCapNhatTranThai.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnCapNhatTranThai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Return.png"))); // NOI18N
         btnCapNhatTranThai.setText("Cập nhật trạng thái môn học");
+        btnCapNhatTranThai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatTranThaiActionPerformed(evt);
+            }
+        });
 
         jPanel6.setBackground(new java.awt.Color(254, 254, 254));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Điểm trung bình", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 18), new java.awt.Color(255, 0, 0))); // NOI18N
@@ -331,6 +573,12 @@ public class KetQuaHocTapNienCheGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void btnCapNhatTranThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatTranThaiActionPerformed
+        // TODO add your handling code here:
+        capNhatTrangThaiMH();
+        initContentsOfTalble();
+    }//GEN-LAST:event_btnCapNhatTranThaiActionPerformed
 
     /**
      * @param args the command line arguments

@@ -27,7 +27,6 @@ public class SinhVienGUI extends javax.swing.JFrame {
     public FileSinhVien fileSinhVien;
     public static String user;
     public static String ms;
-    public static int hocKi = 4;
     public SinhVienGUI() {
         this.setVisible(true);
         this.setTitle("Giành cho sinh viên");
@@ -55,7 +54,6 @@ public class SinhVienGUI extends javax.swing.JFrame {
             new DangKiHocGUI();
         }else {
             DangKiHocNienCheGUI.sv = sv;
-            DangKiHocNienCheGUI.hocKi = this.hocKi;
             new DangKiHocNienCheGUI();
         }
     }

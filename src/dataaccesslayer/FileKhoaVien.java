@@ -60,8 +60,8 @@ public class FileKhoaVien {
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         ArrayList<KhoaVien> listKhoaVien = new FileKhoaVien().docFileKhoaVien();
-        System.out.println(listKhoaVien.get(0).getDsLopHoc().get(1).getTenLop());
+        
         LopNienChe lopNienChe = (LopNienChe)listKhoaVien.get(0).getDsLopHoc().get(1);
-        System.out.println(lopNienChe.getDsLopNC().get(0).getDiem());
+        System.out.println(lopNienChe.getDsLopNC().get(2).getDsMonDangKi().size());
     }
 }
