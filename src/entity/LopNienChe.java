@@ -61,6 +61,24 @@ public class LopNienChe extends LopHoc{
 
     @Override
     public boolean dangKiHocTapChoSV(String MSSV, MonHoc monHoc, KhoaVien khoaVien, int hocKi) {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       for (int i = 0; i< dsLopNC.size(); i++){
+           if (dsLopNC.get(i).getMaSV().equals(MSSV)){
+               if (dsLopNC.get(i).dangKiMon(monHoc)){
+                   DiemMonHoc diemMonHoc = new DiemMonHoc(dsLopNC.get(i), monHoc.getHeSoCK(), monHoc.getTenMon(), hocKi);
+                   monHoc.getDsDiem().add(diemMonHoc);
+                   monHoc.getDsSinhVien().add(dsLopNC.get(i));
+                   return true;
+               }
+               return false;
+           }
+           return false;
+       }
+       return false;
+    }
+
+    @Override
+    public void capNhatTrangThaiMHChoSV(String MSSV) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

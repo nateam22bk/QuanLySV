@@ -352,7 +352,7 @@ public class CapNhatSinhVienGUI extends javax.swing.JFrame {
             SinhVien sv = new SinhVienTinChi(new ArrayList<MonHoc>(),maSV, hoTen, ngaySinh, queQuan);
             listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).capNhatSV(sv, data.get(0));
         }else {
-            SinhVien sv = new SinhVienNienChe(new ArrayList<MonHoc>(),maSV, hoTen, ngaySinh, queQuan);
+            SinhVien sv = new SinhVienNienChe(maSV, hoTen, ngaySinh, queQuan);
             listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).capNhatSV(sv, data.get(0));
         }
         

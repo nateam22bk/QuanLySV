@@ -10,6 +10,7 @@ import dataaccesslayer.FileSinhVien;
 import entity.KhoaVien;
 import entity.LopHoc;
 import entity.SinhVien;
+import entity.SinhVienTinChi;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -26,7 +27,7 @@ public class SinhVienGUI extends javax.swing.JFrame {
     public FileSinhVien fileSinhVien;
     public static String user;
     public static String ms;
-    
+    public static int hocKi = 4;
     public SinhVienGUI() {
         this.setVisible(true);
         this.setTitle("Giành cho sinh viên");
@@ -40,16 +41,23 @@ public class SinhVienGUI extends javax.swing.JFrame {
     public void dangKiHocTap(){
         ArrayList<SinhVien> listSinhVien = new ArrayList<>();
         fileSinhVien = new FileSinhVien();
-        
+        SinhVien sv = null;
         listSinhVien = fileSinhVien.docFileSinhVien();
         
         for (SinhVien sinhVien : listSinhVien) {
             if (sinhVien.getMaSV().equals(ms)){
-                DangKiHocGUI.sv = sinhVien;
+                sv = sinhVien;
             }
         }
         
-        new DangKiHocGUI();
+        if (sv instanceof SinhVienTinChi){
+            DangKiHocGUI.sv = sv;
+            new DangKiHocGUI();
+        }else {
+            DangKiHocNienCheGUI.sv = sv;
+            DangKiHocNienCheGUI.hocKi = this.hocKi;
+            new DangKiHocNienCheGUI();
+        }
     }
     
     public void xemKetQua(){
@@ -85,13 +93,31 @@ public class SinhVienGUI extends javax.swing.JFrame {
     public void xemBangDiem(){
         fileSinhVien = new FileSinhVien();
         ArrayList<SinhVien> listSinhVien = fileSinhVien.docFileSinhVien();
-        
+        SinhVien sv = null;
         for (SinhVien sinhVien : listSinhVien) {
             if (sinhVien.getMaSV().equals(ms)){
-                KetQuaHocTapGUI.sv = sinhVien;
+                sv = sinhVien;
             }
         }
-        new KetQuaHocTapGUI();
+        if (sv instanceof SinhVienTinChi){
+            KetQuaHocTapGUI.sv = sv;
+            new KetQuaHocTapGUI();
+        }else {
+            KetQuaHocTapNienCheGUI.sv = sv;
+            new KetQuaHocTapNienCheGUI();
+        }
+    }
+    
+    public void xetTotNghiep(){
+        fileKhoaVien = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien  = new ArrayList<>();
+        ArrayList<LopHoc> listLopHoc = new ArrayList<>();
+        
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        for (LopHoc lopHoc : listLopHoc) {
+            
+        }
+        
     }
 
     /**
@@ -112,7 +138,7 @@ public class SinhVienGUI extends javax.swing.JFrame {
         btnThongTinCaNhan = new javax.swing.JButton();
         btnKetQuaHocTap = new javax.swing.JButton();
         btnDangKiHocTap = new javax.swing.JButton();
-        btnMucKhac = new javax.swing.JButton();
+        btnXetTotNghiep = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbUser = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -190,9 +216,14 @@ public class SinhVienGUI extends javax.swing.JFrame {
             }
         });
 
-        btnMucKhac.setBackground(new java.awt.Color(254, 254, 254));
-        btnMucKhac.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnMucKhac.setText("Mục Khác");
+        btnXetTotNghiep.setBackground(new java.awt.Color(254, 254, 254));
+        btnXetTotNghiep.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnXetTotNghiep.setText("Yêu cầu xét TN");
+        btnXetTotNghiep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXetTotNghiepActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -204,7 +235,7 @@ public class SinhVienGUI extends javax.swing.JFrame {
                     .addComponent(btnThongTinCaNhan, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                     .addComponent(btnKetQuaHocTap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDangKiHocTap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMucKhac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnXetTotNghiep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -217,7 +248,7 @@ public class SinhVienGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnDangKiHocTap, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(btnMucKhac, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXetTotNghiep, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -305,6 +336,11 @@ public class SinhVienGUI extends javax.swing.JFrame {
         xemBangDiem();
     }//GEN-LAST:event_btnKetQuaHocTapActionPerformed
 
+    private void btnXetTotNghiepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXetTotNghiepActionPerformed
+        // TODO add your handling code here:
+        xetTotNghiep();
+    }//GEN-LAST:event_btnXetTotNghiepActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -343,8 +379,8 @@ public class SinhVienGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangKiHocTap;
     private javax.swing.JButton btnKetQuaHocTap;
-    private javax.swing.JButton btnMucKhac;
     private javax.swing.JButton btnThongTinCaNhan;
+    private javax.swing.JButton btnXetTotNghiep;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

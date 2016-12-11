@@ -83,4 +83,5 @@ public abstract class SinhVien implements Serializable{
         System.out.println("Ten sinh vien: "+ this.hoTen);
     };
     public abstract void xetTotNghiep(KhoaVien KV);
+    public abstract void capNhatTrangThaiMH();
 }

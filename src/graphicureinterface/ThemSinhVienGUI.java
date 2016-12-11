@@ -339,7 +339,7 @@ public class ThemSinhVienGUI extends javax.swing.JFrame {
             listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).themSV(sinhVien);
 
         } else if (rdTinChi == 0) {
-            SinhVien sinhVien = new SinhVienNienChe(new ArrayList<MonHoc>(), maStr, hoTen, ngaySinh, queQuan);
+            SinhVien sinhVien = new SinhVienNienChe( maStr, hoTen, ngaySinh, queQuan);
             sinhVien.setTenVien(tenVien);
             sinhVien.setTenLop(tenLop);
             listSinhVien.add(sinhVien);

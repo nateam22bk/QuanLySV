@@ -64,9 +64,6 @@ public class LopTinChi extends LopHoc implements Serializable{
 
     @Override
     public boolean dangKiHocTapChoSV(String MSSV, MonHoc monHoc, KhoaVien khoaVien, int hocKi) {
-        FileBangDiem filebangDiem = new FileBangDiem();
-        ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
-        bangDiem = filebangDiem.docFileBangDiem();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         for(int i = 0; i< dsSinhVienTC.size(); i++){
            if (dsSinhVienTC.get(i).getMaSV().equals(MSSV)){
@@ -74,14 +71,21 @@ public class LopTinChi extends LopHoc implements Serializable{
                    DiemMonHoc diem = new DiemMonHoc(dsSinhVienTC.get(i), monHoc.getHeSoCK(), monHoc.getTenMon(), hocKi);
                    diem.setHesoCK(monHoc.getHeSoCK());
                    monHoc.getDsDiem().add(diem);
-                   bangDiem.add(diem);
-                   filebangDiem.ghiFileBangDiem(bangDiem);
+                   monHoc.getDsSinhVien().add(dsSinhVienTC.get(i));
                    return true;
                }
                return false;
            }
         }
         return false;
+    }
+    
+    public void capNhatTrangThaiMHChoSV(String MSSV){
+        for (int i = 0; i< dsSinhVienTC.size(); i++){
+            if (dsSinhVienTC.get(i).getMaSV().equals(MSSV)){
+                dsSinhVienTC.get(i).capNhatTrangThaiMH();
+            }
+        }
     }
   
 }

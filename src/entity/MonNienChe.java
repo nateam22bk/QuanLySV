@@ -37,6 +37,11 @@ public class MonNienChe extends MonHoc{
 
     @Override
     public void nhapDiem(ArrayList<Vector<String>> bangDiem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(int i = 0; i< dsDiem.size(); i++){
+            dsDiem.get(i).setDienGiuaKy(Float.parseFloat(bangDiem.get(i).get(2)));
+            dsDiem.get(i).setDiemCuoiKy(Float.parseFloat(bangDiem.get(i).get(3)));
+            dsDiem.get(i).setDiemTB();
+        }
     }
 }

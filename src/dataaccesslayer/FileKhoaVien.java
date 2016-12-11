@@ -8,8 +8,10 @@ package dataaccesslayer;
 import entity.DiemMonHoc;
 import entity.KhoaVien;
 import entity.LopHoc;
+import entity.LopNienChe;
 import entity.LopTinChi;
 import entity.MonHoc;
+import entity.MonNienChe;
 import entity.SinhVien;
 import entity.SinhVienNienChe;
 import java.io.File;
@@ -58,10 +60,8 @@ public class FileKhoaVien {
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         ArrayList<KhoaVien> listKhoaVien = new FileKhoaVien().docFileKhoaVien();
-       /// SinhVien sv = new SinhVienNienChe(new ArrayList<MonHoc>(), "20145167", "Nguyen Thi Mai Lan", dateFormat.parse("01/05/20014"), "Thai Binh");
-        //listKhoaVien.get(0).getDsLopHoc().get(2).themSV(sv);
-        //new FileKhoaVien().ghiFileKhoaVien(listKhoaVien);
-        LopTinChi lopTinChi = (LopTinChi)listKhoaVien.get(0).getDsLopHoc().get(0);
-        System.out.println(listKhoaVien.get(0).getSoTCTN());
+        System.out.println(listKhoaVien.get(0).getDsLopHoc().get(1).getTenLop());
+        LopNienChe lopNienChe = (LopNienChe)listKhoaVien.get(0).getDsLopHoc().get(1);
+        System.out.println(lopNienChe.getDsLopNC().get(0).getDiem());
     }
 }

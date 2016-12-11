@@ -16,20 +16,47 @@ import java.util.Date;
 public class SinhVienNienChe extends SinhVien implements Serializable{
     private float diem;
     private boolean totNghiep;
-    ArrayList<MonHoc> dsMon;
+    ArrayList<MonHoc> dsMonDangKi;
+    ArrayList<MonHoc> dsMonDaQua;
+    ArrayList<MonHoc> dsMonTruot;
 
-    public SinhVienNienChe(ArrayList<MonHoc> dsMon, String MSSV, String hoTen, Date ngaySinh, String queQuan) {
+    public SinhVienNienChe(String MSSV, String hoTen, Date ngaySinh, String queQuan) {
         super(MSSV, hoTen, ngaySinh, queQuan);
-        this.dsMon = dsMon;
+        this.dsMonDangKi = new ArrayList<>();
+        this.dsMonDaQua = new ArrayList<>();
+        this.dsMonTruot = new ArrayList<>();
     }
     
     
     public float getDiem(){
     return diem;
     }
-    public ArrayList<MonHoc> getMon(){
-    return dsMon;
+
+    public ArrayList<MonHoc> getDsMonDangKi() {
+        return dsMonDangKi;
     }
+
+    public ArrayList<MonHoc> getDsMonDaQua() {
+        return dsMonDaQua;
+    }
+
+    public ArrayList<MonHoc> getDsMonTruot() {
+        return dsMonTruot;
+    }
+
+    public void setDsMonDangKi(ArrayList<MonHoc> dsMonDangKi) {
+        this.dsMonDangKi = dsMonDangKi;
+    }
+
+    public void setDsMonDaQua(ArrayList<MonHoc> dsMonDaQua) {
+        this.dsMonDaQua = dsMonDaQua;
+    }
+
+    public void setDsMonTruot(ArrayList<MonHoc> dsMonTruot) {
+        this.dsMonTruot = dsMonTruot;
+    }
+    
+    
     
     public boolean isTotNghiep(){
     return totNghiep;
@@ -39,17 +66,20 @@ public class SinhVienNienChe extends SinhVien implements Serializable{
     this.diem = diem;
     }
 
-    public void setMon(ArrayList<MonHoc> dsMon){
-     this.dsMon=dsMon;
-    }
+    
     
     public void setTotNghiep(boolean totNghiep){
     this.totNghiep=totNghiep;
     }
     
-    public void dangKiMon(MonHoc monHoc){
-        MonNienChe monNienChe = (MonNienChe)monHoc;
-        dsMon.add(monNienChe);
+    public boolean dangKiMon(MonHoc monHoc){
+        if (monHoc instanceof MonNienChe){
+            MonNienChe monNienChe = (MonNienChe)monHoc;
+            dsMonDangKi.add(monHoc);
+            return true;
+        }else {
+            return false;
+        }
     }
     
     @Override
@@ -59,10 +89,12 @@ public class SinhVienNienChe extends SinhVien implements Serializable{
     }
     @Override
     public void xetTotNghiep(KhoaVien KV) {
-       if(KV.dsMonHoc.containsAll(this.dsMon)){ // Khi danh sách môn học của SV đủ so với yêu cầu của khoa thì có thể ra trường
-        System.out.println("Da tot nghiep!");
-        this.setTotNghiep(true);
-       }
+       
            
+    }
+
+    @Override
+    public void capNhatTrangThaiMH() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

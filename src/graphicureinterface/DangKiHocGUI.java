@@ -50,7 +50,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         defaultTableModelMonHocDK = new DefaultTableModel();
         defaultTableModelTraCuu = new DefaultTableModel();
 
-        if (sv instanceof SinhVienTinChi) {
+        
             defaultTableModelMonHocDK.addColumn("Mã môn học");
             defaultTableModelMonHocDK.addColumn("Tên môn học");
             defaultTableModelMonHocDK.addColumn("Số Tín Chỉ");
@@ -63,21 +63,6 @@ public class DangKiHocGUI extends javax.swing.JFrame {
 
             tbMonHocDK.setModel(defaultTableModelMonHocDK);
             tbTraCuu.setModel(defaultTableModelTraCuu);
-        } else {
-            defaultTableModelMonHocDK.addColumn("Mã MH");
-            defaultTableModelMonHocDK.addColumn("Tên MH");
-            defaultTableModelMonHocDK.addColumn("Đơn vị HT");
-            defaultTableModelMonHocDK.addColumn("Học kì");
-
-            defaultTableModelTraCuu.addColumn("Mã MH");
-            defaultTableModelTraCuu.addColumn("Tên MH");
-            defaultTableModelTraCuu.addColumn("Đơn vị HT");
-            defaultTableModelTraCuu.addColumn("Học Kì");
-
-            tbMonHocDK.setModel(defaultTableModelMonHocDK);
-            tbTraCuu.setModel(defaultTableModelTraCuu);
-        }
-
     }
 
     //Khởi tạo ComboBox Khoa Viện
@@ -151,6 +136,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         for (int i = 0; i < listKhoaVien.size(); i++) {
             if (listKhoaVien.get(i).getTenVien().equals(tenVien)) {
                 kvIndex = i;
+                listLopHoc = listKhoaVien.get(i).getDsLopHoc();
                 listMonHoc = listKhoaVien.get(i).getDsMonHoc();
             }
         }
