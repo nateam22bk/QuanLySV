@@ -85,13 +85,11 @@ public class KetQuaHocTapNienCheGUI extends javax.swing.JFrame {
 
     }
     
-    public void showMHTruot(){
-        tableModelDSMHTruot.setNumRows(0);
-
+    
+    public ArrayList<SinhVienNienChe> getListSV(){
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
         ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
         ArrayList<LopHoc> listLopHoc = new ArrayList<>();
-        ArrayList<MonHoc> listMonHoc = new ArrayList<>();
         ArrayList<SinhVienNienChe> listSV = new ArrayList<>();
 
         listKhoaVien = fileKhoaVien.docFileKhoaVien();
@@ -112,7 +110,16 @@ public class KetQuaHocTapNienCheGUI extends javax.swing.JFrame {
                 }
             }
         }
-
+        return listSV;
+    }
+    
+    public void showMHTruot(){
+        tableModelDSMHTruot.setNumRows(0);
+        
+        ArrayList<SinhVienNienChe> listSV = new ArrayList<>();
+        ArrayList<MonHoc> listMonHoc = new ArrayList<>();
+        listSV = getListSV();
+        
         for (SinhVienNienChe sinhVienNienChe : listSV) {
             if (sinhVienNienChe.getMaSV().equals(sv.getMaSV())) {
                 listMonHoc = sinhVienNienChe.getDsMonTruot();
@@ -153,29 +160,12 @@ public class KetQuaHocTapNienCheGUI extends javax.swing.JFrame {
     public void showMHDaDat(){
         tableModelDSMHQua.setNumRows(0);
 
-        FileKhoaVien fileKhoaVien = new FileKhoaVien();
-        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
-        ArrayList<LopHoc> listLopHoc = new ArrayList<>();
+       
         ArrayList<MonHoc> listMonHoc = new ArrayList<>();
         ArrayList<SinhVienNienChe> listSV = new ArrayList<>();
-
-        listKhoaVien = fileKhoaVien.docFileKhoaVien();
-
-        for (KhoaVien khoaVien : listKhoaVien) {
-            if (khoaVien.getTenVien().equals(sv.getTenVien())) {
-                listLopHoc = khoaVien.getDsLopHoc();
-            }
-        }
-
-        for (LopHoc lopHoc : listLopHoc) {
-            if (lopHoc.getTenLop().equals(sv.getTenLop())) {
-                if (lopHoc instanceof LopNienChe) {
-                    LopNienChe lopNienChe = (LopNienChe) lopHoc;
-                    listSV = lopNienChe.getDsLopNC();
-                }
-            }
-        }
-
+        
+        listSV = getListSV();
+        
         for (SinhVienNienChe sinhVienNienChe : listSV) {
             if (sinhVienNienChe.getMaSV().equals(sv.getMaSV())) {
                 listMonHoc = sinhVienNienChe.getDsMonDaQua();
@@ -215,30 +205,11 @@ public class KetQuaHocTapNienCheGUI extends javax.swing.JFrame {
     public void showMHDangKi() {
         tableModelDSMHDangKi.setNumRows(0);
 
-        FileKhoaVien fileKhoaVien = new FileKhoaVien();
-        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
-        ArrayList<LopHoc> listLopHoc = new ArrayList<>();
+        
         ArrayList<MonHoc> listMonHoc = new ArrayList<>();
         ArrayList<SinhVienNienChe> listSV = new ArrayList<>();
-
-        listKhoaVien = fileKhoaVien.docFileKhoaVien();
-
-        for (KhoaVien khoaVien : listKhoaVien) {
-            if (khoaVien.getTenVien().equals(sv.getTenVien())) {
-                listLopHoc = khoaVien.getDsLopHoc();
-                break;
-            }
-        }
-
-        for (LopHoc lopHoc : listLopHoc) {
-            if (lopHoc.getTenLop().equals(sv.getTenLop())) {
-                if (lopHoc instanceof LopNienChe) {
-                    LopNienChe lopNienChe = (LopNienChe) lopHoc;
-                    listSV = lopNienChe.getDsLopNC();
-                    break;
-                }
-            }
-        }
+        
+        listSV = getListSV();
 
         for (SinhVienNienChe sinhVienNienChe : listSV) {
             if (sinhVienNienChe.getMaSV().equals(sv.getMaSV())) {
