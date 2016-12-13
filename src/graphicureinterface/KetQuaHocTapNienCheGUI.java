@@ -14,7 +14,7 @@ import entity.MonHoc;
 import entity.MonNienChe;
 import entity.SinhVien;
 import entity.SinhVienNienChe;
-import static graphicureinterface.KetQuaHocTapGUI.sv;
+import static graphicureinterface.KetQuaHocTapTinChiGUI.sv;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
@@ -77,6 +77,10 @@ public class KetQuaHocTapNienCheGUI extends javax.swing.JFrame {
         tableModelDSMHTruot.addColumn("Điểm GK");
         tableModelDSMHTruot.addColumn("Điểm CK");
         tableModelDSMHTruot.addColumn("Trung Bình");
+        
+        tableModelDiemTB.addColumn("Tổng số MH");
+        tableModelDiemTB.addColumn("Số MH chưa qua");
+        tableModelDiemTB.addColumn("Điểm Trung Bình");
 
         tbDanhSachMHDangKi.setModel(tableModelDSMHDangKi);
         tbDanhSachMHDat.setModel(tableModelDSMHQua);
@@ -247,6 +251,64 @@ public class KetQuaHocTapNienCheGUI extends javax.swing.JFrame {
             tableModelDSMHDangKi.addRow(vector);
         }
     }
+    
+    // Hien thi bang diem trung binh
+    public void showDiemTrungBinh(){
+        ArrayList<SinhVienNienChe> listSV = new ArrayList<>();
+        ArrayList<MonHoc> listMonHocDaQua = new ArrayList<>();
+        ArrayList<MonHoc> listMonHocTruot = new ArrayList<>();
+        
+        listSV = getListSV();
+        
+        for (SinhVienNienChe sinhVienNienChe : listSV) {
+            if (sinhVienNienChe.getMaSV().equals(sv.getMaSV())){
+                listMonHocDaQua = sinhVienNienChe.getDsMonDaQua();
+                listMonHocTruot = sinhVienNienChe.getDsMonTruot();
+                break;
+            }
+        }
+        
+        int soMonQua = listMonHocDaQua.size();
+        int soMonTruot = listMonHocTruot.size();
+        
+        float tongDiem = 0f;
+        int tongDVHocTrinh = 0;
+        
+        for (MonHoc monHoc : listMonHocTruot) {
+            MonNienChe monNienChe = (MonNienChe)monHoc;
+            ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+            bangDiem = monHoc.getDsDiem();
+            for (DiemMonHoc diemMonHoc : bangDiem) {
+                if (diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())){
+                    tongDiem += monNienChe.getDonViHocTrinh()*diemMonHoc.getDiemTB();
+                    tongDVHocTrinh += monNienChe.getDonViHocTrinh();
+                    break;
+                }
+            }
+        }
+        
+        for (MonHoc monHoc : listMonHocDaQua) {
+            MonNienChe monNienChe = (MonNienChe)monHoc;
+            ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+            bangDiem = monHoc.getDsDiem();
+            for (DiemMonHoc diemMonHoc : bangDiem) {
+                if (diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())){
+                    tongDiem += monNienChe.getDonViHocTrinh()*diemMonHoc.getDiemTB();
+                    tongDVHocTrinh += monNienChe.getDonViHocTrinh();
+                    break;
+                }
+            }
+        }
+        
+        Vector<String> dataRow = new Vector<>();
+        dataRow.add(String.valueOf(soMonQua+soMonTruot));
+        dataRow.add(String.valueOf(soMonTruot));
+        dataRow.add(String.valueOf(tongDiem/tongDVHocTrinh));
+        
+        tableModelDiemTB.addRow(dataRow);
+        
+    }
+    
 
     public void capNhatTrangThaiMH() {
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
@@ -549,6 +611,7 @@ public class KetQuaHocTapNienCheGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         capNhatTrangThaiMH();
         initContentsOfTalble();
+        showDiemTrungBinh();
     }//GEN-LAST:event_btnCapNhatTranThaiActionPerformed
 
     /**

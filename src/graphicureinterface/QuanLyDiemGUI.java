@@ -30,6 +30,7 @@ public class QuanLyDiemGUI extends javax.swing.JFrame {
     DefaultComboBoxModel<String> boxModelMonHoc;
     DefaultTableModel tableModelBangDiem;
     ArrayList<MonHoc> listMonHoc;
+
     public QuanLyDiemGUI() {
         this.setVisible(true);
         this.setTitle("Quản lý điểm học tập");
@@ -39,20 +40,21 @@ public class QuanLyDiemGUI extends javax.swing.JFrame {
         initComboBoxMonHoc();
         initBangDiem();
         rdTinChi.setSelected(true);
+        showBangDiem();
     }
-    
-    public void initBangDiem(){
+
+    public void initBangDiem() {
         tableModelBangDiem = new DefaultTableModel();
         tableModelBangDiem.addColumn("MSSV");
         tableModelBangDiem.addColumn("Tên SV");
         tableModelBangDiem.addColumn("Điểm GK");
         tableModelBangDiem.addColumn("Điểm CK");
         tableModelBangDiem.addColumn("Trung Bình");
-        
+
         tbBangDiem.setModel(tableModelBangDiem);
     }
-    
-    public void initComboBoxKhoaVien(){
+
+    public void initComboBoxKhoaVien() {
         boxModelKhoaVien = new DefaultComboBoxModel<>();
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
         ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
@@ -61,44 +63,53 @@ public class QuanLyDiemGUI extends javax.swing.JFrame {
         for (KhoaVien khoaVien : listKhoaVien) {
             boxModelKhoaVien.addElement(khoaVien.getTenVien());
         }
-        
+
         cbKhoaVien.setModel(boxModelKhoaVien);
     }
-    
-    public void initComboBoxMonHoc(){
+
+    public void initComboBoxMonHoc() {
         boxModelMonHoc = new DefaultComboBoxModel<>();
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
         ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
         listKhoaVien = fileKhoaVien.docFileKhoaVien();
         listMonHoc = new ArrayList<>();
-        
+
         for (KhoaVien khoaVien : listKhoaVien) {
-            if (khoaVien.getTenVien().equals(cbKhoaVien.getSelectedItem().toString())){
+            if (khoaVien.getTenVien().equals(cbKhoaVien.getSelectedItem().toString())) {
                 listMonHoc = khoaVien.getDsMonHoc();
             }
         }
-        
+
         for (MonHoc monHoc : listMonHoc) {
-            boxModelMonHoc.addElement(monHoc.getTenMon());
+            if (rdTinChi.isSelected()) {
+                if (monHoc instanceof MonTinChi) {
+                    boxModelMonHoc.addElement(monHoc.getTenMon());
+                }
+            } else {
+                if (monHoc instanceof MonNienChe) {
+                    boxModelMonHoc.addElement(monHoc.getTenMon());
+                }
+            }
+
         }
         cbMonHoc.setModel(boxModelMonHoc);
     }
-    
-    public void showBangDiem(){
+
+    public void showBangDiem() {
         tableModelBangDiem.setNumRows(0);
         ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
-        if (rdTinChi.isSelected()){
+        if (rdTinChi.isSelected()) {
             for (MonHoc monHoc : listMonHoc) {
-            if  (monHoc.getTenMon().equals(cbMonHoc.getSelectedItem().toString())){
-                if (monHoc instanceof MonTinChi){
-                     bangDiem = monHoc.getDsDiem();
+                if (monHoc.getTenMon().equals(cbMonHoc.getSelectedItem().toString())) {
+                    if (monHoc instanceof MonTinChi) {
+                        bangDiem = monHoc.getDsDiem();
+                    }
                 }
             }
-        }
-        }else {
+        } else {
             for (MonHoc monHoc : listMonHoc) {
-                if (monHoc.getTenMon().equals(cbMonHoc.getSelectedItem().toString())){
-                    if (monHoc instanceof MonNienChe){
+                if (monHoc.getTenMon().equals(cbMonHoc.getSelectedItem().toString())) {
+                    if (monHoc instanceof MonNienChe) {
                         bangDiem = monHoc.getDsDiem();
                     }
                 }
@@ -114,53 +125,65 @@ public class QuanLyDiemGUI extends javax.swing.JFrame {
             tableModelBangDiem.addRow(data);
         }
     }
-    
-    public void luuDiem(){
+
+    public void luuDiem() {
+
+        // Kiểm tra xem bảng điểm có dữ liệu chưa
+        if (tbBangDiem.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa load dữ liệu và nhập điểm !");
+            return;
+        }
+
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
         ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
-        
+
         listKhoaVien = fileKhoaVien.docFileKhoaVien();
-        
+
         int kvIndex = 0; // Lưu vị trí của khoa viện
         int mhIndex = 0; // Lưu vị trí của môn học
-        
-        for (int i = 0; i< listKhoaVien.size(); i++){
-            if (listKhoaVien.get(i).getTenVien().equals(cbKhoaVien.getSelectedItem().toString())){
+
+        for (int i = 0; i < listKhoaVien.size(); i++) {
+            if (listKhoaVien.get(i).getTenVien().equals(cbKhoaVien.getSelectedItem().toString())) {
                 kvIndex = i;
                 listMonHoc = listKhoaVien.get(i).getDsMonHoc();
                 break;
             }
         }
-        
-        if (rdTinChi.isSelected()){
-            for(int i = 0; i< listMonHoc.size(); i++){
-                if (listMonHoc.get(i).getTenMon().equals(cbMonHoc.getSelectedItem().toString())){
-                    if (listMonHoc.get(i) instanceof MonTinChi){
+
+        if (rdTinChi.isSelected()) {
+            for (int i = 0; i < listMonHoc.size(); i++) {
+                if (listMonHoc.get(i).getTenMon().equals(cbMonHoc.getSelectedItem().toString())) {
+                    if (listMonHoc.get(i) instanceof MonTinChi) {
                         mhIndex = i;
                         break;
                     }
                 }
             }
-        }else {
-            for(int i = 0; i< listMonHoc.size(); i++){
-                if (listMonHoc.get(i).getTenMon().equals(cbMonHoc.getSelectedItem().toString())){
-                    if (listMonHoc.get(i) instanceof MonNienChe){
+        } else {
+            for (int i = 0; i < listMonHoc.size(); i++) {
+                if (listMonHoc.get(i).getTenMon().equals(cbMonHoc.getSelectedItem().toString())) {
+                    if (listMonHoc.get(i) instanceof MonNienChe) {
                         mhIndex = i;
                         break;
                     }
                 }
             }
         }
-        
-        ArrayList<Vector<String>> bangDiem  = new ArrayList<>();
-        for (int i = 0; i<tbBangDiem.getRowCount(); i++){
+
+        ArrayList<Vector<String>> bangDiem = new ArrayList<>();
+        for (int i = 0; i < tbBangDiem.getRowCount(); i++) {
             Vector<String> data = new Vector<>();
             data = (Vector<String>) tableModelBangDiem.getDataVector().elementAt(i);
             bangDiem.add(data);
         }
-        listKhoaVien.get(kvIndex).getDsMonHoc().get(mhIndex).nhapDiem(bangDiem);
-        fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
-        JOptionPane.showMessageDialog(rootPane, "Đã Lưu");
+        if (listKhoaVien.get(kvIndex).getDsMonHoc().get(mhIndex).nhapDiem(bangDiem)) {
+            JOptionPane.showMessageDialog(rootPane, "Đã lưu điểm !");
+            fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
+            return;
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Điểm nhập vào không hợp lệ !");
+            return;
+        }
     }
 
     /**
@@ -320,10 +343,20 @@ public class QuanLyDiemGUI extends javax.swing.JFrame {
         buttonGroup1.add(rdTinChi);
         rdTinChi.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         rdTinChi.setText("Hệ Tín Chỉ");
+        rdTinChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdTinChiActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdNienChe);
         rdNienChe.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         rdNienChe.setText("Hệ Niên Chế");
+        rdNienChe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdNienCheActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -419,6 +452,16 @@ public class QuanLyDiemGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         luuDiem();
     }//GEN-LAST:event_btnNhapDiemActionPerformed
+
+    private void rdTinChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTinChiActionPerformed
+        // TODO add your handling code here:
+        initComboBoxMonHoc();
+    }//GEN-LAST:event_rdTinChiActionPerformed
+
+    private void rdNienCheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdNienCheActionPerformed
+        // TODO add your handling code here:
+        initComboBoxMonHoc();
+    }//GEN-LAST:event_rdNienCheActionPerformed
 
     /**
      * @param args the command line arguments

@@ -10,11 +10,13 @@
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/entity/MonTinChi.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/dataaccesslayer/FileKhoaVien.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/entity/DiemMonHoc.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/KetQuaHocTapTinChiGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/entity/LopNienChe.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/entity/SinhVienTinChi.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/SinhVienGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/entity/KhoaVien.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/DangKiHocGUI.java</file>
+            <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/ThemLopHocGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/DangKiHocNienCheGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/ThemMonNienCheGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/entity/LopTinChi.java</file>
@@ -22,13 +24,11 @@
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/QuanTriGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/QuanLyDiemGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/ThemSinhVienGUI.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/KetQuaHocTapGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/entity/SinhVienNienChe.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/CapNhatMonHoGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/QuanLyMonHocGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/KetQuaHocTapNienCheGUI.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/entity/MonNienChe.java</file>
-            <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/dataaccesslayer/FileLopHoc.java</file>
             <file>file:/home/tu/NetBeansProjects/QuanLySV4/src/graphicureinterface/CapNhatLopHocGUI.java</file>
         </group>
     </open-files>

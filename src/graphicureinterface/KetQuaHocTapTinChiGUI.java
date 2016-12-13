@@ -5,7 +5,6 @@
  */
 package graphicureinterface;
 
-import dataaccesslayer.FileBangDiem;
 import dataaccesslayer.FileKhoaVien;
 import entity.DiemMonHoc;
 import entity.KhoaVien;
@@ -24,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author tu
  */
-public class KetQuaHocTapGUI extends javax.swing.JFrame {
+public class KetQuaHocTapTinChiGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form KetQuaHocTapGUi
@@ -35,17 +34,17 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
     DefaultTableModel defaultTableModelMHTichLuy;
     DefaultTableModel defaultTableModelMHNoDK;
 
-    public KetQuaHocTapGUI() {
+    public KetQuaHocTapTinChiGUI() {
         this.setVisible(true);
         this.setTitle("Bảng điểm cá nhân");
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initTable();
         initContentsOfTable();
-        
+
     }
-    
-    public void initContentsOfTable(){
+
+    public void initContentsOfTable() {
         showMHDangKi();
         showMHNoDK();
         showMHTichLuy();
@@ -78,11 +77,9 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
         defaultTableModelMHTichLuy.addColumn("Điểm CK");
         defaultTableModelMHTichLuy.addColumn("Trung bình");
 
-        defaultTableModelKetQua.addColumn("Học kì");
         defaultTableModelKetQua.addColumn("Số Tín Chỉ ĐK");
         defaultTableModelKetQua.addColumn("Số Tín Chỉ Nợ ĐK");
-        defaultTableModelKetQua.addColumn("Điểm GPA");
-        defaultTableModelKetQua.addColumn("Điểm CPA");
+        defaultTableModelKetQua.addColumn("Điểm Trung Binh");
 
         tbDiemTrungBinh.setModel(defaultTableModelKetQua);
         tbMonHocDK.setModel(defaultTableModelMonHoc);
@@ -91,7 +88,60 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
 
     }
 
-    public ArrayList<SinhVienTinChi> getListSV(){
+    // Hien thi diem trung binh
+    public void showDiemTrungBinh() {
+        ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
+        ArrayList<MonHoc> listMHTichLuy = new ArrayList<>();
+        ArrayList<MonHoc> listMHNoDangKi = new ArrayList<>();
+
+        listSV = getListSV();
+
+        for (SinhVienTinChi sinhVienTinChi : listSV) {
+            if (sinhVienTinChi.getMaSV().equals(sv.getMaSV())) {
+                listMHTichLuy = sinhVienTinChi.getDsMonTichLuy();
+                listMHNoDangKi = sinhVienTinChi.getDsMonNoDangKi();
+                break;
+            }
+        }
+        float tongDiem = 0f;
+        int tongSoTinChi = 0;
+        int soTinChiNoDangKi = 0;
+
+        for (MonHoc monHoc : listMHNoDangKi) {
+            MonTinChi monTinChi = (MonTinChi) monHoc;
+            ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+            bangDiem = monHoc.getDsDiem();
+            for (DiemMonHoc diemMonHoc : bangDiem) {
+                if (diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())) {
+                    tongDiem += monTinChi.getSoTinChi() * diemMonHoc.getDiemTB();
+                    tongSoTinChi += monTinChi.getSoTinChi();
+                    soTinChiNoDangKi+=monTinChi.getSoTinChi();
+                }
+            }
+        }
+
+        for (MonHoc monHoc : listMHTichLuy) {
+            MonTinChi monTinChi = (MonTinChi) monHoc;
+            ArrayList<DiemMonHoc> bangDiem = new ArrayList<>();
+            bangDiem = monHoc.getDsDiem();
+            for (DiemMonHoc diemMonHoc : bangDiem) {
+                if (diemMonHoc.getSinhVien().getMaSV().equals(sv.getMaSV())) {
+                    tongDiem += monTinChi.getSoTinChi() * diemMonHoc.getDiemTB();
+                    tongSoTinChi += monTinChi.getSoTinChi();
+                }
+            }
+        }
+        
+        Vector<String> dataRow = new Vector<>();
+        dataRow.add(String.valueOf(tongSoTinChi));
+        dataRow.add(String.valueOf(soTinChiNoDangKi));
+        dataRow.add(String.valueOf((float)(tongDiem)/tongSoTinChi));
+        defaultTableModelKetQua.addRow(dataRow);
+        
+
+    }
+
+    public ArrayList<SinhVienTinChi> getListSV() {
         FileKhoaVien fileKhoaVien = new FileKhoaVien();
         ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
         ArrayList<LopHoc> listLopHoc = new ArrayList<>();
@@ -118,14 +168,14 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
         return listSV;
 
     }
-    
+
     public void showMHTichLuy() {
         defaultTableModelMHTichLuy.setNumRows(0);
         ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
         ArrayList<MonHoc> listMonHoc = new ArrayList<>();
-        
-         listSV = getListSV();
-         
+
+        listSV = getListSV();
+
         for (SinhVienTinChi sinhVienTinChi : listSV) {
             if (sinhVienTinChi.getMaSV().equals(sv.getMaSV())) {
                 listMonHoc = sinhVienTinChi.getDsMonTichLuy();
@@ -168,9 +218,9 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
         defaultTableModelMHNoDK.setNumRows(0);
         ArrayList<MonHoc> listMonHoc = new ArrayList<>();
         ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
-        
+
         listSV = getListSV();
-        
+
         for (SinhVienTinChi sinhVienTinChi : listSV) {
             if (sinhVienTinChi.getMaSV().equals(sv.getMaSV())) {
                 listMonHoc = sinhVienTinChi.getDsMonNoDangKi();
@@ -215,7 +265,7 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
 
     public void showMHDangKi() {
         defaultTableModelMonHoc.setNumRows(0);
-        
+
         ArrayList<MonHoc> listMonHoc = new ArrayList<>();
         ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
 
@@ -562,6 +612,7 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         capNhatTrangThaiMH();
         initContentsOfTable();
+        showDiemTrungBinh();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -581,21 +632,23 @@ public class KetQuaHocTapGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KetQuaHocTapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KetQuaHocTapTinChiGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KetQuaHocTapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KetQuaHocTapTinChiGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KetQuaHocTapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KetQuaHocTapTinChiGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KetQuaHocTapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KetQuaHocTapTinChiGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KetQuaHocTapGUI().setVisible(true);
+                new KetQuaHocTapTinChiGUI().setVisible(true);
             }
         });
     }

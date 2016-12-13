@@ -384,6 +384,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="H&#x1ec7; T&#xed;n Ch&#x1ec9;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdTinChiActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rdNienChe">
               <Properties>
@@ -395,6 +398,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="H&#x1ec7; Ni&#xea;n Ch&#x1ebf;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdNienCheActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

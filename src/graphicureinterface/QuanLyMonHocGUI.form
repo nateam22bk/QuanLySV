@@ -343,8 +343,11 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/IMAGE/file_delete50x50.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="X&#xf3;a L&#x1edb;p H&#x1ecd;c"/>
+                <Property name="text" type="java.lang.String" value="X&#xf3;a M&#xf4;n H&#x1ecd;c"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaLopHocActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

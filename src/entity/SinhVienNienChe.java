@@ -88,7 +88,16 @@ public class SinhVienNienChe extends SinhVien implements Serializable{
     }
     @Override
     public void xetTotNghiep(KhoaVien KV) {
-        if (KV.getDsMonHoc().containsAll(dsMonDaQua)){
+        ArrayList<MonHoc> monHocNienChe = new ArrayList<>();
+        ArrayList<MonHoc> monHocCuaVien = new ArrayList<>();
+        
+        monHocCuaVien = KV.getDsMonHoc();
+        for (MonHoc monHoc : monHocCuaVien) {
+            if (monHoc instanceof MonNienChe){
+                monHocNienChe.add(monHoc);
+            }
+        }
+        if (monHocNienChe.containsAll(dsMonDaQua)){
             setTotNghiep(true);
         }
     }

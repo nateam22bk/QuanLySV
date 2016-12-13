@@ -66,11 +66,11 @@ public class SinhVienGUI extends javax.swing.JFrame {
         
         for (SinhVien sinhVien : listSinhVien) {
             if (sinhVien.getMaSV().equals(ms)){
-                KetQuaHocTapGUI.sv = sinhVien;
+                KetQuaHocTapTinChiGUI.sv = sinhVien;
             }
         }
         
-        new KetQuaHocTapGUI();
+        new KetQuaHocTapTinChiGUI();
     }
     
     public void xemThongTin(){
@@ -98,8 +98,8 @@ public class SinhVienGUI extends javax.swing.JFrame {
             }
         }
         if (sv instanceof SinhVienTinChi){
-            KetQuaHocTapGUI.sv = sv;
-            new KetQuaHocTapGUI();
+            KetQuaHocTapTinChiGUI.sv = sv;
+            new KetQuaHocTapTinChiGUI();
         }else {
             KetQuaHocTapNienCheGUI.sv = sv;
             new KetQuaHocTapNienCheGUI();

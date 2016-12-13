@@ -28,21 +28,40 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     /**
      * Creates new form DangKiHocGUI
      */
-    public static int hocKi = 1;
+    public static int hocKi = 0;
     public static SinhVien sv; // Lấy thông tin sinh viên từ SinhVienGUI
     DefaultTableModel defaultTableModelTraCuu;
     DefaultTableModel defaultTableModelMonHocDK;
     DefaultComboBoxModel<String> boxModelVien;
     FileKhoaVien fileKhoaVien;
+    DefaultComboBoxModel<String> boxModelHocKi;
 
     public DangKiHocGUI() {
         this.setVisible(true);
         this.setTitle("Đăng kí môn học");
         initComponents();
         initTable();
-        initComboBox();
+        initComboBoxKhoaVien();
+        initComboBoxHocKi();
         showDataTraCuu();
-        lbHocKi.setText(String.valueOf(hocKi));
+    }
+    
+    
+    // khoi tao combobox hoc ki
+    public void initComboBoxHocKi(){
+        boxModelHocKi = new DefaultComboBoxModel<>();
+        boxModelHocKi.addElement("1");
+        boxModelHocKi.addElement("2");
+        boxModelHocKi.addElement("3");
+        boxModelHocKi.addElement("4");
+        boxModelHocKi.addElement("5");
+        boxModelHocKi.addElement("6");
+        boxModelHocKi.addElement("7");
+        boxModelHocKi.addElement("8");
+        boxModelHocKi.addElement("9");
+        boxModelHocKi.addElement("10");
+        
+        cbHocKi.setModel(boxModelHocKi);
     }
 
     // KHởi tạo bảng
@@ -66,7 +85,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     }
 
     //Khởi tạo ComboBox Khoa Viện
-    public void initComboBox() {
+    public void initComboBoxKhoaVien() {
         boxModelVien = new DefaultComboBoxModel<>();
         fileKhoaVien = new FileKhoaVien();
         ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
@@ -214,7 +233,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         btnXoaMonDK = new javax.swing.JButton();
         btnDangKi = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        lbHocKi = new javax.swing.JLabel();
+        cbHocKi = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -356,7 +375,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(checkBoxTuChon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -410,6 +429,17 @@ public class DangKiHocGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 3, 16)); // NOI18N
+        jLabel5.setText("Học kì : ");
+
+        cbHocKi.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        cbHocKi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbHocKi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbHocKiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -417,6 +447,10 @@ public class DangKiHocGUI extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbHocKi, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -429,7 +463,11 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cbHocKi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -440,13 +478,6 @@ public class DangKiHocGUI extends javax.swing.JFrame {
                 .addGap(60, 60, 60))
         );
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 44, 255));
-        jLabel5.setText("Học Kì : ");
-
-        lbHocKi.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        lbHocKi.setText("hk");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -454,27 +485,16 @@ public class DangKiHocGUI extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbHocKi)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(lbHocKi))
-                .addGap(21, 21, 21)
+                .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -525,6 +545,11 @@ public class DangKiHocGUI extends javax.swing.JFrame {
         dangKiMonHoc();
     }//GEN-LAST:event_btnDangKiActionPerformed
 
+    private void cbHocKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHocKiActionPerformed
+        // TODO add your handling code here:
+        hocKi = Integer.parseInt(cbHocKi.getSelectedItem().toString());
+    }//GEN-LAST:event_cbHocKiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -565,6 +590,7 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnThemMonDK;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoaMonDK;
+    private javax.swing.JComboBox<String> cbHocKi;
     private javax.swing.JComboBox<String> cbKhoaVien;
     private javax.swing.JCheckBox checkBoxTuChon;
     private javax.swing.JButton jButton1;
@@ -581,7 +607,6 @@ public class DangKiHocGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lbHocKi;
     private javax.swing.JTable tbMonHocDK;
     private javax.swing.JTable tbTraCuu;
     // End of variables declaration//GEN-END:variables

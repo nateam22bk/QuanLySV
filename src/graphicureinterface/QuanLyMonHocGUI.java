@@ -33,10 +33,13 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         this.setVisible(true);
         this.setTitle("Quản lý môn học");
         initComponents();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocation(120, 60);
         initComboBoxKhoaVien();
         initTableMonHocDieuKien();
         rdTinChi.setSelected(true);
+        btnCapNhat.setEnabled(false);
+        btnXoaLopHoc.setEnabled(false);
         showDataMonHoc();
     }
     
@@ -127,6 +130,52 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         }
         
         cbKhoaVien.setModel(boxModelKhoaVien);
+    }
+    
+    public void xoaMonHoc(){
+        
+        Vector<String> dataRow = new Vector<>();
+        dataRow = (Vector<String>) defaultTableModelMonHoc.getDataVector().elementAt(tbDanhSachMonHoc.getSelectedRow());
+        
+        FileKhoaVien fileKhoaVien  = new FileKhoaVien();
+        ArrayList<KhoaVien> listKhoaVien = new ArrayList<>();
+        ArrayList<MonHoc> listMonHoc = new ArrayList<>();
+        
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+        
+        int kvIndex = 0;
+        int mhIndex = 0;
+        
+        for (int i = 0; i< listKhoaVien.size(); i++){
+            if (listKhoaVien.get(i).getTenVien().equals(cbKhoaVien.getSelectedItem().toString())){
+                kvIndex = i;
+                listMonHoc = listKhoaVien.get(i).getDsMonHoc();
+                break;
+            }
+        }
+        
+        if (rdTinChi.isSelected()){
+            for (int i = 0; i< listMonHoc.size(); i++){
+                if (listMonHoc.get(i) instanceof MonTinChi){
+                    if (listMonHoc.get(i).getMaMon().equals(dataRow.get(0))){
+                        mhIndex = i;
+                    }
+                }
+            }
+        }else {
+            for (int i = 0; i< listMonHoc.size(); i++){
+                if (listMonHoc.get(i) instanceof MonNienChe){
+                    if (listMonHoc.get(i).getMaMon().equals(dataRow.get(0))){
+                        mhIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        listKhoaVien.get(kvIndex).getDsMonHoc().remove(mhIndex);
+        JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+        fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
     }
 
     /**
@@ -273,7 +322,12 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         btnXoaLopHoc.setBackground(new java.awt.Color(254, 254, 254));
         btnXoaLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnXoaLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/file_delete50x50.png"))); // NOI18N
-        btnXoaLopHoc.setText("Xóa Lớp Học");
+        btnXoaLopHoc.setText("Xóa Môn Học");
+        btnXoaLopHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaLopHocActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -452,6 +506,8 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
     private void tbDanhSachMonHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDanhSachMonHocMouseClicked
         // TODO add your handling code here:
         showMonHocDieuKien();
+        btnCapNhat.setEnabled(true);
+        btnXoaLopHoc.setEnabled(true);
     }//GEN-LAST:event_tbDanhSachMonHocMouseClicked
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
@@ -459,6 +515,11 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         updateMH();
         
     }//GEN-LAST:event_btnCapNhatActionPerformed
+
+    private void btnXoaLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaLopHocActionPerformed
+        // TODO add your handling code here:
+        xoaMonHoc();
+    }//GEN-LAST:event_btnXoaLopHocActionPerformed
 
     /**
      * @param args the command line arguments

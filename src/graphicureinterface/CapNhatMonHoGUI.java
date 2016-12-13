@@ -6,12 +6,15 @@
 package graphicureinterface;
 
 import dataaccesslayer.FileKhoaVien;
+import entity.DiemMonHoc;
 import entity.KhoaVien;
 import entity.MonHoc;
 import entity.MonTinChi;
+import entity.SinhVien;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,6 +35,7 @@ public class CapNhatMonHoGUI extends javax.swing.JFrame {
     ArrayList<KhoaVien> listKhoaVien;
     ArrayList<MonHoc> listMonHoc;
     ArrayList<MonHoc> listMHDK;
+
     public CapNhatMonHoGUI() {
         this.setVisible(true);
         this.setTitle("Cập nhật môn học tín chỉ");
@@ -39,18 +43,56 @@ public class CapNhatMonHoGUI extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initContents();
     }
-    
-    public void initContents(){
+
+    public void initContents() {
         txtMaMH.setText(dataRow.get(0));
         txtTenMH.setText(dataRow.get(1));
         txtHeCK.setText(dataRow.get(3));
         ma = dataRow.get(0);
     }
-    
-    public void capNhatMonHoc(){
-        
+
+    public void capNhatMonHoc() {
+        String maMH = txtMaMH.getText().trim();
+        String tenMH = txtTenMH.getText().trim();
+        String heSoCKStr = txtHeCK.getText().trim();
+        Integer heSoCK = 0;
+
+        try {
+            heSoCK = Integer.parseInt(heSoCKStr);
+
+            if (maMH.length() < 2) {
+                throw new Exception();
+            }
+
+            if (tenMH.length() < 5) {
+                throw new Exception();
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Dữ liệu nhập vào chưa đúng !");
+            return;
+        }
+
+        MonHoc monHoc = new MonHoc(maVien, tenMH, maMH, new ArrayList<DiemMonHoc>(), new ArrayList<SinhVien>(), heSoCK) {
+            @Override
+            public boolean nhapDiem(ArrayList<Vector<String>> bangDiem) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+
+        fileKhoaVien = new FileKhoaVien();
+        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+
+        for (int i = 0; i < listKhoaVien.size(); i++) {
+            if (listKhoaVien.get(i).getMaKhoaVien().equals(maVien)) {
+                listKhoaVien.get(i).capNhatMonHoc(monHoc, dataRow.get(0), laMonTinChi);
+                fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
+                JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công !");
+                break;
+            }
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -233,7 +275,8 @@ public class CapNhatMonHoGUI extends javax.swing.JFrame {
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         // TODO add your handling code here:
-        
+        capNhatMonHoc();
+
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     /**

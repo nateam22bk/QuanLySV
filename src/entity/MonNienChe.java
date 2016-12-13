@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 package entity;
+
 import java.util.*;
+
 /**
  *
  * @author Kaiser GX
  */
-public class MonNienChe extends MonHoc{
+public class MonNienChe extends MonHoc {
+
     private int kiHocSo;
     private int donViHocTrinh;
 
@@ -36,12 +39,26 @@ public class MonNienChe extends MonHoc{
     }
 
     @Override
-    public void nhapDiem(ArrayList<Vector<String>> bangDiem) {
+    public boolean nhapDiem(ArrayList<Vector<String>> bangDiem) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        for(int i = 0; i< dsDiem.size(); i++){
-            dsDiem.get(i).setDienGiuaKy(Float.parseFloat(bangDiem.get(i).get(2)));
-            dsDiem.get(i).setDiemCuoiKy(Float.parseFloat(bangDiem.get(i).get(3)));
-            dsDiem.get(i).setDiemTB();
+        for (int i = 0; i < dsDiem.size(); i++) {
+            String diemGiuaKiStr = bangDiem.get(i).get(2);
+            String diemCuoiKiStr = bangDiem.get(i).get(3);
+            Float diemGiuaKi = 0f;
+            Float diemCuoiKi = 0f;
+            try {
+                diemGiuaKi = Float.parseFloat(diemGiuaKiStr);
+                diemCuoiKi = Float.parseFloat(diemCuoiKiStr);
+                dsDiem.get(i).setDienGiuaKy(diemGiuaKi);
+                dsDiem.get(i).setDiemCuoiKy(diemCuoiKi);
+                dsDiem.get(i).setDiemTB();
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+
         }
+        return false;
     }
+
 }

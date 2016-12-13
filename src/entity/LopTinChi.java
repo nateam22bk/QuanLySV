@@ -5,7 +5,6 @@
  */
 package entity;
 
-import dataaccesslayer.FileBangDiem;
 import java.io.Serializable;
 import java.util.*;
 

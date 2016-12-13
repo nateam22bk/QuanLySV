@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class SinhVienTinChi extends SinhVien implements Serializable {
 
     private float diemCPA;
-    private int soTinChiTL = 158;
+    private int soTinChiTL;
     private int soTinChiTD;
     private boolean totNghiep;
     ArrayList<MonHoc> dsMonDangKi = new ArrayList<>();
@@ -175,7 +175,7 @@ public class SinhVienTinChi extends SinhVien implements Serializable {
             bangDiem = monHoc.getDsDiem();
             for (DiemMonHoc diemMonHoc : bangDiem) {
                 if (diemMonHoc.getSinhVien().getMaSV().equals(this.getMaSV())){
-                    if (diemMonHoc.getDiemCuoiKy() >=4.0f){
+                    if (diemMonHoc.getDiemTB()>=4.0f){
                         dsMonTichLuy.add(dsMonDangKi.get(i));
                         dsMonDangKi.remove(i);
                     }else {

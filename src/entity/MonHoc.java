@@ -112,6 +112,6 @@ public abstract class MonHoc implements Serializable{
         this.dsDiem.remove(Diem);
     }
     
-    public abstract void nhapDiem(ArrayList<Vector<String>> bangDiem);
+    public abstract boolean nhapDiem(ArrayList<Vector<String>> bangDiem);
     
 }

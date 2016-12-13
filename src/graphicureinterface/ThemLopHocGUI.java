@@ -6,7 +6,6 @@
 package graphicureinterface;
 
 import dataaccesslayer.FileKhoaVien;
-import dataaccesslayer.FileLopHoc;
 import entity.KhoaVien;
 import entity.LopHoc;
 import entity.LopNienChe;
