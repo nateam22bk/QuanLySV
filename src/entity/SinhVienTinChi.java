@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class SinhVienTinChi extends SinhVien implements Serializable {
 
     private float diemCPA;
-    private int soTinChiTL;
+    private int soTinChiTL = 158;
     private int soTinChiTD;
     private boolean totNghiep;
     ArrayList<MonHoc> dsMonDangKi = new ArrayList<>();

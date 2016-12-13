@@ -27,7 +27,6 @@ public class SinhVienNienChe extends SinhVien implements Serializable{
         this.dsMonTruot = new ArrayList<>();
     }
     
-    
     public float getDiem(){
     return diem;
     }
@@ -89,8 +88,9 @@ public class SinhVienNienChe extends SinhVien implements Serializable{
     }
     @Override
     public void xetTotNghiep(KhoaVien KV) {
-       
-           
+        if (KV.getDsMonHoc().containsAll(dsMonDaQua)){
+            setTotNghiep(true);
+        }
     }
 
     @Override

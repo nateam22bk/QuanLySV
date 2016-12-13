@@ -74,4 +74,5 @@ public abstract class LopHoc implements Serializable{
    public abstract void capNhatSV(SinhVien sv, String MSSV);
    public abstract boolean dangKiHocTapChoSV(String MSSV, MonHoc monHoc, KhoaVien khoaVien, int hocKi);
    public abstract void capNhatTrangThaiMHChoSV(String MSSV);
+   public abstract boolean xetTotNghiepChoSV(String MSSV, KhoaVien khoaVien);
 }

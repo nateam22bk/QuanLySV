@@ -68,7 +68,7 @@ public class CapNhatKhoaVienGUI extends javax.swing.JFrame {
 
         btnCapNhat.setBackground(new java.awt.Color(254, 254, 254));
         btnCapNhat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/updateNew.png"))); // NOI18N
+        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/updateNew.png"))); // NOI18N
         btnCapNhat.setText("Cập nhật ");
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,7 +81,7 @@ public class CapNhatKhoaVienGUI extends javax.swing.JFrame {
 
         btnThoat.setBackground(new java.awt.Color(254, 254, 254));
         btnThoat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/logout-512.png"))); // NOI18N
+        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logout-512.png"))); // NOI18N
         btnThoat.setText("Thoát");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,9 +108,9 @@ public class CapNhatKhoaVienGUI extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnThoat)
-                .addComponent(jLabel5))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(btnThoat))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addContainerGap())

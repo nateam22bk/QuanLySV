@@ -87,5 +87,20 @@ public class LopTinChi extends LopHoc implements Serializable{
             }
         }
     }
+
+    @Override
+    public boolean xetTotNghiepChoSV(String MSSV, KhoaVien khoaVien) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i< dsSinhVienTC.size(); i++){
+            if (dsSinhVienTC.get(i).getMaSV().equals(MSSV)){
+                dsSinhVienTC.get(i).xetTotNghiep(khoaVien);
+                if (dsSinhVienTC.get(i).isTotNghiep()){
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
+    }
   
 }

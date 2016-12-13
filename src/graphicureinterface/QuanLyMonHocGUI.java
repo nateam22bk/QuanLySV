@@ -56,6 +56,7 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
             defaultTableModelMonHoc.addColumn("Mã Môn Học");
             defaultTableModelMonHoc.addColumn("Tên Môn Học");
             defaultTableModelMonHoc.addColumn("Số Tín Chỉ");
+            defaultTableModelMonHoc.addColumn("Hệ số CK");
             
             tbDanhSachMonHoc.setModel(defaultTableModelMonHoc);
             
@@ -75,6 +76,7 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
                     data.add(monTC.getMaMon());
                     data.add(monTC.getTenMon());
                     data.add(String.valueOf(monTC.getSoTinChi()));
+                    data.add(String.valueOf(monHoc.getHeSoCK()));
                     defaultTableModelMonHoc.addRow(data);
                 }
             }
@@ -505,11 +507,15 @@ public class QuanLyMonHocGUI extends javax.swing.JFrame {
         }
         
         if (rdTinChi.isSelected()){
-            CapNhatMonHocTinChiGUI.dataRow = (Vector<String>) defaultTableModelMonHoc.getDataVector().elementAt(tbDanhSachMonHoc.getSelectedRow());
-            CapNhatMonHocTinChiGUI.maVien = maVien;
-            new CapNhatMonHocTinChiGUI();
+            CapNhatMonHoGUI.laMonTinChi = 1;
+            CapNhatMonHoGUI.dataRow = (Vector<String>) defaultTableModelMonHoc.getDataVector().elementAt(tbDanhSachMonHoc.getSelectedRow());
+            CapNhatMonHoGUI.maVien = maVien;
+            new CapNhatMonHoGUI();
         }else {
-            
+            CapNhatMonHoGUI.laMonTinChi = 0;
+            CapNhatMonHoGUI.dataRow = (Vector<String>) defaultTableModelMonHoc.getDataVector().elementAt(tbDanhSachMonHoc.getSelectedRow());
+            CapNhatMonHoGUI.maVien = maVien;
+            new CapNhatMonHoGUI();
     }
         
   }

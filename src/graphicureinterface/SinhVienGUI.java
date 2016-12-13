@@ -107,14 +107,47 @@ public class SinhVienGUI extends javax.swing.JFrame {
     }
     
     public void xetTotNghiep(){
+        fileSinhVien = new FileSinhVien();
         fileKhoaVien = new FileKhoaVien();
         ArrayList<KhoaVien> listKhoaVien  = new ArrayList<>();
         ArrayList<LopHoc> listLopHoc = new ArrayList<>();
+        ArrayList<SinhVien> listSV = new ArrayList<>();
+        SinhVien sv = null;
+        
+        listSV = fileSinhVien.docFileSinhVien();
+        for (SinhVien sinhVien : listSV) {
+            if (sinhVien.getMaSV().equals(ms)){
+                sv = sinhVien;
+            }
+        }
         
         listKhoaVien = fileKhoaVien.docFileKhoaVien();
-        for (LopHoc lopHoc : listLopHoc) {
-            
+        
+        int kvIndex = 0; // Luu vi tri cua KhoaVien
+        int lhIndex = 0; // Luu vi tri cua LopHoc
+        
+        for(int i = 0; i< listKhoaVien.size(); i++){
+            if (listKhoaVien.get(i).getTenVien().equals(sv.getTenVien())){
+                listLopHoc = listKhoaVien.get(i).getDsLopHoc();
+                kvIndex = i;
+                break;
+            }
         }
+        
+        for (int i = 0; i< listLopHoc.size(); i++){
+            if (listLopHoc.get(i).getTenLop().equals(sv.getTenLop())){
+                lhIndex = i;
+                break;
+            }
+        }
+        
+        if (listKhoaVien.get(kvIndex).getDsLopHoc().get(lhIndex).xetTotNghiepChoSV(ms, listKhoaVien.get(kvIndex))){
+            JOptionPane.showMessageDialog(rootPane, "Ban da tot nghiep !");
+        }else {
+            JOptionPane.showMessageDialog(rootPane, "Ban chua du dieu kien tot nghiep !");
+        }
+        
+        fileKhoaVien.ghiFileKhoaVien(listKhoaVien);
         
     }
 

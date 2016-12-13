@@ -10,7 +10,7 @@ import java.util.*;
  *
  * @author Kaiser GX
  */
-public class KhoaVien implements Serializable{
+public  class KhoaVien implements Serializable{
     private String maKhoaVien;
     private String tenVien;
     public ArrayList<SinhVien> dsSinhVien;
@@ -121,6 +121,32 @@ public class KhoaVien implements Serializable{
     
     public void xoaMonHoc(MonHoc monHoc){
         this.dsMonHoc.remove(monHoc);
+    }
+    
+    public void capNhatMonHoc(MonHoc monHoc, String maMH, int laMonTinChi){
+        if (laMonTinChi == 1){
+            MonTinChi monTinChi = (MonTinChi)monHoc;
+            for (int i = 0; i<dsMonHoc.size(); i++){
+                if (dsMonHoc.get(i) instanceof MonTinChi){
+                    if (dsMonHoc.get(i).getMaMon().equals(maMH)){
+                        dsMonHoc.get(i).setMaMon(monTinChi.getMaMon());
+                        dsMonHoc.get(i).setTenMon(monTinChi.getTenMon());
+                        dsMonHoc.get(i).setHeSoCK(monTinChi.getHeSoCK());
+                    }
+                }
+            }
+        }else {
+            MonNienChe monNienChe = (MonNienChe)monHoc;
+            for (int i = 0; i<dsMonHoc.size(); i++){
+                if (dsMonHoc.get(i) instanceof MonNienChe){
+                    if (dsMonHoc.get(i).getMaMon().equals(maMH)){
+                        dsMonHoc.get(i).setMaMon(monNienChe.getMaMon());
+                        dsMonHoc.get(i).setTenMon(monNienChe.getTenMon());
+                        dsMonHoc.get(i).setHeSoCK(monNienChe.getHeSoCK());
+                    }
+                }
+            }
+        }
     }
     
 }

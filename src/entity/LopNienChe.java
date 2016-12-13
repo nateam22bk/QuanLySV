@@ -84,5 +84,20 @@ public class LopNienChe extends LopHoc{
             }
         }
     }
+
+    @Override
+    public boolean xetTotNghiepChoSV(String MSSV, KhoaVien khoaVien) {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       for (int i = 0; i< dsLopNC.size(); i++){
+           if (dsLopNC.get(i).getMaSV().equals(MSSV)){
+               dsLopNC.get(i).xetTotNghiep(khoaVien);
+               if (dsLopNC.get(i).isTotNghiep()){
+                   return true;
+               }
+               return false;
+           }
+       }
+       return false;
+    }
     
 }

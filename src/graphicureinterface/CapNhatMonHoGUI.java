@@ -17,11 +17,12 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author tu
  */
-public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
+public class CapNhatMonHoGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form CapNhat
      */
+    public static int laMonTinChi;
     public static Vector<String> dataRow;
     public static String maVien;
     public String ma;
@@ -31,50 +32,25 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
     ArrayList<KhoaVien> listKhoaVien;
     ArrayList<MonHoc> listMonHoc;
     ArrayList<MonHoc> listMHDK;
-    public CapNhatMonHocTinChiGUI() {
+    public CapNhatMonHoGUI() {
         this.setVisible(true);
         this.setTitle("Cập nhật môn học tín chỉ");
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initContents();
-        initComboBox();
     }
     
     public void initContents(){
         txtMaMH.setText(dataRow.get(0));
         txtTenMH.setText(dataRow.get(1));
-        txtSoTC.setText(dataRow.get(2));
+        txtHeCK.setText(dataRow.get(3));
         ma = dataRow.get(0);
     }
     
-    // Đổ dữ liệu cho comboBox môn học điều kiện
-    public void initComboBox(){
-        fileKhoaVien = new FileKhoaVien();
-        boxModel = new DefaultComboBoxModel();
-        cbMHDieuKien.setModel(boxModel);
-        listKhoaVien = fileKhoaVien.docFileKhoaVien();
+    public void capNhatMonHoc(){
         
-        for (int i = 0; i< listKhoaVien.size(); i++){
-            if (listKhoaVien.get(i).getMaKhoaVien().equals(maVien)){
-                listMonHoc = listKhoaVien.get(i).getDsMonHoc();
-            }
-        }
-        
-        for (int i = 0; i< listMonHoc.size(); i++){
-            if (listMonHoc.get(i).getMaMon().equals(ma)){
-                if (listMonHoc.get(i) instanceof MonTinChi){
-                    MonTinChi monTC = (MonTinChi)listMonHoc.get(i);
-                    listMHDK = monTC.getDsMonDK();
-                }
-            }
-        }
-        
-        for (int i = 0; i< listMHDK.size(); i++){
-            boxModel.addElement(listMHDK.get(i).getTenMon());
-        }
-        cbMHDieuKien.setModel(boxModel);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,15 +68,11 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         txtMaMH = new javax.swing.JTextField();
         txtTenMH = new javax.swing.JTextField();
-        txtSoTC = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtHeCK = new javax.swing.JTextField();
         btnCapNhat = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        cbMHDieuKien = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        btnXoaMHDieuKien = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,14 +128,14 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel4.setText("Tên Môn Học : ");
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel5.setText("Số Tín Chỉ : ");
-
         txtMaMH.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         txtTenMH.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
-        txtSoTC.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel7.setText("Hệ số CK : ");
+
+        txtHeCK.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -174,16 +146,16 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtMaMH, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                     .addComponent(txtTenMH)
-                    .addComponent(txtSoTC))
+                    .addComponent(txtHeCK))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtMaMH, txtSoTC, txtTenMH});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtMaMH, txtTenMH});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,11 +168,11 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtTenMH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtSoTC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel7)
+                    .addComponent(txtHeCK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         btnCapNhat.setBackground(new java.awt.Color(254, 254, 254));
@@ -213,45 +185,6 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(254, 254, 254));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Xóa môn học điều kiện", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 18), new java.awt.Color(0, 41, 255))); // NOI18N
-
-        cbMHDieuKien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel6.setText("Tên Môn Học :");
-
-        btnXoaMHDieuKien.setBackground(new java.awt.Color(254, 254, 254));
-        btnXoaMHDieuKien.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnXoaMHDieuKien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/file_delete50x50.png"))); // NOI18N
-        btnXoaMHDieuKien.setText("Xóa");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnXoaMHDieuKien, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(35, 35, 35)
-                        .addComponent(cbMHDieuKien, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(cbMHDieuKien))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnXoaMHDieuKien, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -261,7 +194,6 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCapNhat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -271,11 +203,9 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCapNhat)
-                .addContainerGap())
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -303,6 +233,7 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     /**
@@ -322,21 +253,23 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CapNhatMonHocTinChiGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CapNhatMonHoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CapNhatMonHocTinChiGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CapNhatMonHoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CapNhatMonHocTinChiGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CapNhatMonHoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CapNhatMonHocTinChiGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CapNhatMonHoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CapNhatMonHocTinChiGUI().setVisible(true);
+                new CapNhatMonHoGUI().setVisible(true);
             }
         });
     }
@@ -344,20 +277,16 @@ public class CapNhatMonHocTinChiGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnThoat;
-    private javax.swing.JButton btnXoaMHDieuKien;
-    private javax.swing.JComboBox<String> cbMHDieuKien;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JTextField txtHeCK;
     private javax.swing.JTextField txtMaMH;
-    private javax.swing.JTextField txtSoTC;
     private javax.swing.JTextField txtTenMH;
     // End of variables declaration//GEN-END:variables
 }
