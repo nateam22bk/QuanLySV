@@ -49,6 +49,14 @@ public class LopTinChi extends LopHoc implements Serializable{
     }
 
     @Override
+    public void xoaSV(SinhVien sv) {
+        super.xoaSV(sv); //To change body of generated methods, choose Tools | Templates.
+        dsSinhVienTC.remove(sv);
+    }
+    
+    
+
+    @Override
     public void capNhatSV(SinhVien sv, String MSSV) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         for (int i = 0; i< dsSinhVienTC.size(); i++){

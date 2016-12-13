@@ -69,8 +69,22 @@ public abstract class LopHoc implements Serializable{
     public static void setSO_SV_MAX(int SO_SV_MAX) {
         LopHoc.SO_SV_MAX = SO_SV_MAX;
     }
-   public abstract void themSV(SinhVien sv);
-   public abstract void xoaSV(String MSSV);
+   public  void themSV(SinhVien sv){
+       
+   }
+   
+   public void themSV(String MSSV){
+       
+   }
+   
+   public  void xoaSV(String MSSV){
+       
+   }
+   
+   public void xoaSV(SinhVien sv){
+       
+   }
+   
    public abstract void capNhatSV(SinhVien sv, String MSSV);
    public abstract boolean dangKiHocTapChoSV(String MSSV, MonHoc monHoc, KhoaVien khoaVien, int hocKi);
    public abstract void capNhatTrangThaiMHChoSV(String MSSV);

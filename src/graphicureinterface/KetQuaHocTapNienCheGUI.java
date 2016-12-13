@@ -254,6 +254,7 @@ public class KetQuaHocTapNienCheGUI extends javax.swing.JFrame {
     
     // Hien thi bang diem trung binh
     public void showDiemTrungBinh(){
+        tableModelDiemTB.setNumRows(0);
         ArrayList<SinhVienNienChe> listSV = new ArrayList<>();
         ArrayList<MonHoc> listMonHocDaQua = new ArrayList<>();
         ArrayList<MonHoc> listMonHocTruot = new ArrayList<>();

@@ -44,6 +44,8 @@ public class QuanLyKhoaVienGUI extends javax.swing.JFrame {
         btnXoaKhoaVien.setEnabled(false);
         btnXoaLopHoc.setEnabled(false);
         initComboBox();
+        //showDataTableLopHoc();
+        showDataTableVien();
     }
     
     // Khởi tạo bảng lớp học

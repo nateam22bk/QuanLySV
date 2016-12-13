@@ -47,6 +47,13 @@ public class LopNienChe extends LopHoc{
     }
 
     @Override
+    public void xoaSV(SinhVien sv) {
+        super.xoaSV(sv); //To change body of generated methods, choose Tools | Templates.
+        dsLopNC.remove(sv);
+    }
+    
+
+    @Override
     public void capNhatSV(SinhVien sv, String MSSV) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         for (int i = 0; i< dsLopNC.size(); i++){

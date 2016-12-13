@@ -90,6 +90,7 @@ public class KetQuaHocTapTinChiGUI extends javax.swing.JFrame {
 
     // Hien thi diem trung binh
     public void showDiemTrungBinh() {
+        defaultTableModelKetQua.setNumRows(0);
         ArrayList<SinhVienTinChi> listSV = new ArrayList<>();
         ArrayList<MonHoc> listMHTichLuy = new ArrayList<>();
         ArrayList<MonHoc> listMHNoDangKi = new ArrayList<>();
@@ -259,9 +260,6 @@ public class KetQuaHocTapTinChiGUI extends javax.swing.JFrame {
 
     }
 
-    public void showBangDiemTB() {
-
-    }
 
     public void showMHDangKi() {
         defaultTableModelMonHoc.setNumRows(0);
