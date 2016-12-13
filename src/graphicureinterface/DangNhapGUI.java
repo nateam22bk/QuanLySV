@@ -7,6 +7,7 @@ package graphicureinterface;
 
 import dataaccesslayer.FileSinhVien;
 import entity.SinhVien;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -148,6 +149,12 @@ public class DangNhapGUI extends javax.swing.JFrame {
 
         txtUserName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -279,6 +286,13 @@ public class DangNhapGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         dangNhap();
     }//GEN-LAST:event_btnDangNhapActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            dangNhap();
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     /**
      * @param args the command line arguments
